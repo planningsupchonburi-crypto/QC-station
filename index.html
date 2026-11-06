@@ -1173,7 +1173,7 @@
 <script>
   // ===== ลิงก์หลังบ้าน (Apps Script Web App) =====
   // วางลิงก์ที่ได้จากการ Deploy (ลงท้ายด้วย /exec) ไว้ระหว่างเครื่องหมาย ' '
-  const API_URL = 'https://script.google.com/macros/s/AKfycbzTaFGeSPUj1cHijoAHYG5FeaWkq8UsABgH9cKdTSUJZ-4eARxP8nZf-_GBo9kCVpq6VQ/exec';
+  const API_URL = '';
 
   // ===== ค่าคงที่ของบอร์ด (แก้ตามที่วัดจริง) =====
   const MARKER_MM = 50;                  // ขนาดสี่เหลี่ยมดำที่พิมพ์จริง (บอร์ด A3)
@@ -1423,11 +1423,11 @@
     else if (cur.done) { $('primaryTxt').textContent = 'ตรวจชิ้นถัดไป'; $('hint').textContent = 'บันทึกผลเรียบร้อย'; p.classList.remove('dis'); }
     else if (cur.pending === 'visual') { $('primaryTxt').textContent = 'ยืนยันผลด้วยเครื่องมือวัด'; $('hint').textContent = 'ผลวัดแกว่ง ต้องให้พนักงานตัดสิน'; p.classList.remove('dis'); }
     else { $('primaryTxt').textContent = 'เริ่มตรวจครั้งที่ ' + (nA + 1); $('hint').textContent = 'ยังไม่บันทึกผล · ต้องตรวจซ้ำตามกติกา'; p.classList.remove('dis'); }
-    $('pieceNo').textContent = cur.calib ? 'คาลิเบรตกล้อง' : 'ชิ้นที่ #' + (lastNo() + (cur.done ? 0 : 1));
-    const inSeq = nA > 0 && !cur.done;
+    $('pieceNo').textContent = cur.calib ? 'คาลิเบรตกล้อง' : 'ชิ้นที่ #' + (cur.recheckOf && !cur.done ? cur.recheckOf.n : lastNo() + (cur.done ? 0 : 1));
+    const inSeq = (nA > 0 || !!cur.recheckOf) && !cur.done;
     $('rtTag').classList.toggle('hide', !inSeq);
-    if (inSeq) $('rtTag').textContent = cur.pending === 'visual' ? 'รอยืนยันด้วยเครื่องมือวัด' : 'ตรวจซ้ำ · ครั้งที่ ' + (nA + 1) + '/5';
-    $('resetBtn').classList.toggle('hide', inSeq);   // ระหว่างตรวจซ้ำ ยกเลิกชิ้นไม่ได้ (กันหลบผลไม่ผ่าน)
+    if (inSeq) $('rtTag').textContent = cur.pending === 'visual' ? 'รอยืนยันด้วยเครื่องมือวัด' : (cur.recheckOf ? 'ขอตรวจซ้ำ · ' : 'ตรวจซ้ำ · ') + 'ครั้งที่ ' + (nA + 1) + '/5';
+    $('resetBtn').classList.toggle('hide', nA > 0 && !cur.done);   // ระหว่างตรวจซ้ำ ยกเลิกชิ้นไม่ได้ (กันหลบผลไม่ผ่าน)
     $('pieceSub').textContent = cur.calib || cur.step === R ? '' : '· ภาพที่ ' + cur.step + '/' + S();
   }
   const lastNo = () => hist.reduce((a, h) => Math.max(a, h.n), 0);
@@ -1485,7 +1485,7 @@
 
   function resetPiece() {
     if (typeof LIVE !== 'undefined') { LIVE.armed = false; LIVE.holdUntil = 0; LIVE.autoView = false; }
-    Object.assign(cur, { step: 1, p1: null, p2: null, p3: null, p4: null, p5: null, p6: null, endsOk: null, manualT: null, view: 1, mode: 'ana', calib: false, attempts: [], done: false, pending: null });
+    Object.assign(cur, { step: 1, p1: null, p2: null, p3: null, p4: null, p5: null, p6: null, endsOk: null, manualT: null, view: 1, mode: 'ana', calib: false, attempts: [], done: false, pending: null, recheckOf: null });
     clearShots();
   }
   function clearShots() {
@@ -1497,6 +1497,13 @@
   function nextAttempt() {
     Object.assign(cur, { step: 1, p1: null, p2: null, p3: null, p4: null, p5: null, p6: null, endsOk: null, manualT: null, view: 1, mode: 'ana', pending: null });
     clearShots(); toast('ตรวจครั้งที่ ' + (cur.attempts.length + 1) + ' · วางชิ้นงานใหม่แล้วถ่ายภาพที่ 1');
+  }
+  // พนักงานขอตรวจซ้ำชิ้นที่เพิ่งผ่าน: ใช้เลขชิ้นเดิม ถ้าผ่านอีก ยอดไม่เปลี่ยน / ถ้าไม่ผ่าน เข้ากติกาตรวจซ้ำปกติ แล้วแทนที่ผลเดิม
+  function startRecheck() {
+    const h = hist.find((x) => x.uid === cur.uid);
+    if (!cur.done || !h || h.verdict !== 'pass' || h.uid !== hist[hist.length - 1].uid) { toast('ขอตรวจซ้ำได้เฉพาะชิ้นล่าสุดที่ผ่าน'); return; }
+    Object.assign(cur, { recheckOf: { uid: h.uid, n: h.n, t: h.t }, attempts: [], done: false });
+    nextAttempt(); toast('ขอตรวจซ้ำชิ้นที่ #' + h.n + ' · ถ้าผ่านเหมือนเดิมจะไม่นับเพิ่ม');
   }
   $('resetBtn').onclick = resetPiece;
   $('alertBtn').onclick = () => { cur.calib = false; setAlert(); renderSteps(); };
@@ -1618,8 +1625,16 @@
       dL: pick.L - m.L.n, dW: pick.W - m.W.n, dT: pick.T - m.T.n, sL: m.L, sW: m.W, sT: m.T,
       dent: pick.dent, fill: pick.fill, faces: pick.faces, dentLim: cfg.dent, surf: pick.surf, surfN: pick.surfN, ends: pick.ends, reason: reasonTxt(pick),
       attempts: A.length, seq, by, Z: cfg.comp ? cfg.Z : null, rms: pick.rms, max: pick.max, synced: false };
-    hist.push(rec); store.set('hist', hist.slice(-3000));
     if (by === 'operator' && verdict === 'fail') rec.reason = 'พนักงานตัดสินไม่ผ่าน (เครื่องมือวัด)';
+    const rc = cur.recheckOf;
+    if (rc) {   // พนักงานขอตรวจซ้ำ → ใช้เลขชิ้นเดิม และแทนที่ผลเดิม (ไม่นับเป็นชิ้นใหม่)
+      rec.n = rc.n; rec.replaces = rc.uid; rec.replacesT = rc.t; rec.recheck = true;
+      rec.reason = 'พนักงานขอตรวจซ้ำ (ผลเดิม: ผ่าน)' + (rec.reason ? ' · ' + rec.reason : '');
+      const i = hist.findIndex((h) => h.uid === rc.uid);
+      if (i >= 0) hist.splice(i, 1, rec); else hist.push(rec);
+      cur.recheckOf = null;
+    } else hist.push(rec);
+    store.set('hist', hist.slice(-3000));
     cur.step = RES(); cur.done = true; cur.pending = null; cur.uid = rec.uid;
     renderSteps(); renderStats(); showStage(); showDimsOf(pick);
     if (cfg.sheet) { queue.push(rec); store.set('queue', queue); syncNow(); }
@@ -1647,11 +1662,11 @@
     const nPass = A.filter((x) => x.v === 'P').length;
     if (kind === 'pass') {
       $('vTitle').innerHTML = 'ผ่าน<small>PASS</small>';
-      $('vSub').innerHTML = m.name + ' · ชิ้นที่ #' + d.rec.n + (nA > 1 ? ' · ผ่านหลังตรวจ ' + nA + ' ครั้ง · บันทึกค่าที่ดีที่สุด' : ' · ทุกขนาดอยู่ในพิกัด') + (d.rec.by === 'operator' ? '<br>ยืนยันผลโดยพนักงาน (ตรวจด้วยเครื่องมือวัด)' : '');
+      $('vSub').innerHTML = m.name + ' · ชิ้นที่ #' + d.rec.n + (nA > 1 ? ' · ผ่านหลังตรวจ ' + nA + ' ครั้ง · บันทึกค่าที่ดีที่สุด' : ' · ทุกขนาดอยู่ในพิกัด') + (d.rec.by === 'operator' ? '<br>ยืนยันผลโดยพนักงาน (ตรวจด้วยเครื่องมือวัด)' : '') + (d.rec.recheck ? '<br>ตรวจซ้ำตามคำขอ · ผลยังผ่านเหมือนเดิม ไม่นับเพิ่ม' : '');
     } else if (kind === 'fail') {
       const bad = ['L', 'W', 'T'].filter((k) => !inTol(a[k], m[k])).concat(a.dent != null && a.dent > cfg.dent ? ['F'] : [], a.surf != null && cfg.surfOn && a.surf > cfg.surf ? ['S'] : [], a.ends === 'ng' ? ['E'] : []);
       $('vTitle').innerHTML = 'ไม่ผ่าน<small>REJECT</small>';
-      $('vSub').innerHTML = m.name + ' · ชิ้นที่ #' + d.rec.n + (d.rec.by === 'operator' ? ' · พนักงานตัดสินไม่ผ่าน (ตรวจด้วยเครื่องมือวัด)' : (bad.filter((k) => 'LWT'.includes(k)).length ? ' · ขนาดเกินพิกัด ' + bad.filter((k) => 'LWT'.includes(k)).length + ' ด้าน' : '') + (bad.includes('F') ? ' · มีรอยเว้า/ขอบแหว่ง' : '') + (bad.includes('S') ? ' · มีตำหนิบนผิว' : '') + (bad.includes('E') ? ' · หน้าปลายมีตำหนิ' : '')) + (nA > 1 ? ' · ตรวจ ' + nA + ' ครั้ง' : '') + '<br>แยกชิ้นงานออกจากไลน์';
+      $('vSub').innerHTML = m.name + ' · ชิ้นที่ #' + d.rec.n + (d.rec.by === 'operator' ? ' · พนักงานตัดสินไม่ผ่าน (ตรวจด้วยเครื่องมือวัด)' : (bad.filter((k) => 'LWT'.includes(k)).length ? ' · ขนาดเกินพิกัด ' + bad.filter((k) => 'LWT'.includes(k)).length + ' ด้าน' : '') + (bad.includes('F') ? ' · มีรอยเว้า/ขอบแหว่ง' : '') + (bad.includes('S') ? ' · มีตำหนิบนผิว' : '') + (bad.includes('E') ? ' · หน้าปลายมีตำหนิ' : '')) + (nA > 1 ? ' · ตรวจ ' + nA + ' ครั้ง' : '') + (d.rec.recheck ? '<br>ตรวจซ้ำตามคำขอ · เปลี่ยนจากผ่านเป็นไม่ผ่าน (ยอดผ่าน −1)' : '') + '<br>แยกชิ้นงานออกจากไลน์';
     } else if (kind === 'retest') {
       $('vTitle').innerHTML = 'ตรวจซ้ำ<small>ครั้งที่ ' + (nA + 1) + ' จาก 5</small>';
       $('vSub').innerHTML = d.why + '<br>ยังไม่บันทึกผล และยังไม่นับยอด';
@@ -1679,13 +1694,14 @@
     } else if (kind === 'retest') {
       B.innerHTML = '<button class="peek" data-a="peek">ดูภาพ</button><button class="next" data-a="again">เริ่มตรวจครั้งที่ ' + (nA + 1) + arrow + '</button>';
     } else {
-      B.innerHTML = '<button class="peek" data-a="peek">ดูภาพ</button><button class="next" data-a="next">ชิ้นถัดไป' + arrow + '</button>';
+      B.innerHTML = '<button class="peek" data-a="peek">ดูภาพ</button>' + (kind === 'pass' ? '<button class="peek" data-a="recheck">ขอตรวจซ้ำ</button>' : '') + '<button class="next" data-a="next">ชิ้นถัดไป' + arrow + '</button>';
     }
     B.querySelectorAll('button').forEach((b) => b.onclick = () => {
       const act = b.dataset.a;
       if (act === 'peek') $('verdict').classList.remove('on');
       else if (act === 'next') resetPiece();
       else if (act === 'again') nextAttempt();
+      else if (act === 'recheck') startRecheck();
       else if (act === 'vpass') finalize('pass', 'operator');
       else if (act === 'vfail') finalize('fail', 'operator');
     });
@@ -1704,8 +1720,21 @@
       else if (action === 'models') r.getModels(data.token); else if (action === 'saveModels') r.saveModels(data.list, data.token);
       else if (action === 'dashboard') r.getDashboard(data.day, data.token); else r.getSheetUrl();
     });
-    return fetch(API_URL, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(Object.assign({ action }, data)) })
-      .then((r) => r.json()).then((j) => { if (j && j.error) throw new Error(j.error); return j; });
+    const url = String(API_URL).trim();
+    if (!/^https:\/\/script\.google\.com\/.+\/exec$/.test(url)) return Promise.reject(new Error('API_URL ไม่ถูกต้อง ต้องขึ้นต้นด้วย https://script.google.com/ และลงท้ายด้วย /exec'));
+    const body = JSON.stringify(Object.assign({ action }, data));
+    const done = (r) => r.text().then((t) => {
+      let j; try { j = JSON.parse(t); } catch (e) { throw new Error('เซิร์ฟเวอร์ไม่ได้ตอบเป็นข้อมูล (มักเกิดจากยังไม่กดอนุญาตสิทธิ์ หรือยังไม่ Deploy เวอร์ชันใหม่)'); }
+      if (j && j.error) throw new Error(j.error); return j;
+    });
+    return fetch(url, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body })
+      .then(done)
+      .catch((err) => {
+        // ช่องทางสำรอง: ส่งแบบ GET (ใช้ได้เมื่อข้อมูลไม่ใหญ่ เช่น เข้าสู่ระบบ / โหลดพาร์ท / Dashboard)
+        if (!(err instanceof TypeError) || body.length > 6000) throw err;
+        return fetch(url + '?q=' + encodeURIComponent(body), { redirect: 'follow' }).then(done)
+          .catch((e2) => { throw e2 instanceof TypeError ? new Error('Failed to fetch — เปิดลิงก์ /exec?diag=1 เพื่อตรวจว่าติดตรงไหน') : e2; });
+      });
   }
   let syncing = false, syncErr = '';
   function setSync() {
@@ -2388,7 +2417,7 @@
   function jobOf(m) {
     const p = planFor(opPlan, m), qty = p ? p.qty : 0, d = today();
     let pass = ((opPlan && opPlan.counts[m.name]) || {}).pass || 0;
-    if (opPlan && opPlan.live) pass += queue.filter((r) => r.model === m.name && r.verdict === 'pass' && ymd(new Date(r.t)) === d).length;   // ยังไม่ขึ้นชีต
+    if (opPlan && opPlan.live) pass += queue.filter((r) => r.model === m.name && ymd(new Date(r.t)) === d).reduce((s, r) => s + (r.verdict === 'pass' ? 1 : 0) - (r.replaces ? 1 : 0), 0);   // ยังไม่ขึ้นชีต (ตรวจซ้ำตามคำขอ = แทนที่ชิ้นที่ผ่านเดิม)
     else pass = countRows(offRows(d))[m.name] ? countRows(offRows(d))[m.name].pass : 0;
     return { p, qty, pass, rem: Math.max(0, qty - pass), sent: !!(p && p.sub) };
   }
