@@ -136,6 +136,8 @@
     .vsync{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-size:13.5px;padding:6px 12px;border-radius:999px;background:rgba(0,0,0,.18)}
     .vsync i{width:8px;height:8px;border-radius:50%;background:#fff;opacity:.6}
     .vsync.ok i{opacity:1;background:#a6f4c5} .vsync.busy i{animation:pl 1s infinite} .vsync.err i{background:#fecdca;opacity:1}
+    .vrow.na{opacity:.55}
+    .step.skip{opacity:.4}
     .vbtns{display:flex;gap:10px;justify-content:center;margin-top:16px}
     .vbox .next{display:inline-flex;align-items:center;gap:10px;padding:16px 34px;border-radius:16px;background:#fff;font-size:19px;font-weight:700;box-shadow:0 14px 28px -14px rgba(0,0,0,.45)}
     .verdict.pass .next{color:var(--pass-d)} .verdict.fail .next{color:var(--fail-d)}
@@ -273,6 +275,9 @@
     .keys button:active{background:#e4e7ec}
     .kpf{display:flex;gap:10px;margin-top:12px}
     .kpf button{flex:1;height:56px;border-radius:16px;font-weight:700;font-size:17px;background:var(--soft)}
+    .kpf.sf3{flex-wrap:wrap}
+    .kpf.sf3 button{flex:1 1 40%;font-size:16px}
+    .kpf.sf3 button.ok{order:-1;flex:1 1 100%}
     .kpf button.ok{background:linear-gradient(135deg,var(--pri2),var(--pri));color:#fff;flex:2}
     details.tech{margin-top:4px;font-size:12.5px;color:var(--mute)}
     details.tech summary{cursor:pointer;padding:4px 0}
@@ -1168,12 +1173,19 @@
     <div class="kpf" style="margin-top:16px"><button id="endsNg" style="color:#b42318">✗ มีตำหนิ</button><button class="ok" id="endsOk">✓ ไม่มีตำหนิ</button></div>
   </div>
 </div>
+<div class="kp" id="surfDlg">
+  <div class="kpb" style="text-align:center">
+    <h3 id="surfT">กล้องพบตำหนิบนผิว</h3>
+    <p>ถ้าเป็นรอยเปื้อน ฝุ่น หรือคราบที่เช็ดออกได้<br>ให้เช็ดแล้วตรวจด้วยตาอีกครั้ง จากนั้นเลือก</p>
+    <div class="kpf sf3" style="margin-top:16px"><button id="surfNg" style="color:#b42318">✗ ตำหนิจริง</button><button id="surfRe">↻ เช็ดแล้ว ถ่ายใหม่</button><button class="ok" id="surfOk">✓ ยืนยันผิวดี</button></div>
+  </div>
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
   // ===== ลิงก์หลังบ้าน (Apps Script Web App) =====
   // วางลิงก์ที่ได้จากการ Deploy (ลงท้ายด้วย /exec) ไว้ระหว่างเครื่องหมาย ' '
-  const API_URL = 'https://script.google.com/macros/s/AKfycbzTaFGeSPUj1cHijoAHYG5FeaWkq8UsABgH9cKdTSUJZ-4eARxP8nZf-_GBo9kCVpq6VQ/exec';
+  const API_URL = '';
 
   // ===== ค่าคงที่ของบอร์ด (แก้ตามที่วัดจริง) =====
   const MARKER_MM = 50;                  // ขนาดสี่เหลี่ยมดำที่พิมพ์จริง (บอร์ด A3)
@@ -1332,7 +1344,7 @@
     const shots = [[cur.p1, T], [cur.p2, W], [cur.p3, T], [cur.p4, W], [cur.p5, Lh], [cur.p6, Lh]].filter(([p]) => p && p.dentA != null);
     if (!shots.length) return null;
     const per = shots.map(([p, h]) => p.dentA * fac(h));
-    const su = shots.filter(([p]) => p.surfA != null).map(([p, h]) => ({ d: p.surfA * fac(h), n: p.surfN || 0 }));
+    const su = shots.filter(([p]) => p.surfA != null && !p.surfOk).map(([p, h]) => ({ d: p.surfA * fac(h), n: p.surfN || 0 }));
     return { dent: Math.max(...per), fill: Math.min(...shots.map(([p]) => p.fillA)), faces: shots.length, per,
       surf: su.length ? Math.max(...su.map((x) => x.d)) : null, surfN: su.reduce((a, x) => a + x.n, 0) };
   }
@@ -1406,8 +1418,10 @@
     const R = RES();
     $('stepsBox').parentNode.classList.toggle('many', S() > 2);
     $('stepsBox').innerHTML = STEP_LBL.slice(0, S()).concat('ผลตรวจ').map((t, i) => {
-      const s = i + 1, cls = s < cur.step || cur.step === R ? 'done' : s === cur.step ? 'cur' : '';
-      return (i ? '<span class="arrow">›</span>' : '') + '<button class="step ' + cls + '" data-s="' + s + '"><i>' + (cls === 'done' ? '✓' : s) + '</i><span>' + t + '</span></button>';
+      const s = i + 1, la = cur.step === R && cur.attempts.length ? cur.attempts[cur.attempts.length - 1] : null;
+      const skip = la && la.stopAt && s > la.stopAt && s < R;   // หยุดวัดก่อนครบ → ภาพที่ไม่ได้ถ่าย
+      const cls = skip ? 'skip' : s < cur.step || cur.step === R ? 'done' : s === cur.step ? 'cur' : '';
+      return (i ? '<span class="arrow">›</span>' : '') + '<button class="step ' + cls + '" data-s="' + s + '"><i>' + (cls === 'done' ? '✓' : cls === 'skip' ? '–' : s) + '</i><span>' + t + '</span></button>';
     }).join('');
     const p = $('primary'), lock = !cvReady && !window.QC_DEMO, nA = cur.attempts.length;
     p.classList.toggle('cal', cur.calib);
@@ -1485,7 +1499,7 @@
 
   function resetPiece() {
     if (typeof LIVE !== 'undefined') { LIVE.armed = false; LIVE.holdUntil = 0; LIVE.autoView = false; }
-    Object.assign(cur, { step: 1, p1: null, p2: null, p3: null, p4: null, p5: null, p6: null, endsOk: null, manualT: null, view: 1, mode: 'ana', calib: false, attempts: [], done: false, pending: null, recheckOf: null });
+    Object.assign(cur, { step: 1, p1: null, p2: null, p3: null, p4: null, p5: null, p6: null, endsOk: null, manualT: null, view: 1, mode: 'ana', calib: false, attempts: [], done: false, pending: null, recheckOf: null, surfOkAt: null });
     clearShots();
   }
   function clearShots() {
@@ -1527,8 +1541,7 @@
     cur.view = n; cur.mode = r.ok ? 'ana' : 'raw';
     if (!r.ok) return retake(r.err, r.hint);
     if (n === 1) {
-      cur.p1 = r; setAlert();
-      cur.step = 2; renderDims(); renderSteps(); showStage(); beep('step'); toast('ภาพที่ 1 เรียบร้อย · พลิกชิ้นงาน 90° แล้วถ่ายต่อ');
+      cur.p1 = r; setAlert(); shotDone(1);
     } else if (n === 2) {
       cur.p2 = r;
       const s = solve();
@@ -1536,9 +1549,7 @@
         cur.p2 = null;
         return retake('ความยาว 2 ภาพไม่ตรงกัน (' + s.L1.toFixed(1) + ' / ' + s.L2.toFixed(1) + ' mm)', 'ตรวจว่าพลิกตามแนวยาว และวางชิ้นงานกลางกรอบ แล้วถ่ายภาพที่ 2 ใหม่');
       }
-      setAlert();
-      if (S() > 2) { cur.step = 3; renderDims(); renderSteps(); showStage(); beep('step'); toast('ภาพที่ 2 เรียบร้อย · พลิกต่ออีก 90° แล้วถ่ายภาพที่ 3'); }
-      else attemptDone();
+      setAlert(); shotDone(2);
     } else {
       const s = solve();
       if (n <= 4) {
@@ -1550,12 +1561,49 @@
         const a = r.La * fac(s.L), b = r.Xa * fac(s.L), A = Math.max(s.W, s.T), B = Math.min(s.W, s.T);
         if (Math.abs(a - A) > cfg.lchk + 1 || Math.abs(b - B) > cfg.lchk + 1) return retake('หน้าปลายไม่ตรงขนาด (' + a.toFixed(1) + ' × ' + b.toFixed(1) + ' mm)', 'ตรวจว่าตั้งชิ้นงานตรง ไม่เอียง และทับจุดกลาง แล้วถ่ายภาพที่ ' + n + ' ใหม่');
       }
-      cur['p' + n] = r; setAlert();
-      const nextMsg = n === 4 ? 'ตั้งชิ้นงานขึ้นบนหน้าปลาย' : n === 5 ? 'พลิกกลับหัว' : 'พลิกต่ออีก 90°';
-      if (n < S()) { cur.step = n + 1; renderDims(); renderSteps(); showStage(); beep('step'); toast('ภาพที่ ' + n + ' เรียบร้อย · ' + nextMsg + ' แล้วถ่ายภาพที่ ' + (n + 1)); }
-      else attemptDone();
+      cur['p' + n] = r; setAlert(); shotDone(n);
     }
   }
+  // หลังถ่ายแต่ละภาพ: ตำหนิผิว (อย่างเดียว) → ถามพนักงานก่อน / จุดอื่นไม่ผ่าน → หยุดวัด / ผ่าน → ไปภาพถัดไป
+  function shotDone(n) {
+    renderDims();
+    if (surfAsk(n)) return;
+    advance(n);
+  }
+  function advance(n) {
+    if (n < S() && earlyStop(n)) return;
+    if (n >= S()) return attemptDone();
+    const nextMsg = n === 1 ? 'พลิกชิ้นงาน 90° แล้วถ่ายต่อ' : n === 4 ? 'ตั้งชิ้นงานขึ้นบนหน้าปลาย แล้วถ่ายภาพที่ 5' : n === 5 ? 'พลิกกลับหัว แล้วถ่ายภาพที่ 6' : 'พลิกต่ออีก 90° แล้วถ่ายภาพที่ ' + (n + 1);
+    cur.step = n + 1; renderDims(); renderSteps(); showStage(); beep('step'); toast('ภาพที่ ' + n + ' เรียบร้อย · ' + nextMsg);
+  }
+  // ตำหนิผิวอาจเป็นแค่รอยเปื้อน → ให้พนักงานเช็ดแล้วเลือก: ถ่ายใหม่ / ยืนยันผิวดี / ตำหนิจริง
+  function surfAsk(n) {
+    const p = cur['p' + n];
+    if (!cfg.surfOn || !p || p.surfA == null || p.surfOk) return false;
+    const r = solve(), h = [0, r.T ?? M().T.n, r.W, r.T, r.W, r.L, r.L][n] ?? M().T.n;
+    if (p.surfA * fac(h) <= cfg.surf) return false;
+    const bad = evalBad(r, n < S()).bad;
+    if (bad.some((k) => k !== 'S')) return false;   // มีจุดอื่นไม่ผ่านด้วย → ไม่ผ่านตามปกติ
+    cur.surfAt = n;
+    $('surfT').textContent = 'กล้องพบตำหนิบนผิว (ภาพที่ ' + n + ' · ' + (p.surfA * fac(h)).toFixed(1) + ' mm)';
+    $('surfDlg').classList.add('on'); beep('retake');
+    return true;
+  }
+  $('surfOk').onclick = () => {   // พนักงานตรวจแล้ว ผิวดี → ไม่นับตำหนิของภาพนี้ แล้ววัดต่อ
+    const n = cur.surfAt; $('surfDlg').classList.remove('on');
+    cur['p' + n].surfOk = true; (cur.surfOkAt = cur.surfOkAt || []).push(n);
+    toast('พนักงานยืนยันผิวดี (ภาพที่ ' + n + ')'); advance(n);
+  };
+  $('surfRe').onclick = () => {   // เช็ดแล้ว ให้กล้องถ่ายภาพนี้ใหม่
+    const n = cur.surfAt; $('surfDlg').classList.remove('on');
+    cur['p' + n] = null; cur.step = n; cur.view = n;
+    window.dispatchEvent(new Event('qc-wipe'));
+    renderDims(); renderSteps(); setAlert('เช็ดรอยเปื้อนแล้ว ถ่ายภาพที่ ' + n + ' ใหม่', 'วางชิ้นงานด้านเดิมให้กล้องถ่ายอีกครั้ง'); showStage();
+  };
+  $('surfNg').onclick = () => {   // ตำหนิจริง → ไม่ผ่าน (หยุดวัด)
+    const n = cur.surfAt; $('surfDlg').classList.remove('on');
+    finishAttempt(n, true);
+  };
   // ถ่ายครบแล้ว → ถ้าพาร์ทนี้ให้พนักงานดูหน้าปลายเอง ถามก่อน แล้วค่อยตัดสินผลครั้งนี้
   function attemptDone() {
     if (endsManual() && cur.endsOk == null) { $('endsDlg').classList.add('on'); beep('step'); return; }
@@ -1595,16 +1643,31 @@
     return Math.max((a.dent || 0) / cfg.dent, (a.surf || 0) / cfg.surf, ...['L', 'W', 'T'].map((k) => { const d = a[k] - m[k].n, t = d >= 0 ? m[k].p : m[k].m; return Math.abs(d) / Math.max(t, 0.05); }));
   }
 
-  function finishAttempt() {
-    const r = renderDims(), m = M();
-    const fe = fillEval(r) || { dent: null, fill: null, faces: 0, surf: null, surfN: 0 };
-    const bad = ['L', 'W', 'T'].filter((k) => !inTol(r[k], m[k]));
+  // ตรวจจุดที่ไม่ผ่านจากภาพที่ถ่ายไปแล้ว
+  //  early = ยังถ่ายไม่ครบ: ขนาดจากภาพที่ 1 เป็นค่าชั่วคราว (ยังไม่รู้ความหนาจริง) จึงตัดสินไม่ผ่านเมื่อเกินพิกัดชัดเจน (เผื่อ 0.5 mm)
+  function evalBad(r, early) {
+    const m = M(), fe = fillEval(r) || { dent: null, fill: null, faces: 0, surf: null, surfN: 0 };
+    const mg = early && !r.final ? 0.5 : 0;
+    const bad = ['L', 'W', 'T'].filter((k) => r[k] != null && !inTol(r[k], { n: m[k].n, p: m[k].p + mg, m: m[k].m + mg }));
     if (fe.dent != null && fe.dent > cfg.dent) bad.push('F');
     if (cfg.surfOn && fe.surf != null && fe.surf > cfg.surf) bad.push('S');
-    const ends = endsManual() ? (cur.endsOk ? 'ok' : 'ng') : (cur.p5 ? 'cam' : '');
+    return { bad, fe };
+  }
+  // พบจุดไม่ผ่านระหว่างถ่าย → หยุดวัดทันที แล้วเข้าหน้าตรวจซ้ำ / ตัดสินผล (ไม่ต้องรอครบทุกด้าน)
+  function earlyStop(n) {
+    if (!evalBad(renderDims(), true).bad.length) return false;
+    finishAttempt(n); return true;
+  }
+  function finishAttempt(stopAt, surfNg) {
+    const r = renderDims(), early = !!stopAt && stopAt < S();
+    const { bad, fe } = evalBad(r, early);
+    if (surfNg && !bad.includes('S')) bad.push('S');
+    const ends = stopAt ? '' : endsManual() ? (cur.endsOk ? 'ok' : 'ng') : (cur.p5 ? 'cam' : '');
     if (ends === 'ng') bad.push('E');
-    cur.attempts.push({ v: bad.length ? 'F' : 'P', bad, L: r.L, W: r.W, T: r.T, L1: r.L1, L2: r.L2 ?? null, tm: r.tm, swap: !!r.swap, rms: cur.p1.rms, max: cur.p1.max,
-      dent: fe.dent, fill: fe.fill, faces: fe.faces, surf: cfg.surfOn ? fe.surf : null, surfN: fe.surfN, ends });
+    const keep = (k) => (r.final || bad.includes(k) ? r[k] : null);   // ค่าชั่วคราวที่ยังไม่ยืนยัน ไม่บันทึก
+    cur.attempts.push({ v: bad.length ? 'F' : 'P', bad, L: keep('L'), W: keep('W'), T: r.T ?? null, L1: r.L1 ?? null, L2: r.L2 ?? null, tm: r.tm || 'cam', swap: !!r.swap, rms: cur.p1.rms, max: cur.p1.max,
+      dent: fe.dent, fill: fe.fill, faces: fe.faces, surf: cfg.surfOn ? fe.surf : null, surfN: fe.surfN, ends, stopAt: early ? stopAt : null, surfOk: cur.surfOkAt || null });
+    cur.surfOkAt = null;
     cur.endsOk = null;
     const d = decide(cur.attempts.map((a) => a.v));
     if (d.final) return finalize(d.final, 'auto');
@@ -1622,7 +1685,7 @@
     pick.best = true;
     const rec = { uid: Date.now().toString(36) + Math.random().toString(36).slice(2, 7), n: lastNo() + 1, t: Date.now(), verdict, model: m.name, station: cfg.station, user: sess ? sess.name : '',
       L: pick.L, W: pick.W, T: pick.T, L1: pick.L1, L2: pick.L2, tm: pick.tm, swap: pick.swap,
-      dL: pick.L - m.L.n, dW: pick.W - m.W.n, dT: pick.T - m.T.n, sL: m.L, sW: m.W, sT: m.T,
+      dL: pick.L != null ? pick.L - m.L.n : null, dW: pick.W != null ? pick.W - m.W.n : null, dT: pick.T != null ? pick.T - m.T.n : null, stopAt: pick.stopAt, sL: m.L, sW: m.W, sT: m.T,
       dent: pick.dent, fill: pick.fill, faces: pick.faces, dentLim: cfg.dent, surf: pick.surf, surfN: pick.surfN, ends: pick.ends, reason: reasonTxt(pick),
       attempts: A.length, seq, by, Z: cfg.comp ? cfg.Z : null, rms: pick.rms, max: pick.max, synced: false };
     if (by === 'operator' && verdict === 'fail') rec.reason = 'พนักงานตัดสินไม่ผ่าน (เครื่องมือวัด)';
@@ -1642,10 +1705,12 @@
   }
 
   function reasonTxt(a) {
-    const m = M(), out = ['L', 'W', 'T'].filter((k) => !inTol(a[k], m[k])).map((k) => NAMES[k] + ' ' + sgn(a[k] - m[k].n));
+    const m = M(), out = ['L', 'W', 'T'].filter((k) => a[k] != null && !inTol(a[k], m[k])).map((k) => NAMES[k] + ' ' + sgn(a[k] - m[k].n));
     if (a.dent != null && a.dent > cfg.dent) out.push('รอยเว้า ' + a.dent.toFixed(2) + ' mm');
     if (a.surf != null && cfg.surfOn && a.surf > cfg.surf) out.push('ตำหนิผิว ' + a.surf.toFixed(2) + ' mm' + (a.surfN > 1 ? ' (' + a.surfN + ' จุด)' : ''));
     if (a.ends === 'ng') out.push('หน้าปลายมีตำหนิ (พนักงานตรวจ)');
+    if (a.stopAt) out.push('หยุดวัดที่ภาพที่ ' + a.stopAt + '/' + S());
+    if (a.surfOk && a.surfOk.length) out.push('พนักงานยืนยันผิวดี (ภาพที่ ' + a.surfOk.join(', ') + ')');
     return out.join(', ');
   }
   // ---------- หน้าจอผล (ผ่าน / ไม่ผ่าน / ตรวจซ้ำ / ตรวจด้วยเครื่องมือวัด) ----------
@@ -1664,17 +1729,18 @@
       $('vTitle').innerHTML = 'ผ่าน<small>PASS</small>';
       $('vSub').innerHTML = m.name + ' · ชิ้นที่ #' + d.rec.n + (nA > 1 ? ' · ผ่านหลังตรวจ ' + nA + ' ครั้ง · บันทึกค่าที่ดีที่สุด' : ' · ทุกขนาดอยู่ในพิกัด') + (d.rec.by === 'operator' ? '<br>ยืนยันผลโดยพนักงาน (ตรวจด้วยเครื่องมือวัด)' : '') + (d.rec.recheck ? '<br>ตรวจซ้ำตามคำขอ · ผลยังผ่านเหมือนเดิม ไม่นับเพิ่ม' : '');
     } else if (kind === 'fail') {
-      const bad = ['L', 'W', 'T'].filter((k) => !inTol(a[k], m[k])).concat(a.dent != null && a.dent > cfg.dent ? ['F'] : [], a.surf != null && cfg.surfOn && a.surf > cfg.surf ? ['S'] : [], a.ends === 'ng' ? ['E'] : []);
+      const bad = ['L', 'W', 'T'].filter((k) => a[k] != null && !inTol(a[k], m[k])).concat(a.dent != null && a.dent > cfg.dent ? ['F'] : [], a.surf != null && cfg.surfOn && a.surf > cfg.surf ? ['S'] : [], a.ends === 'ng' ? ['E'] : []);
       $('vTitle').innerHTML = 'ไม่ผ่าน<small>REJECT</small>';
       $('vSub').innerHTML = m.name + ' · ชิ้นที่ #' + d.rec.n + (d.rec.by === 'operator' ? ' · พนักงานตัดสินไม่ผ่าน (ตรวจด้วยเครื่องมือวัด)' : (bad.filter((k) => 'LWT'.includes(k)).length ? ' · ขนาดเกินพิกัด ' + bad.filter((k) => 'LWT'.includes(k)).length + ' ด้าน' : '') + (bad.includes('F') ? ' · มีรอยเว้า/ขอบแหว่ง' : '') + (bad.includes('S') ? ' · มีตำหนิบนผิว' : '') + (bad.includes('E') ? ' · หน้าปลายมีตำหนิ' : '')) + (nA > 1 ? ' · ตรวจ ' + nA + ' ครั้ง' : '') + (d.rec.recheck ? '<br>ตรวจซ้ำตามคำขอ · เปลี่ยนจากผ่านเป็นไม่ผ่าน (ยอดผ่าน −1)' : '') + '<br>แยกชิ้นงานออกจากไลน์';
     } else if (kind === 'retest') {
       $('vTitle').innerHTML = 'ตรวจซ้ำ<small>ครั้งที่ ' + (nA + 1) + ' จาก 5</small>';
-      $('vSub').innerHTML = d.why + '<br>ยังไม่บันทึกผล และยังไม่นับยอด';
+      $('vSub').innerHTML = (a.stopAt ? 'พบจุดไม่ผ่านที่ภาพที่ ' + a.stopAt + '/' + S() + ' · หยุดวัดทันที<br>' : '') + d.why + '<br>ยังไม่บันทึกผล และยังไม่นับยอด';
     } else {
       $('vTitle').innerHTML = 'ตรวจด้วยเครื่องมือวัด<small>ผลวัดแกว่ง</small>';
       $('vSub').innerHTML = 'วัด ' + nA + ' ครั้ง ผ่าน ' + nPass + ' / ไม่ผ่าน ' + (nA - nPass) + ' · ชิ้นงานอาจอยู่ใกล้ขอบพิกัด<br>วัดชิ้นงานด้วยเครื่องมือวัด (เช่น เวอร์เนียร์) แล้วกดยืนยันผล';
     }
     $('vTable').innerHTML = ['L', 'W', 'T'].map((k) => {
+      if (a[k] == null) return '<div class="vrow na"><span class="ic">–</span><span class="nm">' + NAMES[k] + '<small>' + tolTxt(m[k]) + '</small></span><span class="vv">–</span><span class="dd">หยุดวัดก่อน</span></div>';
       const ok = inTol(a[k], m[k]);
       return '<div class="vrow ' + (ok ? 'ok' : 'ng') + '"><span class="ic">' + (ok ? '✓' : '✗') + '</span><span class="nm">' + NAMES[k] + '<small>' + tolTxt(m[k]) + '</small></span>' +
         '<span class="vv">' + a[k].toFixed(2) + '</span><span class="dd">' + sgn(a[k] - m[k].n) + '</span></div>';
@@ -1816,7 +1882,7 @@
     ['L', 'W', 'T'].forEach((k) => { const a = mine.map((h) => h[k]).filter((v) => v != null); $('st' + k).textContent = a.length ? mean(a).toFixed(2) + ' ± ' + sd(a).toFixed(2) : '–'; });
     try { renderJob(); } catch (e) {}
     $('hList').innerHTML = hist.length ? hist.slice(-80).reverse().map((h) =>
-      '<div class="hr"><span class="n">#' + h.n + '</span><span class="m">' + h.L.toFixed(1) + ' × ' + h.W.toFixed(1) + ' × ' + h.T.toFixed(1) + (h.dent != null ? ' · เว้า ' + h.dent.toFixed(1) : '') + (h.surf != null ? ' · ผิว ' + h.surf.toFixed(1) : '') +
+      '<div class="hr"><span class="n">#' + h.n + '</span><span class="m">' + ['L', 'W', 'T'].map((k) => (h[k] != null ? h[k].toFixed(1) : '–')).join(' × ') + (h.dent != null ? ' · เว้า ' + h.dent.toFixed(1) : '') + (h.surf != null ? ' · ผิว ' + h.surf.toFixed(1) : '') +
       '<small>' + hhmm(h.t) + ' · ' + h.model + (h.user ? ' · ' + h.user : '') + (h.tm === 'manual' ? ' · หนากรอกเอง' : '') + ((h.attempts || 1) > 1 ? '<span class="at">' + h.seq.split('').map((c) => (c === 'P' ? '✓' : '✗')).join('') + (h.by === 'operator' ? ' 📏' : '') + '</span>' : '') + '</small></span><span class="s ' + (h.synced ? 'ok' : 'err') + '" title="Google Sheet">' + (h.synced ? '☁ ✓' : '☁ …') + '</span>' + '<span class="chip ' + h.verdict + '">' + (h.verdict === 'pass' ? 'ผ่าน' : 'ไม่ผ่าน') + '</span>' + '</div>').join('')
       : '<div class="empty">ยังไม่มีประวัติ</div>';
   }
@@ -2785,7 +2851,7 @@
     if (on('svQtyDlg')) return $('svQtyDlg').classList.remove('on');
     if (on('svPartDlg')) return $('pBack').click();
     if (on('svCsvDlg')) return $('svCsvDlg').classList.remove('on');
-    if (on('endsDlg') || on('kp')) return;
+    if (on('endsDlg') || on('surfDlg') || on('kp')) return;
     if (document.querySelector('.sheet.on')) return sheet(null);
     if (vis('login')) { if (lgMode !== 'pick') setLgMode('pick'); return; }
     if (vis('sup')) return confirmOut();
