@@ -721,6 +721,15 @@
     .pk-tag{position:absolute;top:12px;right:12px;font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;background:#e6f1fb;color:#3a7cc2}
     .pk-tag.last{background:#fff4e0;color:#b54708}
     .pk-tile mark{background:#fde68a;color:inherit;border-radius:3px;padding:0 1px}
+    .pk-tile.off{opacity:.42;filter:grayscale(.7);cursor:not-allowed;box-shadow:none}
+    .pk-tile.off .pk-num{color:#9aa8b8}
+    .pk-tile.off.done{opacity:.6;filter:none}
+    .pk-tag.none{background:#eef1f5;color:#6b7a8c}
+    .pk-note{grid-column:1/-1;display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:18px;background:#fff7ed;border:2px solid #fed7aa;color:#9a3412;font-size:16px;font-weight:600}
+    .pk-note.load{background:#f1f5f9;border-color:#e2e8f0;color:#475569}
+    .pk-note span{flex:1;line-height:1.5}
+    .pk-note small{display:block;font-weight:400;font-size:14px;opacity:.85}
+    .pk-note button{flex:none;padding:10px 16px;border-radius:12px;border:0;background:#ea580c;color:#fff;font:inherit;font-size:15px}
     .pk-empty{grid-column:1/-1;text-align:center;color:#8aa0b8;padding:60px 0;font-size:16px}
     .pk-foot{display:flex;gap:10px;justify-content:space-between;padding:10px 24px 16px}
     .pk-foot button{height:46px;padding:0 18px;border-radius:14px;background:#fff;border:1px solid #d9e4f0;font-weight:600;font-size:14.5px;color:#41566e}
@@ -1185,7 +1194,7 @@
 <script>
   // ===== ลิงก์หลังบ้าน (Apps Script Web App) =====
   // วางลิงก์ที่ได้จากการ Deploy (ลงท้ายด้วย /exec) ไว้ระหว่างเครื่องหมาย ' '
-  const API_URL = 'https://script.google.com/macros/s/AKfycbzTaFGeSPUj1cHijoAHYG5FeaWkq8UsABgH9cKdTSUJZ-4eARxP8nZf-_GBo9kCVpq6VQ/exec';
+  const API_URL = '';
 
   // ===== ค่าคงที่ของบอร์ด (แก้ตามที่วัดจริง) =====
   const MARKER_MM = 50;                  // ขนาดสี่เหลี่ยมดำที่พิมพ์จริง (บอร์ด A3)
@@ -1319,28 +1328,42 @@
   // ภาพที่แก้ perspective ด้วยมาร์กเกอร์บนบอร์ด จะเห็นผิวที่สูง h ใหญ่ขึ้น Z/(Z−h) เท่า
   // ภาพที่ 1: ผิวบนสูง = ความหนา (วัดจากภาพที่ 2) | ภาพที่ 2: ผิวบนสูง = ความกว้าง (วัดจากภาพที่ 1)
   const fac = (h) => cfg.comp ? (cfg.Z - h) / cfg.Z : 1;
+  // ค่าจริงของแต่ละภาพ (ไม่เฉลี่ย) — ภาพ 1/3 เห็นด้าน a (ผิวบนสูง b) · ภาพ 2/4 เห็นด้าน b (ผิวบนสูง a)
+  //  การคำนวณมีแค่ชดเชยความสูงผิวบน (parallax) ซึ่งจำเป็นเพื่อให้ได้ขนาดจริง
+  //  ค่าหลักของแต่ละด้าน = ค่าที่ใกล้ขอบพิกัดที่สุด (ค่าแย่สุด) จากทุกภาพ → ทุกค่าต้องอยู่ในพิกัดจึงจะผ่าน
+  function worstOf(list, s) {
+    const ex = (v) => Math.max(v - (s.n + s.p), (s.n - s.m) - v);
+    return list.length ? list.reduce((w, o) => (ex(o.v) > ex(w.v) ? o : w)).v : null;
+  }
   function solve() {
     const m = M();
     if (!cur.p1) return null;
     if (cur.p2) {
       let a = cur.p1.Xa, b = cur.p2.Xa;
       for (let i = 0; i < 30; i++) { const a2 = cur.p1.Xa * fac(b), b2 = cur.p2.Xa * fac(a); a = a2; b = b2; }
-      const L1 = cur.p1.La * fac(b), L2 = cur.p2.La * fac(a);
       // ถ้าวางสลับด้าน (กว้าง/หนา) ระบบจัดให้อัตโนมัติ ตามค่าที่ใกล้มาตรฐานกว่า
       const sc = (w, t) => Math.abs(w - m.W.n) + Math.abs(t - m.T.n);
       const swap = Math.abs(m.W.n - m.T.n) > 1 && sc(b, a) + 0.5 < sc(a, b);
-      return { final: true, L: (L1 + L2) / 2, L1, L2, W: swap ? b : a, T: swap ? a : b, swap, tm: 'cam' };
+      const Ls = [{ s: 1, v: cur.p1.La * fac(b) }, { s: 2, v: cur.p2.La * fac(a) }], As = [{ s: 1, v: a }], Bs = [{ s: 2, v: b }];
+      if (cur.p3) { Ls.push({ s: 3, v: cur.p3.La * fac(b) }); As.push({ s: 3, v: cur.p3.Xa * fac(b) }); }
+      if (cur.p4) { Ls.push({ s: 4, v: cur.p4.La * fac(a) }); Bs.push({ s: 4, v: cur.p4.Xa * fac(a) }); }
+      const Ws = swap ? Bs : As, Ts = swap ? As : Bs;
+      return { final: true, Ls, Ws, Ts, L: worstOf(Ls, m.L), W: worstOf(Ws, m.W), T: worstOf(Ts, m.T), L1: Ls[0].v, L2: Ls[1].v, h1: b, h2: a, swap, tm: 'cam' };
     }
-    if (cur.manualT != null) { const T = cur.manualT; return { final: true, L: cur.p1.La * fac(T), L1: cur.p1.La * fac(T), W: cur.p1.Xa * fac(T), T, tm: 'manual' }; }
+    if (cur.manualT != null) {
+      const T = cur.manualT, L1 = cur.p1.La * fac(T), W1 = cur.p1.Xa * fac(T);
+      return { final: true, Ls: [{ s: 1, v: L1 }], Ws: [{ s: 1, v: W1 }], Ts: [], L: L1, L1, W: W1, T, h1: T, h2: W1, tm: 'manual' };
+    }
     const h = m.T.n;   // ยังไม่รู้ความหนาจริง ใช้ค่ามาตรฐานไปก่อน (ค่าชั่วคราว)
-    return { final: false, L: cur.p1.La * fac(h), W: cur.p1.Xa * fac(h), T: null };
+    return { final: false, L: cur.p1.La * fac(h), W: cur.p1.Xa * fac(h), T: null, h1: h, h2: m.W.n };
   }
+  const perShot = (list) => (list && list.length > 1 ? list.map((o) => '①②③④⑤⑥'[o.s - 1] + '\u00a0' + o.v.toFixed(2)).join('  ') : null);
 
   // ความเต็มกรอบ: รอยเว้าลึกสุดจากทุกภาพ (แปลงเป็น mm จริงด้วยความสูงผิวบนของแต่ละภาพ)
   function fillEval(r) {
     if (!r) return null;
-    const m = M(), T = r.T != null ? r.T : m.T.n, W = r.W != null ? r.W : m.W.n;
-    const Lh = r.L != null ? r.L : m.L.n;
+    const m = M(), T = r.h1 != null ? r.h1 : m.T.n, W = r.h2 != null ? r.h2 : m.W.n;
+    const Lh = r.L1 != null ? r.L1 : r.L != null ? r.L : m.L.n;
     const shots = [[cur.p1, T], [cur.p2, W], [cur.p3, T], [cur.p4, W], [cur.p5, Lh], [cur.p6, Lh]].filter(([p]) => p && p.dentA != null);
     if (!shots.length) return null;
     const per = shots.map(([p, h]) => p.dentA * fac(h));
@@ -1484,15 +1507,15 @@
     const r = solve();
     const feR = fillEval(r); setFill(feR, r && !r.final); setSurf(feR, r && !r.final);
     if (!r) { ['L', 'W', 'T'].forEach((k) => setDim(k, null)); return r; }
-    setDim('L', r.L, !r.final, r.final && r.L2 != null ? '1: ' + r.L1.toFixed(1) + ' · 2: ' + r.L2.toFixed(1) : null);
-    setDim('W', r.W, !r.final, r.swap ? 'สลับด้านอัตโนมัติ' : null);
-    setDim('T', r.T, false, r.T != null ? (r.tm === 'manual' ? 'กรอกเอง' : 'จากภาพที่ 2') : null);
+    setDim('L', r.L, !r.final, perShot(r.Ls));
+    setDim('W', r.W, !r.final, perShot(r.Ws) || (r.swap ? 'สลับด้านอัตโนมัติ' : null));
+    setDim('T', r.T, false, r.T != null ? (r.tm === 'manual' ? 'กรอกเอง' : perShot(r.Ts) || 'จากภาพที่ 2') : null);
     return r;
   }
   function showDimsOf(a) {   // แสดงค่าของครั้งที่ระบุบนการ์ดด้านขวา
-    setDim('L', a.L, false, a.L2 != null ? '1: ' + a.L1.toFixed(1) + ' · 2: ' + a.L2.toFixed(1) : null);
-    setDim('W', a.W, false, a.swap ? 'สลับด้านอัตโนมัติ' : null);
-    setDim('T', a.T, false, a.tm === 'manual' ? 'กรอกเอง' : 'จากภาพที่ 2');
+    setDim('L', a.L, false, perShot(a.Ls));
+    setDim('W', a.W, false, perShot(a.Ws) || (a.swap ? 'สลับด้านอัตโนมัติ' : null));
+    setDim('T', a.T, false, a.tm === 'manual' ? 'กรอกเอง' : perShot(a.Ts) || 'จากภาพที่ 2');
     setFill(a.dent != null ? { dent: a.dent, fill: a.fill, faces: a.faces } : null, false);
     setSurf(a.surf != null ? { surf: a.surf, surfN: a.surfN, faces: a.faces } : null, false);
   }
@@ -1554,11 +1577,11 @@
       const s = solve();
       if (n <= 4) {
         // ภาพที่ 3–4: ตรวจขอบ/ผิว และตรวจว่าความยาวยังตรงกับภาพก่อน
-        const Ln = r.La * fac(n === 3 ? s.T : s.W);
-        if (Math.abs(Ln - s.L) > cfg.lchk) return retake('ความยาวภาพที่ ' + n + ' ไม่ตรงกับภาพก่อน (' + Ln.toFixed(1) + ' / ' + s.L.toFixed(1) + ' mm)', 'ตรวจว่ากลิ้งตามแนวยาว แล้วถ่ายภาพที่ ' + n + ' ใหม่');
+        const Ln = r.La * fac(n === 3 ? s.h1 : s.h2);
+        if (Math.abs(Ln - s.L1) > cfg.lchk) return retake('ความยาวภาพที่ ' + n + ' ไม่ตรงกับภาพก่อน (' + Ln.toFixed(1) + ' / ' + s.L1.toFixed(1) + ' mm)', 'ตรวจว่ากลิ้งตามแนวยาว แล้วถ่ายภาพที่ ' + n + ' ใหม่');
       } else {
         // ภาพที่ 5–6: หน้าปลาย (ผิวบนสูง = ความยาว) ต้องได้ขนาด กว้าง × หนา ตรงกับที่วัดได้
-        const a = r.La * fac(s.L), b = r.Xa * fac(s.L), A = Math.max(s.W, s.T), B = Math.min(s.W, s.T);
+        const a = r.La * fac(s.L1), b = r.Xa * fac(s.L1), A = Math.max(s.h1, s.h2), B = Math.min(s.h1, s.h2);
         if (Math.abs(a - A) > cfg.lchk + 1 || Math.abs(b - B) > cfg.lchk + 1) return retake('หน้าปลายไม่ตรงขนาด (' + a.toFixed(1) + ' × ' + b.toFixed(1) + ' mm)', 'ตรวจว่าตั้งชิ้นงานตรง ไม่เอียง และทับจุดกลาง แล้วถ่ายภาพที่ ' + n + ' ใหม่');
       }
       cur['p' + n] = r; setAlert(); shotDone(n);
@@ -1580,7 +1603,7 @@
   function surfAsk(n) {
     const p = cur['p' + n];
     if (!cfg.surfOn || !p || p.surfA == null || p.surfOk) return false;
-    const r = solve(), h = [0, r.T ?? M().T.n, r.W, r.T, r.W, r.L, r.L][n] ?? M().T.n;
+    const r = solve(), h = [0, r.h1, r.h2, r.h1, r.h2, r.L1, r.L1][n] ?? M().T.n;
     if (p.surfA * fac(h) <= cfg.surf) return false;
     const bad = evalBad(r, n < S()).bad;
     if (bad.some((k) => k !== 'S')) return false;   // มีจุดอื่นไม่ผ่านด้วย → ไม่ผ่านตามปกติ
@@ -1620,7 +1643,7 @@
   // P = ผ่าน, F = ไม่ผ่าน
   //  P              → ผ่าน
   //  F F            → ไม่ผ่าน
-  //  F P P          → ผ่าน (บันทึกค่าที่ดีที่สุด)
+  //  F P P          → ผ่าน (บันทึกค่าครั้งสุดท้าย)
   //  F P F F        → ไม่ผ่าน
   //  F P F P F      → ไม่ผ่าน
   //  F P F P P      → ให้พนักงานตรวจด้วยเครื่องมือวัด แล้วกดยืนยัน ผ่าน / ไม่ผ่าน
@@ -1665,7 +1688,8 @@
     const ends = stopAt ? '' : endsManual() ? (cur.endsOk ? 'ok' : 'ng') : (cur.p5 ? 'cam' : '');
     if (ends === 'ng') bad.push('E');
     const keep = (k) => (r.final || bad.includes(k) ? r[k] : null);   // ค่าชั่วคราวที่ยังไม่ยืนยัน ไม่บันทึก
-    cur.attempts.push({ v: bad.length ? 'F' : 'P', bad, L: keep('L'), W: keep('W'), T: r.T ?? null, L1: r.L1 ?? null, L2: r.L2 ?? null, tm: r.tm || 'cam', swap: !!r.swap, rms: cur.p1.rms, max: cur.p1.max,
+    const keepL = (l, k) => (r.final ? l || [] : bad.includes(k) ? [{ s: 1, v: r[k] }] : []);
+    cur.attempts.push({ v: bad.length ? 'F' : 'P', bad, t: Date.now(), Ls: keepL(r.Ls, 'L'), Ws: keepL(r.Ws, 'W'), Ts: r.Ts || [], L: keep('L'), W: keep('W'), T: r.T ?? null, L1: r.final ? r.L1 ?? null : null, L2: r.L2 ?? null, tm: r.tm || 'cam', swap: !!r.swap, rms: cur.p1.rms, max: cur.p1.max,
       dent: fe.dent, fill: fe.fill, faces: fe.faces, surf: cfg.surfOn ? fe.surf : null, surfN: fe.surfN, ends, stopAt: early ? stopAt : null, surfOk: cur.surfOkAt || null });
     cur.surfOkAt = null;
     cur.endsOk = null;
@@ -1679,12 +1703,13 @@
 
   function finalize(verdict, by) {
     const m = M(), A = cur.attempts, seq = A.map((a) => a.v).join('');
-    const passes = A.filter((a) => a.v === 'P');
-    // ผ่าน → ใช้ค่าที่ดีที่สุดในครั้งที่ผ่าน | ไม่ผ่าน → ใช้ค่าครั้งสุดท้าย
-    const pick = verdict === 'pass' && passes.length ? passes.reduce((b, a) => (score(a) < score(b) ? a : b)) : A[A.length - 1];
+    // ใช้ค่าจริงของครั้งสุดท้าย (ครั้งที่ตัดสินผล) · ค่าของทุกครั้งส่งไปเก็บในแท็บ "ประวัติตรวจทุกครั้ง"
+    const pick = A[A.length - 1];
     pick.best = true;
+    const v2 = (l) => (l || []).map((o) => [o.s, +o.v.toFixed(3)]);
+    const log = A.map((a, i) => ({ i: i + 1, t: a.t || Date.now(), v: a.v, Ls: v2(a.Ls), Ws: v2(a.Ws), Ts: v2(a.Ts), dent: a.dent, surf: a.surf, stopAt: a.stopAt || null, reason: a.v === 'F' ? reasonTxt(a) : (a.surfOk && a.surfOk.length ? 'พนักงานยืนยันผิวดี (ภาพที่ ' + a.surfOk.join(', ') + ')' : '') }));
     const rec = { uid: Date.now().toString(36) + Math.random().toString(36).slice(2, 7), n: lastNo() + 1, t: Date.now(), verdict, model: m.name, station: cfg.station, user: sess ? sess.name : '',
-      L: pick.L, W: pick.W, T: pick.T, L1: pick.L1, L2: pick.L2, tm: pick.tm, swap: pick.swap,
+      L: pick.L, W: pick.W, T: pick.T, L1: pick.L1, L2: pick.L2, tm: pick.tm, swap: pick.swap, Ls: v2(pick.Ls), Ws: v2(pick.Ws), Ts: v2(pick.Ts), log,
       dL: pick.L != null ? pick.L - m.L.n : null, dW: pick.W != null ? pick.W - m.W.n : null, dT: pick.T != null ? pick.T - m.T.n : null, stopAt: pick.stopAt, sL: m.L, sW: m.W, sT: m.T,
       dent: pick.dent, fill: pick.fill, faces: pick.faces, dentLim: cfg.dent, surf: pick.surf, surfN: pick.surfN, ends: pick.ends, reason: reasonTxt(pick),
       attempts: A.length, seq, by, Z: cfg.comp ? cfg.Z : null, rms: pick.rms, max: pick.max, synced: false };
@@ -1727,7 +1752,7 @@
     const nPass = A.filter((x) => x.v === 'P').length;
     if (kind === 'pass') {
       $('vTitle').innerHTML = 'ผ่าน<small>PASS</small>';
-      $('vSub').innerHTML = m.name + ' · ชิ้นที่ #' + d.rec.n + (nA > 1 ? ' · ผ่านหลังตรวจ ' + nA + ' ครั้ง · บันทึกค่าที่ดีที่สุด' : ' · ทุกขนาดอยู่ในพิกัด') + (d.rec.by === 'operator' ? '<br>ยืนยันผลโดยพนักงาน (ตรวจด้วยเครื่องมือวัด)' : '') + (d.rec.recheck ? '<br>ตรวจซ้ำตามคำขอ · ผลยังผ่านเหมือนเดิม ไม่นับเพิ่ม' : '');
+      $('vSub').innerHTML = m.name + ' · ชิ้นที่ #' + d.rec.n + (nA > 1 ? ' · ผ่านหลังตรวจ ' + nA + ' ครั้ง · บันทึกค่าครั้งสุดท้าย' : ' · ทุกขนาดอยู่ในพิกัด') + (d.rec.by === 'operator' ? '<br>ยืนยันผลโดยพนักงาน (ตรวจด้วยเครื่องมือวัด)' : '') + (d.rec.recheck ? '<br>ตรวจซ้ำตามคำขอ · ผลยังผ่านเหมือนเดิม ไม่นับเพิ่ม' : '');
     } else if (kind === 'fail') {
       const bad = ['L', 'W', 'T'].filter((k) => a[k] != null && !inTol(a[k], m[k])).concat(a.dent != null && a.dent > cfg.dent ? ['F'] : [], a.surf != null && cfg.surfOn && a.surf > cfg.surf ? ['S'] : [], a.ends === 'ng' ? ['E'] : []);
       $('vTitle').innerHTML = 'ไม่ผ่าน<small>REJECT</small>';
@@ -2386,7 +2411,7 @@
     return esc(s.slice(0, i)) + '<mark>' + esc(s.slice(i, i + q.length)) + '</mark>' + esc(s.slice(i + q.length));
   }
   function showPicker(closable) {
-    $('picker').classList.remove('hide'); $('pkClose').classList.toggle('hide', !closable);
+    $('picker').classList.remove('hide'); $('picker').dataset.closable = closable ? '1' : ''; $('pkClose').classList.toggle('hide', !closable);
     $('pkQ').value = ''; $('pkHello').textContent = 'สวัสดีค่ะ' + (sess ? ' คุณ' + sess.name : '') + ' · แตะเพื่อเลือกพาร์ทที่จะตรวจ';
     renderPicker(); pullModels(); refreshJob();
   }
@@ -2396,23 +2421,38 @@
     $('pkClr').classList.toggle('hide', !q);
     const today = new Date().toDateString();
     const cnt = {}; hist.forEach((h) => { if (new Date(h.t).toDateString() === today) cnt[h.model] = (cnt[h.model] || 0) + 1; });
-    const list = models.filter((m) => !q || pkHay(m).includes(q)).map((m, i) => [m, i]).sort((a, b) => (planFor(opPlan, a[0]) ? 0 : 1) - (planFor(opPlan, b[0]) ? 0 : 1) || a[1] - b[1]).map((x) => x[0]);
-    const np = models.filter((m) => planFor(opPlan, m)).length;
-    $('pkMeta').textContent = (q ? 'พบ ' + list.length + ' พาร์ท จากทั้งหมด ' + models.length : 'ทั้งหมด ' + models.length + ' พาร์ท') + (np ? ' · มีงานเรียกวันนี้ ' + np + ' พาร์ท (แสดงก่อน)' : '');
+    const list = models.filter((m) => !q || pkHay(m).includes(q)).map((m, i) => [m, i]).sort((a, b) => { const r = (m) => (canPick(m) ? 0 : planFor(opPlan, m) ? 1 : 2); return r(a[0]) - r(b[0]) || a[1] - b[1]; }).map((x) => x[0]);
+    const np = planReady() ? models.filter((m) => planFor(opPlan, m)).length : 0;
+    $('pkMeta').textContent = (q ? 'พบ ' + list.length + ' พาร์ท จากทั้งหมด ' + models.length : 'ทั้งหมด ' + models.length + ' พาร์ท') + (np ? ' · เลือกได้เฉพาะงานที่เรียกวันนี้ ' + np + ' พาร์ท' : '');
     $('pkGrid').innerHTML = list.length ? list.map((m, i) => {
       const num = (m.name.match(/(\d+)\s*$/) || [null, String(models.indexOf(m) + 1).padStart(2, '0')])[1];
       const dims = m.L.n + ' × ' + m.W.n + ' × ' + m.T.n;
-      const jb = jobOf(m), tag = jb.sent ? '<span class="pk-tag sent">✓ ส่งงานแล้ว</span>' : jb.qty ? '<span class="pk-tag ' + (jb.rem ? 'plan' : 'done') + '">' + (jb.rem ? 'เรียก ' + jb.qty + ' · เหลือ ' + jb.rem : 'ครบ ' + jb.qty + ' · รอส่งงาน') + '</span>' : m.id === selId && pkChosen ? '<span class="pk-tag last">กำลังตรวจ</span>' : '';
-      return '<button class="pk-tile' + (m.id === selId ? ' cur' : '') + '" data-id="' + m.id + '">' + tag +
+      const ok = canPick(m), jb = jobOf(m);
+      const tag = jb.sent ? '<span class="pk-tag sent">✓ ส่งงานแล้ว · ผ่าน ' + jb.pass + '</span>' : !ok ? '<span class="pk-tag none">' + (planReady() ? 'ไม่มีในแผนวันนี้' : 'รอแผนงาน') + '</span>' : jb.qty ? '<span class="pk-tag ' + (jb.rem ? 'plan' : 'done') + '">' + (jb.rem ? 'เรียก ' + jb.qty + ' · เหลือ ' + jb.rem : 'ครบ ' + jb.qty + ' · รอส่งงาน') + '</span>' : m.id === selId && pkChosen ? '<span class="pk-tag last">กำลังตรวจ</span>' : '';
+      return '<button class="pk-tile' + (!ok ? ' off' + (jb.sent ? ' done' : '') : m.id === selId ? ' cur' : '') + '" data-id="' + m.id + '"' + (!ok ? ' aria-disabled="true"' : '') + '>' + tag +
         '<span class="pk-num">' + hlTxt(num, q) + '</span><span class="pk-name">' + hlTxt(m.name, q) + '</span>' +
         '<span class="pk-dim">' + hlTxt(dims, q) + '</span><span class="pk-tol">L +' + m.L.p + '/−' + m.L.m + ' · W +' + m.W.p + '/−' + m.W.m + ' · T +' + m.T.p + '/−' + m.T.m + '</span></button>';
     }).join('') : '<div class="pk-empty">ไม่พบพาร์ทที่ค้นหา “' + esc($('pkQ').value.trim()) + '”</div>';
+    let note = '';
+    if (!planReady()) note = planErr ? '<div class="pk-note"><span>โหลดแผนงานวันนี้ไม่ได้<small>ตรวจสอบอินเทอร์เน็ต แล้วกดโหลดใหม่ · ระหว่างนี้ยังเลือกพาร์ทไม่ได้</small></span><button data-a="reload">↻ โหลดแผนงานใหม่</button></div>'
+      : '<div class="pk-note load"><span>กำลังโหลดแผนงานวันนี้…</span></div>';
+    else if (!np) note = '<div class="pk-note"><span>วันนี้ยังไม่มีงานเรียก<small>กรุณาติดต่อ Planner ให้เรียกงานก่อน แล้วกดโหลดใหม่</small></span><button data-a="reload">↻ โหลดแผนงานใหม่</button></div>';
+    if (note && !q) $('pkGrid').insertAdjacentHTML('afterbegin', note);
+    $('pkClose').classList.toggle('hide', !($('picker').dataset.closable === '1' && canPick(M())));
   }
   $('pkQ').addEventListener('input', renderPicker);
   $('pkQ').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); const t = $('pkGrid').querySelectorAll('.pk-tile'); if (t.length === 1) t[0].click(); else $('pkQ').blur(); } });
   $('pkClr').onclick = () => { $('pkQ').value = ''; renderPicker(); $('pkQ').focus(); };
   $('pkGrid').onclick = (e) => {
+    if (e.target.closest('[data-a=reload]')) { const n = $('pkGrid').querySelector('.pk-note span'); if (n) n.textContent = 'กำลังโหลดแผนงาน…'; refreshJob(); return; }
     const b = e.target.closest('.pk-tile'); if (!b) return;
+    const pm = models.find((x) => x.id === b.dataset.id);
+    if (!pm || !canPick(pm)) {
+      beep('retake');
+      toast(pm && jobOf(pm).sent ? pm.name + ' ส่งงานแล้ว · เข้าตรวจอีกไม่ได้ ถ้าต้องตรวจเพิ่ม ให้ Planner เพิ่มจำนวนเรียก'
+        : planReady() ? (pm ? pm.name + ' ' : '') + 'ไม่มีในแผนงานวันนี้ · ติดต่อ Planner ให้เรียกงานก่อน' : 'ยังไม่มีแผนงานวันนี้ · ติดต่อ Planner');
+      return;
+    }
     selId = b.dataset.id; store.set('sel', selId); pkChosen = true;
     applyModel(); resetPiece(); hidePicker(); renderJob(); toast('เลือก ' + M().name + ' แล้ว พร้อมตรวจ');
     if (cfg.live && !liveOn()) setTimeout(() => startLive(), 250);   // เข้ากล้องสดทันที
@@ -2473,13 +2513,23 @@
     const item = { id: m.id, model: m.name, name: m.name, qty };
     if (hasBackend()) return api('savePlan', { day, item, token: sess.token }).then((r) => { if (!r || !r.ok) throw new Error((r && r.msg) || 'บันทึกไม่สำเร็จ'); });
     const old = plansLocal(day).find((p) => p.id === m.id);
-    planLocalSet(day, Object.assign(old || {}, { id: m.id, model: m.name, qty, by: sess ? sess.name : '' })); return Promise.resolve();
+    const reopen = old && old.sub && qty > old.qty ? { sub: false, subBy: '', subAt: '', note: 'เปิดใหม่ (เพิ่มจาก ' + old.qty + ')' } : {};
+    planLocalSet(day, Object.assign(old || {}, { id: m.id, model: m.name, qty, by: sess ? sess.name : '' }, reopen)); return Promise.resolve();
   }
   const planFor = (P, m) => P && (P.plans.find((p) => p.id === m.id) || P.plans.find((p) => p.model === m.name));
 
   // =============== Operator: งานที่เรียก / ผ่าน / คงเหลือ / ส่งงาน ===============
   let opPlan = null, jArm = 0;
-  function refreshJob() { return fetchPlan(today()).then((P) => { opPlan = P; renderJob(); if (!$('picker').classList.contains('hide')) renderPicker(); }).catch(() => {}); }
+  let planErr = false;
+  function refreshJob() {
+    return fetchPlan(today()).then((P) => { opPlan = P; planErr = false; })
+      .catch(() => { if (!opPlan || opPlan.day !== today()) { opPlan = null; planErr = true; } })
+      .then(() => { renderJob(); if (!$('picker').classList.contains('hide')) renderPicker(); });
+  }
+  // Operator เลือกได้เฉพาะพาร์ทที่ Planner เรียกในวันนี้
+  const planReady = () => !!(opPlan && opPlan.day === today());
+  //  ส่งงานแล้ว = ปิดงาน เข้าตรวจอีกไม่ได้ (ก่อนส่งตรวจเกินจำนวนเรียกได้) · Planner เพิ่มจำนวนเรียก = เปิดงานใหม่
+  const canPick = (m) => { const p = planReady() && planFor(opPlan, m); return !!p && !p.sub; };
   function jobOf(m) {
     const p = planFor(opPlan, m), qty = p ? p.qty : 0, d = today();
     let pass = ((opPlan && opPlan.counts[m.name]) || {}).pass || 0;
@@ -2659,7 +2709,7 @@
     $('qDay').textContent = 'แผนงานวันที่ ' + svPlan.day; $('qName').textContent = qModel.name;
     $('qDims').textContent = qModel.L.n + ' × ' + qModel.W.n + ' × ' + qModel.T.n + ' mm';
     $('qQty').value = p ? p.qty : ''; $('qErr').textContent = '';
-    $('qInfo').textContent = p ? 'ผ่านแล้ว ' + ps + ' ชิ้น' + (p.sub ? ' · ส่งงานแล้ว' : '') + (p.by ? ' · กรอกโดย ' + p.by : '') : 'ยังไม่มีแผนของพาร์ทนี้';
+    $('qInfo').textContent = p ? 'ผ่านแล้ว ' + ps + ' ชิ้น' + (p.sub ? ' · ส่งงานแล้ว (ถ้าเพิ่มจำนวน Operator จะตรวจต่อได้)' : '') + (p.by ? ' · กรอกโดย ' + p.by : '') : 'ยังไม่มีแผนของพาร์ทนี้';
     $('svQtyDlg').classList.add('on'); setTimeout(() => $('qQty').focus(), 80);
   };
   document.querySelectorAll('#svQtyDlg .q-pm, #svQtyDlg .q-chips button').forEach((b) => b.onclick = () => {
