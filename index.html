@@ -9,8 +9,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="QC Station">
   <meta name="theme-color" content="#eef3f9">
-  <link rel="apple-touch-icon" href="icon.png">
-  <link rel="icon" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png?v=epe">
+  <link rel="icon" href="icon.png?v=epe">
   <title>QC Station</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -275,6 +275,35 @@
     .keys button:active{background:#e4e7ec}
     .kpf{display:flex;gap:10px;margin-top:12px}
     .kpf button{flex:1;height:56px;border-radius:16px;font-weight:700;font-size:17px;background:var(--soft)}
+    .sup.pln #svTabSys{display:none}
+    #svSysPg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+    #svSysPg.hide{display:none}
+    .sys-card{background:#fff;border-radius:20px;border:1px solid #e6e9f3;padding:18px 20px}
+    .sys-card h3{margin:0 0 4px;font-size:17px}.sys-card>p{margin:0 0 12px;color:#667085;font-size:13.5px;line-height:1.5}
+    .sys-row{display:flex;align-items:center;gap:12px;padding:9px 0;border-top:1px solid #f2f4f7;font-size:15px}
+    .sys-row>span{flex:1}.sys-row input[type=number],.sys-row input[type=time],.sys-row input[type=text],.sys-row input[type=email]{width:150px;border:1px solid #d0d5dd;border-radius:10px;padding:8px 10px;font:inherit;font-size:15px}
+    .sys-row input.w{width:100%;flex:1}
+    .sys-sh{display:grid;grid-template-columns:1fr 150px 36px;gap:8px;margin-top:6px}.sys-sh input{border:1px solid #d0d5dd;border-radius:10px;padding:8px 10px;font:inherit}
+    .sys-sh button{border:0;background:#fee4e2;color:#b42318;border-radius:10px;cursor:pointer}
+    .sys-add{margin-top:8px;border:1px dashed #98a2b3;background:#fff;border-radius:10px;padding:7px 12px;font:inherit;cursor:pointer}
+    .sys-foot{grid-column:1/-1;display:flex;align-items:center;gap:14px}
+    .sys-foot button{border:0;border-radius:14px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font:inherit;font-weight:700;font-size:16px;padding:13px 28px;cursor:pointer}
+    .sys-foot span{color:#667085;font-size:14px}
+    @media (max-width:820px),(orientation:portrait){ #svSysPg{grid-template-columns:1fr} }
+    .sv-mst{display:flex;flex-direction:column;gap:8px}
+    .sv-mi{display:flex;gap:10px;align-items:center;font-size:13.5px;border:1px solid #e6e9f3;border-radius:12px;padding:8px 10px}
+    .sv-mi b{flex:none;font-size:12px;border-radius:999px;padding:2px 9px}.sv-mi b.p{background:#dcfae6;color:#067647}.sv-mi b.f{background:#fee4e2;color:#b42318}
+    .sv-mi span{flex:1;min-width:0}.sv-mi small{color:#667085}
+    .lot-in{width:100%;font:inherit;font-size:22px;letter-spacing:.5px;padding:14px 16px;border:2px solid #c7d2fe;border-radius:14px;margin-top:8px;text-align:center}
+    .lot-in:focus{outline:none;border-color:#6366f1}
+    .lot-err{color:#b42318;font-size:14px;min-height:20px;margin:6px 0 0}
+    .piece .rnd .mini{padding:2px 8px;font-size:12px;margin-left:6px;vertical-align:middle}
+    .mst-t{width:100%;border-collapse:collapse;margin:10px 0;font-size:15px}.mst-t td,.mst-t th{padding:7px 8px;border-bottom:1px solid #eaecf0;text-align:right}.mst-t td:first-child,.mst-t th:first-child{text-align:left}
+    .mst-t .ok{color:#067647;font-weight:700}.mst-t .ng{color:#b42318;font-weight:700}
+    .mst-bn{border-radius:14px;padding:12px 14px;font-weight:700;font-size:17px;text-align:center}.mst-bn.p{background:#dcfae6;color:#067647}.mst-bn.f{background:#fee4e2;color:#b42318}
+    .mst-why{font-size:13.5px;color:#475467;line-height:1.6;margin:8px 0 0;padding-left:18px}
+    .kpb.mst{width:min(520px,94%)}
+    .mini{border:1px solid #d0d5dd;background:#fff;border-radius:10px;padding:7px 12px;font:inherit;font-size:14px;cursor:pointer}
     .kpf.sf3{flex-wrap:wrap}
     .kpf.sf3 button{flex:1 1 40%;font-size:16px}
     .kpf.sf3 button.ok{order:-1;flex:1 1 100%}
@@ -413,6 +442,31 @@
     .sv-date{display:flex;align-items:center;gap:8px;height:48px;padding:0 12px;border-radius:14px;background:#fff;border:1px solid #dfe3f0}
     .sv-date svg{width:20px;height:20px;color:#6d5bd0}
     .sv-date input{border:0;outline:0;background:none;font:inherit;font-size:16px;color:#1f2a44}
+    .sv-grid{grid-template-columns:repeat(6,minmax(0,1fr)) !important}
+    .sv-grid>.sv-card{grid-column:span 2}.sv-grid>.sv-card.s2{grid-column:span 4}.sv-grid>.sv-card.s3{grid-column:span 6}.sv-grid>.sv-card.sh{grid-column:span 3}
+    @media (max-width:1100px){ .sv-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important} .sv-grid>.sv-card,.sv-grid>.sv-card.sh{grid-column:span 1} .sv-grid>.sv-card.s2,.sv-grid>.sv-card.s3{grid-column:span 2} }
+    @media (max-width:820px),(orientation:portrait){ .sv-grid{grid-template-columns:1fr !important} .sv-grid>.sv-card,.sv-grid>.sv-card.sh,.sv-grid>.sv-card.s2,.sv-grid>.sv-card.s3{grid-column:auto} }
+    .sv-ngn.b{background:#eef2ff;color:#4338ca}
+    #svPlanBox .sv-pbox{grid-template-columns:repeat(5,minmax(0,1fr))}
+    #svNg .sv-ng{grid-template-columns:repeat(4,minmax(0,1fr))}
+    #svMst .sv-mst{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+    @media (max-width:1100px){ #svPlanBox .sv-pbox{grid-template-columns:repeat(3,minmax(0,1fr))} #svNg .sv-ng,#svMst .sv-mst{grid-template-columns:repeat(2,minmax(0,1fr))} }
+    .sv-more{display:flex;align-items:center;gap:8px;margin-top:12px;width:100%;border:1px dashed #c7d2fe;background:#f8faff;color:#4338ca;border-radius:12px;padding:9px 14px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;text-align:left}
+    .sv-more b{background:#4338ca;color:#fff;border-radius:999px;padding:1px 9px;font-size:12.5px}
+    .sv-more span{margin-left:auto;font-weight:500;color:#6366f1}
+    .sv-more:hover{background:#eef2ff}
+    .sv-dlg.fx{position:fixed;z-index:60}
+    .sv-allbox{width:min(1040px,96vw) !important;max-height:88vh;display:flex;flex-direction:column;gap:10px}
+    .sv-allhd{display:flex;align-items:center;gap:10px}.sv-allhd h3{margin:0;font-size:19px;flex:none}
+    .sv-allhd .sv-cf{margin-left:auto}
+    .sv-allhd button{flex:none;width:38px;height:38px;border:0;border-radius:10px;background:#f2f4f7;font-size:16px;cursor:pointer}
+    .sv-allm{font-size:13px;color:#667085}
+    #svAllB{overflow:auto;min-height:120px}
+    #svAllB .sv-pbox{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+    .sv-shift{appearance:auto;cursor:pointer;min-width:150px}
+    .sv-hq{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .sv-cf{margin-left:auto;width:min(260px,100%);height:38px;border:1px solid #d0d5dd;border-radius:10px;padding:0 12px;font:inherit;font-size:14px;font-weight:400}
+    .sv-cf:focus{outline:none;border-color:#6366f1}
     .sv-chip{height:48px;padding:0 16px;border-radius:14px;background:#fff;border:1px solid #dfe3f0;font-weight:600;color:#4b3fb0}
     .sv-ref{display:flex;align-items:center;gap:8px;height:48px;padding:0 20px;border-radius:14px;background:linear-gradient(135deg,#8f80e0,#5b4bc4);color:#fff;font-weight:700;font-size:16px;box-shadow:0 10px 22px -12px rgba(91,75,196,.8)}
     .sv-ref svg{width:20px;height:20px}
@@ -462,6 +516,26 @@
     .sv-tbl td.m{font-family:var(--mono)}
     .sv-tbl td.r{white-space:normal;color:#b42318;font-size:13px}
     .sv-pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700}
+    .sv-ngn{font-size:13px;font-weight:600;color:#b42318;background:#fee4e2;border-radius:999px;padding:2px 10px;margin-left:6px}
+    .sv-ng{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+    .sv-ngi{display:flex;align-items:center;gap:10px;border:1px solid #fecdca;background:#fffbfa;border-radius:14px;padding:10px 12px}
+    .sv-ngi div{flex:1;min-width:0;font-size:13px;line-height:1.45}
+    .sv-ngi div b{font-size:14px}
+    .sv-ngi div small{display:block;color:#b42318;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .sv-ngi button,.sv-imb{flex:none;border:0;border-radius:10px;background:#b42318;color:#fff;font:inherit;font-size:14px;font-weight:600;padding:9px 12px;cursor:pointer}
+    .sv-ngi button.no{background:#f2f4f7;color:#98a2b3;cursor:default}
+    .sv-imb{padding:3px 8px;font-size:12px;margin-left:6px}
+    .kp.ngdlg{z-index:80}
+    #lotDlg,#mstDlg{z-index:70}   /* ต้องอยู่เหนือหน้าเลือกพาร์ท (z-index 55) */
+    .ngdlg .kpb{width:min(920px,96%);max-height:94vh;display:flex;flex-direction:column;gap:10px;background:#fff}
+    .ng-hd{display:flex;align-items:center;gap:10px}.ng-hd b{flex:1;font-size:17px}
+    .ng-hd button{border:0;background:#f2f4f7;border-radius:10px;width:36px;height:36px;font-size:16px;cursor:pointer}
+    .ng-im{flex:1;min-height:200px;display:flex;align-items:center;justify-content:center;background:#0b0f14;border-radius:14px;overflow:auto;color:#cbd5e1;font-size:15px}
+    .ng-im img{max-width:100%;max-height:70vh;display:block}
+    .ng-r{margin:0;color:#b42318;font-size:14px}
+    .ng-ft{display:flex;gap:10px;justify-content:flex-end}
+    .ng-ft a,.ng-ft button{border:0;border-radius:12px;padding:10px 16px;font:inherit;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer}
+    .ng-ft a{background:#eef4ff;color:#1d4ed8}.ng-ft a.off{pointer-events:none;opacity:.4}.ng-ft button{background:#1f2a5a;color:#fff}
     .sv-pill.p{background:#dcfae6;color:#067647}.sv-pill.f{background:#fee4e2;color:#b42318}
     .sv-src{font-size:12px;color:#98a0b5;margin-top:10px}
     #svPartsPg{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(330px,1fr);gap:16px;align-items:start}
@@ -560,7 +634,15 @@
     .sup.pln .q-chips button{background:#fff0f6;color:#b0306c}
     .sup.pln .sv-pi .pr i{background:linear-gradient(90deg,#f4a3c7,#d9568f)}
     .sup.pln .sv-kpi.y b{color:#b0306c}.sup.pln .sv-kpi.y::after{background:#ec8fba}
-    .sup:not(.pln) #svTabPlan{display:none}
+    .sup:not(.pln) #svPlanList .pl-t{cursor:default}
+    .sup:not(.pln) #svPlanList .pl-t:not(.has){opacity:.55}
+    .urg-b{display:inline-flex;align-items:center;font-style:normal;font-size:12.5px;font-weight:800;letter-spacing:.5px;padding:3px 11px;border-radius:999px;background:#ffd8b5;color:#7c2d12;border:1px solid #fdba74}
+    .pl-t .urg-b{position:absolute;top:10px;left:12px}.pl-t.urg{border-color:#fdba74 !important;background:#fff4ea !important}.pl-t.urg b{margin-top:24px}
+    .pk-tile .urg-b{align-self:flex-start;margin-bottom:6px}.pk-tile.urg{border-color:#fdba74;background:#fff8f1;box-shadow:0 0 0 2px #ffe4cc}
+    .sv-pi .urg-b{float:right}.sv-pi.urg{border-color:#fdba74;background:#fff7ed}
+    .model.urg::after{content:'ด่วน';margin-left:8px;font-size:12.5px;font-weight:800;padding:2px 8px;border-radius:999px;background:#ffd8b5;color:#7c2d12;border:1px solid #fdba74}
+    .q-urg{display:flex;align-items:center;gap:10px;margin:12px 0 4px;padding:10px 12px;border-radius:14px;border:2px solid #fdba74;background:#fff4ea;font-weight:700;color:#7c2d12;cursor:pointer}
+    .q-urg input{width:22px;height:22px;accent-color:#f59e5b}.q-urg small{display:block;font-weight:400;color:#7c2d12;font-size:12.5px}
     .sup.pln #svSet{display:none}
     .lg-role.r-pln .lr-i{background:linear-gradient(135deg,#f9bdd7,#e2689f)}
     .login[data-mode="pln"] .lg-hi{color:#b0306c;background:#fde7f1}
@@ -723,6 +805,8 @@
     .pk-tile mark{background:#fde68a;color:inherit;border-radius:3px;padding:0 1px}
     .pk-tile.off{opacity:.42;filter:grayscale(.7);cursor:not-allowed;box-shadow:none}
     .pk-tile.off .pk-num{color:#9aa8b8}
+    .piece .rnd{display:block;font-size:12.5px;color:#64748b;margin-top:2px}
+    .piece .rnd b{color:#2563eb;font-weight:600;font-size:inherit}
     .pk-tile.off.done{opacity:.6;filter:none}
     .pk-tag.none{background:#eef1f5;color:#6b7a8c}
     .pk-note{grid-column:1/-1;display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:18px;background:#fff7ed;border:2px solid #fed7aa;color:#9a3412;font-size:16px;font-weight:600}
@@ -731,6 +815,9 @@
     .pk-note small{display:block;font-weight:400;font-size:14px;opacity:.85}
     .pk-note button{flex:none;padding:10px 16px;border-radius:12px;border:0;background:#ea580c;color:#fff;font:inherit;font-size:15px}
     .pk-empty{grid-column:1/-1;text-align:center;color:#8aa0b8;padding:60px 0;font-size:16px}
+    .pk-mst{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:1px;height:auto;padding:8px 14px;border-radius:14px;background:#fff;border:1px solid #c7d7ea;font:inherit;font-size:14.5px;font-weight:700;color:#3b4fd8;cursor:pointer;line-height:1.25}
+    .pk-mst small{font-size:12px;font-weight:500;color:#067647}
+    .pk-mst + .pk-x{margin-left:10px}
     .pk-foot{display:flex;gap:10px;justify-content:space-between;padding:10px 24px 16px}
     .pk-foot button{height:46px;padding:0 18px;border-radius:14px;background:#fff;border:1px solid #d9e4f0;font-weight:600;font-size:14.5px;color:#41566e}
     @media (max-width:620px){ .pk-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))} }
@@ -769,33 +856,33 @@
     <div class="lg-deco sv d-sv2"><svg viewBox="0 0 24 24" fill="none" stroke="#6d5bd0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg><div>จัดการพาร์ทงาน<small>เพิ่ม · แก้ไข · ทุกเครื่อง</small></div></div>
 
 <div class="lg-chars">
-<svg class="qcgirl ch-op" viewBox="0 0 320 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="น้อง Nani ประเภทผู้ใช้งาน Operator ถักเปียสองข้าง เสื้อโปโลฟ้าอ่อนทับเสื้อกั๊กน้ำเงิน ถือเวอร์เนียร์"><defs>
+<svg class="qcgirl ch-op" viewBox="0 0 320 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="น้อง Nani ประเภทผู้ใช้งาน Operator ถักเปียสองข้าง เสื้อโปโลสีน้ำตาล ถือเวอร์เนียร์"><defs>
 <linearGradient id="oh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b5444"/><stop offset=".6" stop-color="#644335"/><stop offset="1" stop-color="#55382d"/></linearGradient>
 <filter id="ow" x="-10%" y="-10%" width="120%" height="120%"><feMorphology in="SourceAlpha" operator="dilate" radius="4" result="d"/><feFlood flood-color="#ffffff"/><feComposite in2="d" operator="in" result="o"/><feMerge><feMergeNode in="o"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
 <clipPath id="ocut"><rect x="0" y="0" width="320" height="372"/></clipPath>
-</defs><circle cx="160" cy="200" r="150" fill="#e2f0fd"/><g fill="#a7cdf0"><path d="M30 110l4 11 11 4-11 4-4 11-4-11-11-4 11-4z"/><path d="M286 84l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/><circle cx="292" cy="220" r="4"/><circle cx="34" cy="250" r="5"/></g><g clip-path="url(#ocut)"><g filter="url(#ow)"><g transform="translate(0 14)"><path d="M84 176C76 100 114 66 160 66s84 34 76 110c0 20-4 34-12 46Q160 234 96 222c-8-12-12-26-12-46z" fill="url(#oh)" stroke="#4a3029" stroke-width="2.8" stroke-linejoin="round"/></g><path d="M132 268C138 246 182 246 188 268L180 270C174 256 146 256 140 270z" fill="#c7e4f8" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M145 224C146 244 145 256 142 266V304H178V266C175 256 174 244 175 224z" fill="#ffe6d5"/><path d="M145 224C146 244 145 256 142 266M175 224C174 244 175 256 178 266" fill="none" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M145 240C152 250 168 250 175 240V224H145z" fill="#efbca3" opacity=".75"/><path d="M150 276Q160 284 170 276" fill="none" stroke="#efbca3" stroke-width="2.4" stroke-linecap="round"/><path d="M36 380C38 316 70 282 118 270C128 266 136 262 140 258Q148 282 160 294Q172 282 180 258C184 262 192 266 202 270C250 282 282 316 284 380z" fill="#c7e4f8" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M58 380c2-46 18-80 52-100l30 52v48zM262 380c-2-46-18-80-52-100l-30 52v48z" fill="#2e4677" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M140 257L160 294L147 306L123 270zM180 257L160 294L173 306L197 270z" fill="#c7e4f8" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M160 294v34" stroke="#3d2a24" stroke-width="2.6"/><circle cx="160" cy="310" r="2.6" fill="#3d2a24"/><circle cx="160" cy="322" r="2.6" fill="#3d2a24"/><path d="M82 344h34v26H82z" fill="none" stroke="#1f3360" stroke-width="2.6" stroke-linejoin="round"/><path d="M82 350h34" stroke="#1f3360" stroke-width="2.6"/><circle cx="160" cy="346" r="3.4" fill="#dfe8f5" stroke="#3d2a24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><circle cx="160" cy="366" r="3.4" fill="#dfe8f5" stroke="#3d2a24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M58 380c2-46 18-80 52-100" fill="none" stroke="#1f3360" stroke-width="2" opacity=".5"/><path d="M210 276c40 14 62 46 66 104h8c-2-64-36-98-74-104z" fill="#000" opacity=".06"/><g transform="rotate(3 186 309)"><rect x="164" y="300" width="46" height="19" rx="5" fill="#fff" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><rect x="166" y="302" width="7" height="15" rx="2.5" fill="#6aa6dd"/><text x="192" y="313.5" text-anchor="middle" font-family="Arial Rounded MT Bold,Arial,sans-serif" font-size="11" font-weight="700" fill="#2e4677">Nani</text></g><g transform="translate(0 14)"><g transform="translate(97.5 236.0) rotate(30)"><path d="M0 -15.6C13.0 -8.6 13.0 8.6 0 15.6C-13.0 8.6 -13.0 -8.6 0 -15.6z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.9 -6.2Q1.3 0 -1.9 7.0" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(100.9 249.2) rotate(-30)"><path d="M0 -14.8C12.3 -8.1 12.3 8.1 0 14.8C-12.3 8.1 -12.3 -8.1 0 -14.8z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.7 -5.9Q1.2 0 -1.8 6.6" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(94.3 262.4) rotate(30)"><path d="M0 -13.9C11.6 -7.7 11.6 7.7 0 13.9C-11.6 7.7 -11.6 -7.7 0 -13.9z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.5 -5.6Q1.2 0 -1.7 6.3" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(97.7 275.6) rotate(-30)"><path d="M0 -13.1C10.9 -7.2 10.9 7.2 0 13.1C-10.9 7.2 -10.9 -7.2 0 -13.1z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.3 -5.2Q1.1 0 -1.6 5.9" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(91.1 288.8) rotate(30)"><path d="M0 -12.2C10.2 -6.7 10.2 6.7 0 12.2C-10.2 6.7 -10.2 -6.7 0 -12.2z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.1 -4.9Q1.0 0 -1.5 5.5" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(94.5 302.0) rotate(-30)"><path d="M0 -11.4C9.5 -6.3 9.5 6.3 0 11.4C-9.5 6.3 -9.5 -6.3 0 -11.4z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-2.9 -4.6Q1.0 0 -1.4 5.1" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><rect x="85.0" y="310.0" width="14" height="7" rx="3.5" fill="#8ec0ec" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M85.0 317.0C83.0 328.0 88.0 336.0 92.0 340.0C96.0 335.0 101.0 328.0 99.0 317.0z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><g transform="translate(217.5 236.0) rotate(30)"><path d="M0 -15.6C13.0 -8.6 13.0 8.6 0 15.6C-13.0 8.6 -13.0 -8.6 0 -15.6z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.9 -6.2Q1.3 0 -1.9 7.0" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(224.1 249.2) rotate(-30)"><path d="M0 -14.8C12.3 -8.1 12.3 8.1 0 14.8C-12.3 8.1 -12.3 -8.1 0 -14.8z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.7 -5.9Q1.2 0 -1.8 6.6" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(220.7 262.4) rotate(30)"><path d="M0 -13.9C11.6 -7.7 11.6 7.7 0 13.9C-11.6 7.7 -11.6 -7.7 0 -13.9z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.5 -5.6Q1.2 0 -1.7 6.3" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(227.3 275.6) rotate(-30)"><path d="M0 -13.1C10.9 -7.2 10.9 7.2 0 13.1C-10.9 7.2 -10.9 -7.2 0 -13.1z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.3 -5.2Q1.1 0 -1.6 5.9" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(223.9 288.8) rotate(30)"><path d="M0 -12.2C10.2 -6.7 10.2 6.7 0 12.2C-10.2 6.7 -10.2 -6.7 0 -12.2z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.1 -4.9Q1.0 0 -1.5 5.5" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(230.5 302.0) rotate(-30)"><path d="M0 -11.4C9.5 -6.3 9.5 6.3 0 11.4C-9.5 6.3 -9.5 -6.3 0 -11.4z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-2.9 -4.6Q1.0 0 -1.4 5.1" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><rect x="221.0" y="310.0" width="14" height="7" rx="3.5" fill="#8ec0ec" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M221.0 317.0C219.0 328.0 224.0 336.0 228.0 340.0C232.0 335.0 237.0 328.0 235.0 317.0z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/></g><g transform="translate(0 14)"><path d="M92 162C92 108 122 84 160 84s68 24 68 78c0 46-28 76-68 76s-68-30-68-76z" fill="#ffe6d5" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M100 132c20-14 100-14 120 0v-12H100z" fill="#f6cbb3" opacity=".6"/><ellipse cx="130" cy="176" rx="10.5" ry="12.5" fill="#3a2420"/><ellipse cx="130" cy="182" rx="7" ry="5.5" fill="#8a5638"/><circle cx="127" cy="171" r="4.2" fill="#fff"/><circle cx="134" cy="183" r="1.8" fill="#fff"/><path d="M118 172Q130 159 142 172" fill="none" stroke="#2e1c18" stroke-width="3.4" stroke-linecap="round"/><path d="M119 170l-4 -4" stroke="#2e1c18" stroke-width="2.6" stroke-linecap="round"/><ellipse cx="190" cy="176" rx="10.5" ry="12.5" fill="#3a2420"/><ellipse cx="190" cy="182" rx="7" ry="5.5" fill="#8a5638"/><circle cx="193" cy="171" r="4.2" fill="#fff"/><circle cx="186" cy="183" r="1.8" fill="#fff"/><path d="M178 172Q190 159 202 172" fill="none" stroke="#2e1c18" stroke-width="3.4" stroke-linecap="round"/><path d="M201 170l4 -4" stroke="#2e1c18" stroke-width="2.6" stroke-linecap="round"/><ellipse cx="111" cy="203" rx="13" ry="8" fill="#ff9fb2" opacity=".55"/><ellipse cx="209" cy="203" rx="13" ry="8" fill="#ff9fb2" opacity=".55"/><path d="M159 193q2 2 4 0" fill="none" stroke="#d99a83" stroke-width="2.4" stroke-linecap="round"/><path d="M146 207Q160 226 174 207Q160 211 146 207z" fill="#c4485c" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M152 216q8 5 16 0q-8-4-16 0z" fill="#ff9aab"/><path d="M86 178C80 110 112 72 160 70c46 0 80 34 74 106-4-18-12-30-22-36-6 8-10 12-16 12-4-8-10-14-16-16-6 10-12 16-20 18-4-8-8-14-14-16-6 10-14 16-22 16-4-6-8-10-12-12-6 10-10 24-12 44z" fill="url(#oh)" stroke="#4a3029" stroke-width="2.8" stroke-linejoin="round"/><path d="M95 150C88 176 90 202 101 226c2-18 4-38 9-58zM225 150c7 26 5 52-6 76-2-18-4-38-9-58z" fill="url(#oh)" stroke="#4a3029" stroke-width="2.6" stroke-linejoin="round"/><path d="M150 84c-10 14-14 30-14 46M182 88c6 12 8 24 6 38M118 100c-8 12-12 24-12 36M206 104c6 10 8 22 8 34" fill="none" stroke="#86594a" stroke-width="2" stroke-linecap="round" opacity=".7"/><path d="M112 92C130 78 186 76 210 94" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".1"/><path d="M124 86q18-8 34-8" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" opacity=".45"/><g fill="#ffffff" fill-opacity=".15" stroke="#3a2a26" stroke-width="3.4"><circle cx="130" cy="176" r="24"/><circle cx="190" cy="176" r="24"/></g><path d="M154 174q6-5 12 0M106 172l-12-4M214 172l12-4" fill="none" stroke="#3a2a26" stroke-width="3.2" stroke-linecap="round"/><path d="M116 162l8-5M176 162l8-5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".9"/></g><path d="M262 304C260 294 258 284 256 272" fill="none" stroke="#3d2a24" stroke-width="28" stroke-linecap="round"/><path d="M262 304C260 294 258 284 256 272" fill="none" stroke="#ffe6d5" stroke-width="22" stroke-linecap="round"/><path d="M282 384C280 356 272 332 264 312" fill="none" stroke="#3d2a24" stroke-width="36" stroke-linecap="round"/><path d="M282 384C280 356 272 332 264 312" fill="none" stroke="#c7e4f8" stroke-width="30" stroke-linecap="round"/><path d="M252 324q14 6 28 0" fill="none" stroke="#9cc5e6" stroke-width="2.6" stroke-linecap="round"/><g transform="translate(258 286) rotate(-84)">
+</defs><circle cx="160" cy="200" r="150" fill="#e2f0fd"/><g fill="#a7cdf0"><path d="M30 110l4 11 11 4-11 4-4 11-4-11-11-4 11-4z"/><path d="M286 84l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/><circle cx="292" cy="220" r="4"/><circle cx="34" cy="250" r="5"/></g><g clip-path="url(#ocut)"><g filter="url(#ow)"><g transform="translate(0 14)"><path d="M84 176C76 100 114 66 160 66s84 34 76 110c0 20-4 34-12 46Q160 234 96 222c-8-12-12-26-12-46z" fill="url(#oh)" stroke="#4a3029" stroke-width="2.8" stroke-linejoin="round"/></g><path d="M132 268C138 246 182 246 188 268L180 270C174 256 146 256 140 270z" fill="#7a3a2e" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M145 224C146 244 145 256 142 266V304H178V266C175 256 174 244 175 224z" fill="#ffe6d5"/><path d="M145 224C146 244 145 256 142 266M175 224C174 244 175 256 178 266" fill="none" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M145 240C152 250 168 250 175 240V224H145z" fill="#efbca3" opacity=".75"/><path d="M150 276Q160 284 170 276" fill="none" stroke="#efbca3" stroke-width="2.4" stroke-linecap="round"/><path d="M36 380C38 316 70 282 118 270C128 266 136 262 140 258Q148 282 160 294Q172 282 180 258C184 262 192 266 202 270C250 282 282 316 284 380z" fill="#7a3a2e" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M140 257L160 294L147 306L123 270zM180 257L160 294L173 306L197 270z" fill="#7a3a2e" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M160 294v34" stroke="#4a2219" stroke-width="2.6"/><circle cx="160" cy="310" r="2.6" fill="#e9d6cf"/><circle cx="160" cy="322" r="2.6" fill="#e9d6cf"/><path d="M210 276c40 14 62 46 66 104h8c-2-64-36-98-74-104z" fill="#000" opacity=".06"/><g transform="rotate(3 186 309)"><rect x="164" y="300" width="46" height="19" rx="5" fill="#fff" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><rect x="166" y="302" width="7" height="15" rx="2.5" fill="#6aa6dd"/><text x="192" y="313.5" text-anchor="middle" font-family="Arial Rounded MT Bold,Arial,sans-serif" font-size="11" font-weight="800" letter-spacing=".6" fill="#ea6a1e">EPE</text></g><g transform="translate(0 14)"><g transform="translate(97.5 236.0) rotate(30)"><path d="M0 -15.6C13.0 -8.6 13.0 8.6 0 15.6C-13.0 8.6 -13.0 -8.6 0 -15.6z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.9 -6.2Q1.3 0 -1.9 7.0" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(100.9 249.2) rotate(-30)"><path d="M0 -14.8C12.3 -8.1 12.3 8.1 0 14.8C-12.3 8.1 -12.3 -8.1 0 -14.8z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.7 -5.9Q1.2 0 -1.8 6.6" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(94.3 262.4) rotate(30)"><path d="M0 -13.9C11.6 -7.7 11.6 7.7 0 13.9C-11.6 7.7 -11.6 -7.7 0 -13.9z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.5 -5.6Q1.2 0 -1.7 6.3" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(97.7 275.6) rotate(-30)"><path d="M0 -13.1C10.9 -7.2 10.9 7.2 0 13.1C-10.9 7.2 -10.9 -7.2 0 -13.1z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.3 -5.2Q1.1 0 -1.6 5.9" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(91.1 288.8) rotate(30)"><path d="M0 -12.2C10.2 -6.7 10.2 6.7 0 12.2C-10.2 6.7 -10.2 -6.7 0 -12.2z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.1 -4.9Q1.0 0 -1.5 5.5" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(94.5 302.0) rotate(-30)"><path d="M0 -11.4C9.5 -6.3 9.5 6.3 0 11.4C-9.5 6.3 -9.5 -6.3 0 -11.4z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-2.9 -4.6Q1.0 0 -1.4 5.1" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><rect x="85.0" y="310.0" width="14" height="7" rx="3.5" fill="#8ec0ec" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M85.0 317.0C83.0 328.0 88.0 336.0 92.0 340.0C96.0 335.0 101.0 328.0 99.0 317.0z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><g transform="translate(217.5 236.0) rotate(30)"><path d="M0 -15.6C13.0 -8.6 13.0 8.6 0 15.6C-13.0 8.6 -13.0 -8.6 0 -15.6z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.9 -6.2Q1.3 0 -1.9 7.0" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(224.1 249.2) rotate(-30)"><path d="M0 -14.8C12.3 -8.1 12.3 8.1 0 14.8C-12.3 8.1 -12.3 -8.1 0 -14.8z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.7 -5.9Q1.2 0 -1.8 6.6" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(220.7 262.4) rotate(30)"><path d="M0 -13.9C11.6 -7.7 11.6 7.7 0 13.9C-11.6 7.7 -11.6 -7.7 0 -13.9z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.5 -5.6Q1.2 0 -1.7 6.3" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(227.3 275.6) rotate(-30)"><path d="M0 -13.1C10.9 -7.2 10.9 7.2 0 13.1C-10.9 7.2 -10.9 -7.2 0 -13.1z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.3 -5.2Q1.1 0 -1.6 5.9" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(223.9 288.8) rotate(30)"><path d="M0 -12.2C10.2 -6.7 10.2 6.7 0 12.2C-10.2 6.7 -10.2 -6.7 0 -12.2z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.1 -4.9Q1.0 0 -1.5 5.5" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(230.5 302.0) rotate(-30)"><path d="M0 -11.4C9.5 -6.3 9.5 6.3 0 11.4C-9.5 6.3 -9.5 -6.3 0 -11.4z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-2.9 -4.6Q1.0 0 -1.4 5.1" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><rect x="221.0" y="310.0" width="14" height="7" rx="3.5" fill="#8ec0ec" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M221.0 317.0C219.0 328.0 224.0 336.0 228.0 340.0C232.0 335.0 237.0 328.0 235.0 317.0z" fill="url(#oh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/></g><g transform="translate(0 14)"><path d="M92 162C92 108 122 84 160 84s68 24 68 78c0 46-28 76-68 76s-68-30-68-76z" fill="#ffe6d5" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M100 132c20-14 100-14 120 0v-12H100z" fill="#f6cbb3" opacity=".6"/><ellipse cx="130" cy="176" rx="10.5" ry="12.5" fill="#3a2420"/><ellipse cx="130" cy="182" rx="7" ry="5.5" fill="#8a5638"/><circle cx="127" cy="171" r="4.2" fill="#fff"/><circle cx="134" cy="183" r="1.8" fill="#fff"/><path d="M118 172Q130 159 142 172" fill="none" stroke="#2e1c18" stroke-width="3.4" stroke-linecap="round"/><path d="M119 170l-4 -4" stroke="#2e1c18" stroke-width="2.6" stroke-linecap="round"/><ellipse cx="190" cy="176" rx="10.5" ry="12.5" fill="#3a2420"/><ellipse cx="190" cy="182" rx="7" ry="5.5" fill="#8a5638"/><circle cx="193" cy="171" r="4.2" fill="#fff"/><circle cx="186" cy="183" r="1.8" fill="#fff"/><path d="M178 172Q190 159 202 172" fill="none" stroke="#2e1c18" stroke-width="3.4" stroke-linecap="round"/><path d="M201 170l4 -4" stroke="#2e1c18" stroke-width="2.6" stroke-linecap="round"/><ellipse cx="111" cy="203" rx="13" ry="8" fill="#ff9fb2" opacity=".55"/><ellipse cx="209" cy="203" rx="13" ry="8" fill="#ff9fb2" opacity=".55"/><path d="M159 193q2 2 4 0" fill="none" stroke="#d99a83" stroke-width="2.4" stroke-linecap="round"/><path d="M146 207Q160 226 174 207Q160 211 146 207z" fill="#c4485c" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M152 216q8 5 16 0q-8-4-16 0z" fill="#ff9aab"/><path d="M86 178C80 110 112 72 160 70c46 0 80 34 74 106-4-18-12-30-22-36-6 8-10 12-16 12-4-8-10-14-16-16-6 10-12 16-20 18-4-8-8-14-14-16-6 10-14 16-22 16-4-6-8-10-12-12-6 10-10 24-12 44z" fill="url(#oh)" stroke="#4a3029" stroke-width="2.8" stroke-linejoin="round"/><path d="M95 150C88 176 90 202 101 226c2-18 4-38 9-58zM225 150c7 26 5 52-6 76-2-18-4-38-9-58z" fill="url(#oh)" stroke="#4a3029" stroke-width="2.6" stroke-linejoin="round"/><path d="M150 84c-10 14-14 30-14 46M182 88c6 12 8 24 6 38M118 100c-8 12-12 24-12 36M206 104c6 10 8 22 8 34" fill="none" stroke="#86594a" stroke-width="2" stroke-linecap="round" opacity=".7"/><path d="M112 92C130 78 186 76 210 94" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".1"/><path d="M124 86q18-8 34-8" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" opacity=".45"/><g fill="#ffffff" fill-opacity=".15" stroke="#3a2a26" stroke-width="3.4"><circle cx="130" cy="176" r="24"/><circle cx="190" cy="176" r="24"/></g><path d="M154 174q6-5 12 0M106 172l-12-4M214 172l12-4" fill="none" stroke="#3a2a26" stroke-width="3.2" stroke-linecap="round"/><path d="M116 162l8-5M176 162l8-5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".9"/></g><path d="M262 304C260 294 258 284 256 272" fill="none" stroke="#3d2a24" stroke-width="28" stroke-linecap="round"/><path d="M262 304C260 294 258 284 256 272" fill="none" stroke="#ffe6d5" stroke-width="22" stroke-linecap="round"/><path d="M282 384C280 356 272 332 264 312" fill="none" stroke="#3d2a24" stroke-width="36" stroke-linecap="round"/><path d="M282 384C280 356 272 332 264 312" fill="none" stroke="#7a3a2e" stroke-width="30" stroke-linecap="round"/><path d="M252 324q14 6 28 0" fill="none" stroke="#c9877a" stroke-width="2.6" stroke-linecap="round"/><g transform="translate(258 286) rotate(-84)">
 <rect x="-6" y="-5.5" width="130" height="11" rx="3" fill="#e6ebf2" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M40 -5.5v4M47 -5.5v3M54 -5.5v4M61 -5.5v3M68 -5.5v4M75 -5.5v3M82 -5.5v4M89 -5.5v3M96 -5.5v4" stroke="#3d2a24" stroke-width="1.4"/>
 <path d="M110 -5.5h12l4 -24h-6l-10 15z" fill="#e6ebf2" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M112 5.5h11v28l-5.5 11-5.5-11z" fill="#e6ebf2" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
 <rect x="70" y="-9" width="26" height="18" rx="4" fill="#c6d0dc" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><circle cx="78" cy="0" r="2.6" fill="#fff" opacity=".8"/>
 <path d="M82 -9l1-19h-5l-6 19z" fill="#c6d0dc" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M82 9h12v25l-6 10-6-10z" fill="#c6d0dc" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
 </g><g transform="rotate(-10 256 272)"><ellipse cx="256" cy="272" rx="15" ry="15.8" fill="#ffe6d5" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M245.5 268.2h18.0M245.5 275.0h18.0" stroke="#e2a78d" stroke-width="2" stroke-linecap="round"/></g></g></g></svg>
-<svg class="qcgirl ch-sup" viewBox="0 0 320 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="น้อง Nani ประเภทผู้ใช้งาน Supervisor ถักเปียข้างเดียว สวมสูทเบลเซอร์ ถือคลิปบอร์ดและปากกา"><defs>
+<svg class="qcgirl ch-sup" viewBox="0 0 320 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="น้อง Nani ประเภทผู้ใช้งาน Supervisor ถักเปียข้างเดียว เสื้อเชิ้ตช่างไหล่ฟ้าเทาตัวขาวมีแถบส้ม ถือคลิปบอร์ดและปากกา"><defs>
 <linearGradient id="sh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b5444"/><stop offset=".6" stop-color="#644335"/><stop offset="1" stop-color="#55382d"/></linearGradient>
 <filter id="sw" x="-10%" y="-10%" width="120%" height="120%"><feMorphology in="SourceAlpha" operator="dilate" radius="4" result="d"/><feFlood flood-color="#ffffff"/><feComposite in2="d" operator="in" result="o"/><feMerge><feMergeNode in="o"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-<clipPath id="scut"><rect x="0" y="0" width="320" height="372"/></clipPath>
-</defs><circle cx="160" cy="200" r="150" fill="#ece8fc"/><g fill="#bfb4f3"><path d="M30 110l4 11 11 4-11 4-4 11-4-11-11-4 11-4z"/><path d="M286 84l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/><circle cx="292" cy="220" r="4"/><circle cx="34" cy="250" r="5"/></g><g clip-path="url(#scut)"><g filter="url(#sw)"><g transform="translate(0 14)"><path d="M84 176C76 100 114 66 160 66s84 34 76 110c0 20-4 34-12 46Q160 234 96 222c-8-12-12-26-12-46z" fill="url(#sh)" stroke="#4a3029" stroke-width="2.8" stroke-linejoin="round"/></g><path d="M132 268C138 246 182 246 188 268L180 270C174 256 146 256 140 270z" fill="#474f86" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M145 224C146 244 145 256 142 266V304H178V266C175 256 174 244 175 224z" fill="#ffe6d5"/><path d="M145 224C146 244 145 256 142 266M175 224C174 244 175 256 178 266" fill="none" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M145 240C152 250 168 250 175 240V224H145z" fill="#efbca3" opacity=".75"/><path d="M150 276Q160 284 170 276" fill="none" stroke="#efbca3" stroke-width="2.4" stroke-linecap="round"/><path d="M36 380C38 316 70 282 118 270C128 266 136 262 140 258Q148 282 160 294Q172 282 180 258C184 262 192 266 202 270C250 282 282 316 284 380z" fill="#353b66" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M128 266L160 338L192 266L180 258Q172 282 160 294Q148 282 140 258z" fill="#fff" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M128 264L160 340L147 348L114 292L117 270zM192 264L160 340L173 348L206 292L203 270z" fill="#474f86" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><circle cx="168" cy="372" r="3.6" fill="#f2d27a" stroke="#3d2a24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M212 336h30" stroke="#232845" stroke-width="2.6" stroke-linecap="round"/><path d="M210 276c40 14 62 46 66 104h8c-2-64-36-98-74-104z" fill="#000" opacity=".06"/><g transform="rotate(6 218 313)"><rect x="196" y="304" width="46" height="19" rx="5" fill="#fff" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><rect x="198" y="306" width="7" height="15" rx="2.5" fill="#e8c35e"/><text x="224" y="317.5" text-anchor="middle" font-family="Arial Rounded MT Bold,Arial,sans-serif" font-size="11" font-weight="700" fill="#353b66">Nani</text></g><g transform="translate(0 14)"><g transform="translate(97.5 236.0) rotate(30)"><path d="M0 -15.6C13.0 -8.6 13.0 8.6 0 15.6C-13.0 8.6 -13.0 -8.6 0 -15.6z" fill="url(#sh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.9 -6.2Q1.3 0 -1.9 7.0" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(100.9 249.6) rotate(-30)"><path d="M0 -14.8C12.3 -8.1 12.3 8.1 0 14.8C-12.3 8.1 -12.3 -8.1 0 -14.8z" fill="url(#sh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.7 -5.9Q1.2 0 -1.8 6.6" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(94.3 263.2) rotate(30)"><path d="M0 -13.9C11.6 -7.7 11.6 7.7 0 13.9C-11.6 7.7 -11.6 -7.7 0 -13.9z" fill="url(#sh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.5 -5.6Q1.2 0 -1.7 6.3" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(97.7 276.8) rotate(-30)"><path d="M0 -13.1C10.9 -7.2 10.9 7.2 0 13.1C-10.9 7.2 -10.9 -7.2 0 -13.1z" fill="url(#sh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.3 -5.2Q1.1 0 -1.6 5.9" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(91.1 290.4) rotate(30)"><path d="M0 -12.2C10.2 -6.7 10.2 6.7 0 12.2C-10.2 6.7 -10.2 -6.7 0 -12.2z" fill="url(#sh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.1 -4.9Q1.0 0 -1.5 5.5" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(94.5 304.0) rotate(-30)"><path d="M0 -11.4C9.5 -6.3 9.5 6.3 0 11.4C-9.5 6.3 -9.5 -6.3 0 -11.4z" fill="url(#sh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-2.9 -4.6Q1.0 0 -1.4 5.1" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><rect x="85.0" y="312.0" width="14" height="7" rx="3.5" fill="#9c8ef0" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M85.0 319.0C83.0 330.0 88.0 338.0 92.0 342.0C96.0 337.0 101.0 330.0 99.0 319.0z" fill="url(#sh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/></g><g transform="translate(0 14)"><path d="M92 162C92 108 122 84 160 84s68 24 68 78c0 46-28 76-68 76s-68-30-68-76z" fill="#ffe6d5" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M100 132c20-14 100-14 120 0v-12H100z" fill="#f6cbb3" opacity=".6"/><ellipse cx="130" cy="176" rx="10.5" ry="12.5" fill="#3a2420"/><ellipse cx="130" cy="182" rx="7" ry="5.5" fill="#8a5638"/><circle cx="127" cy="171" r="4.2" fill="#fff"/><circle cx="134" cy="183" r="1.8" fill="#fff"/><path d="M118 172Q130 159 142 172" fill="none" stroke="#2e1c18" stroke-width="3.4" stroke-linecap="round"/><path d="M119 170l-4 -4" stroke="#2e1c18" stroke-width="2.6" stroke-linecap="round"/><ellipse cx="190" cy="176" rx="10.5" ry="12.5" fill="#3a2420"/><ellipse cx="190" cy="182" rx="7" ry="5.5" fill="#8a5638"/><circle cx="193" cy="171" r="4.2" fill="#fff"/><circle cx="186" cy="183" r="1.8" fill="#fff"/><path d="M178 172Q190 159 202 172" fill="none" stroke="#2e1c18" stroke-width="3.4" stroke-linecap="round"/><path d="M201 170l4 -4" stroke="#2e1c18" stroke-width="2.6" stroke-linecap="round"/><ellipse cx="111" cy="203" rx="13" ry="8" fill="#ff9fb2" opacity=".55"/><ellipse cx="209" cy="203" rx="13" ry="8" fill="#ff9fb2" opacity=".55"/><path d="M159 193q2 2 4 0" fill="none" stroke="#d99a83" stroke-width="2.4" stroke-linecap="round"/><path d="M147 208q13 11 26 0" fill="none" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M86 178C80 110 112 72 160 70c46 0 80 34 74 106-4-18-12-30-22-36-6 8-10 12-16 12-4-8-10-14-16-16-6 10-12 16-20 18-4-8-8-14-14-16-6 10-14 16-22 16-4-6-8-10-12-12-6 10-10 24-12 44z" fill="url(#sh)" stroke="#4a3029" stroke-width="2.8" stroke-linejoin="round"/><path d="M95 150C88 176 90 202 101 226c2-18 4-38 9-58zM225 150c7 26 5 52-6 76-2-18-4-38-9-58z" fill="url(#sh)" stroke="#4a3029" stroke-width="2.6" stroke-linejoin="round"/><path d="M150 84c-10 14-14 30-14 46M182 88c6 12 8 24 6 38M118 100c-8 12-12 24-12 36M206 104c6 10 8 22 8 34" fill="none" stroke="#86594a" stroke-width="2" stroke-linecap="round" opacity=".7"/><path d="M112 92C130 78 186 76 210 94" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".1"/><path d="M124 86q18-8 34-8" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" opacity=".45"/><g fill="#ffffff" fill-opacity=".15" stroke="#3a2a26" stroke-width="3.4"><circle cx="130" cy="176" r="24"/><circle cx="190" cy="176" r="24"/></g><path d="M154 174q6-5 12 0M106 172l-12-4M214 172l12-4" fill="none" stroke="#3a2a26" stroke-width="3.2" stroke-linecap="round"/><path d="M116 162l8-5M176 162l8-5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".9"/></g><path d="M38 380C44 350 62 334 92 330" fill="none" stroke="#3d2a24" stroke-width="38" stroke-linecap="round"/><path d="M38 380C44 350 62 334 92 330" fill="none" stroke="#353b66" stroke-width="32" stroke-linecap="round"/><g transform="rotate(-12 110 330)">
+<clipPath id="sbody"><path d="M36 380C38 316 70 282 118 270C128 266 136 262 140 258Q148 282 160 294Q172 282 180 258C184 262 192 266 202 270C250 282 282 316 284 380z"/></clipPath><clipPath id="scut"><rect x="0" y="0" width="320" height="372"/></clipPath>
+</defs><circle cx="160" cy="200" r="150" fill="#ece8fc"/><g fill="#bfb4f3"><path d="M30 110l4 11 11 4-11 4-4 11-4-11-11-4 11-4z"/><path d="M286 84l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/><circle cx="292" cy="220" r="4"/><circle cx="34" cy="250" r="5"/></g><g clip-path="url(#scut)"><g filter="url(#sw)"><g transform="translate(0 14)"><path d="M84 176C76 100 114 66 160 66s84 34 76 110c0 20-4 34-12 46Q160 234 96 222c-8-12-12-26-12-46z" fill="url(#sh)" stroke="#4a3029" stroke-width="2.8" stroke-linejoin="round"/></g><path d="M132 268C138 246 182 246 188 268L180 270C174 256 146 256 140 270z" fill="#9eabc8" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M145 224C146 244 145 256 142 266V304H178V266C175 256 174 244 175 224z" fill="#ffe6d5"/><path d="M145 224C146 244 145 256 142 266M175 224C174 244 175 256 178 266" fill="none" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M145 240C152 250 168 250 175 240V224H145z" fill="#efbca3" opacity=".75"/><path d="M150 276Q160 284 170 276" fill="none" stroke="#efbca3" stroke-width="2.4" stroke-linecap="round"/><path d="M36 380C38 316 70 282 118 270C128 266 136 262 140 258Q148 282 160 294Q172 282 180 258C184 262 192 266 202 270C250 282 282 316 284 380z" fill="#f3f0e7" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><g clip-path="url(#sbody)"><path d="M10 340Q60 306 128 302L192 302Q260 306 310 340V200H10z" fill="#9eabc8"/><path d="M10 340Q60 306 128 302L192 302Q260 306 310 340" fill="none" stroke="#3d2a24" stroke-width="6.4"/><path d="M10 340Q60 306 128 302L192 302Q260 306 310 340" fill="none" stroke="#f07a2a" stroke-width="3.6"/></g><path d="M36 380C38 316 70 282 118 270C128 266 136 262 140 258Q148 282 160 294Q172 282 180 258C184 262 192 266 202 270C250 282 282 316 284 380z" fill="none" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round"/><path d="M140 257L160 294L147 306L123 270zM180 257L160 294L173 306L197 270z" fill="#9eabc8" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M160 294v86" stroke="#3d2a24" stroke-width="2.6"/><circle cx="160" cy="318" r="2.8" fill="#fff" stroke="#3d2a24" stroke-width="1.6"/><circle cx="160" cy="342" r="2.8" fill="#fff" stroke="#3d2a24" stroke-width="1.6"/><circle cx="160" cy="366" r="2.8" fill="#fff" stroke="#3d2a24" stroke-width="1.6"/><path d="M200 334h38v24q-19 5-38 0z" fill="none" stroke="#cfc8b6" stroke-width="2.2" stroke-linejoin="round"/><path d="M210 276c40 14 62 46 66 104h8c-2-64-36-98-74-104z" fill="#000" opacity=".06"/><g transform="rotate(6 218 313)"><rect x="196" y="304" width="46" height="19" rx="5" fill="#fff" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><rect x="198" y="306" width="7" height="15" rx="2.5" fill="#e8c35e"/><text x="224" y="317.5" text-anchor="middle" font-family="Arial Rounded MT Bold,Arial,sans-serif" font-size="11" font-weight="800" letter-spacing=".6" fill="#ea6a1e">EPE</text></g><g transform="translate(0 14)"><g transform="translate(97.5 236.0) rotate(30)"><path d="M0 -15.6C13.0 -8.6 13.0 8.6 0 15.6C-13.0 8.6 -13.0 -8.6 0 -15.6z" fill="url(#sh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.9 -6.2Q1.3 0 -1.9 7.0" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(100.9 249.6) rotate(-30)"><path d="M0 -14.8C12.3 -8.1 12.3 8.1 0 14.8C-12.3 8.1 -12.3 -8.1 0 -14.8z" fill="url(#sh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.7 -5.9Q1.2 0 -1.8 6.6" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(94.3 263.2) rotate(30)"><path d="M0 -13.9C11.6 -7.7 11.6 7.7 0 13.9C-11.6 7.7 -11.6 -7.7 0 -13.9z" fill="url(#sh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.5 -5.6Q1.2 0 -1.7 6.3" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(97.7 276.8) rotate(-30)"><path d="M0 -13.1C10.9 -7.2 10.9 7.2 0 13.1C-10.9 7.2 -10.9 -7.2 0 -13.1z" fill="url(#sh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.3 -5.2Q1.1 0 -1.6 5.9" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(91.1 290.4) rotate(30)"><path d="M0 -12.2C10.2 -6.7 10.2 6.7 0 12.2C-10.2 6.7 -10.2 -6.7 0 -12.2z" fill="url(#sh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.1 -4.9Q1.0 0 -1.5 5.5" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(94.5 304.0) rotate(-30)"><path d="M0 -11.4C9.5 -6.3 9.5 6.3 0 11.4C-9.5 6.3 -9.5 -6.3 0 -11.4z" fill="url(#sh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-2.9 -4.6Q1.0 0 -1.4 5.1" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><rect x="85.0" y="312.0" width="14" height="7" rx="3.5" fill="#9c8ef0" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M85.0 319.0C83.0 330.0 88.0 338.0 92.0 342.0C96.0 337.0 101.0 330.0 99.0 319.0z" fill="url(#sh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/></g><g transform="translate(0 14)"><path d="M92 162C92 108 122 84 160 84s68 24 68 78c0 46-28 76-68 76s-68-30-68-76z" fill="#ffe6d5" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M100 132c20-14 100-14 120 0v-12H100z" fill="#f6cbb3" opacity=".6"/><ellipse cx="130" cy="176" rx="10.5" ry="12.5" fill="#3a2420"/><ellipse cx="130" cy="182" rx="7" ry="5.5" fill="#8a5638"/><circle cx="127" cy="171" r="4.2" fill="#fff"/><circle cx="134" cy="183" r="1.8" fill="#fff"/><path d="M118 172Q130 159 142 172" fill="none" stroke="#2e1c18" stroke-width="3.4" stroke-linecap="round"/><path d="M119 170l-4 -4" stroke="#2e1c18" stroke-width="2.6" stroke-linecap="round"/><ellipse cx="190" cy="176" rx="10.5" ry="12.5" fill="#3a2420"/><ellipse cx="190" cy="182" rx="7" ry="5.5" fill="#8a5638"/><circle cx="193" cy="171" r="4.2" fill="#fff"/><circle cx="186" cy="183" r="1.8" fill="#fff"/><path d="M178 172Q190 159 202 172" fill="none" stroke="#2e1c18" stroke-width="3.4" stroke-linecap="round"/><path d="M201 170l4 -4" stroke="#2e1c18" stroke-width="2.6" stroke-linecap="round"/><ellipse cx="111" cy="203" rx="13" ry="8" fill="#ff9fb2" opacity=".55"/><ellipse cx="209" cy="203" rx="13" ry="8" fill="#ff9fb2" opacity=".55"/><path d="M159 193q2 2 4 0" fill="none" stroke="#d99a83" stroke-width="2.4" stroke-linecap="round"/><path d="M147 208q13 11 26 0" fill="none" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M86 178C80 110 112 72 160 70c46 0 80 34 74 106-4-18-12-30-22-36-6 8-10 12-16 12-4-8-10-14-16-16-6 10-12 16-20 18-4-8-8-14-14-16-6 10-14 16-22 16-4-6-8-10-12-12-6 10-10 24-12 44z" fill="url(#sh)" stroke="#4a3029" stroke-width="2.8" stroke-linejoin="round"/><path d="M95 150C88 176 90 202 101 226c2-18 4-38 9-58zM225 150c7 26 5 52-6 76-2-18-4-38-9-58z" fill="url(#sh)" stroke="#4a3029" stroke-width="2.6" stroke-linejoin="round"/><path d="M150 84c-10 14-14 30-14 46M182 88c6 12 8 24 6 38M118 100c-8 12-12 24-12 36M206 104c6 10 8 22 8 34" fill="none" stroke="#86594a" stroke-width="2" stroke-linecap="round" opacity=".7"/><path d="M112 92C130 78 186 76 210 94" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".1"/><path d="M124 86q18-8 34-8" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" opacity=".45"/><g fill="#ffffff" fill-opacity=".15" stroke="#3a2a26" stroke-width="3.4"><circle cx="130" cy="176" r="24"/><circle cx="190" cy="176" r="24"/></g><path d="M154 174q6-5 12 0M106 172l-12-4M214 172l12-4" fill="none" stroke="#3a2a26" stroke-width="3.2" stroke-linecap="round"/><path d="M116 162l8-5M176 162l8-5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".9"/></g><path d="M28 384C34 364 46 350 62 344" fill="none" stroke="#3d2a24" stroke-width="36" stroke-linecap="round"/><path d="M28 384C34 364 46 350 62 344" fill="none" stroke="#ffe6d5" stroke-width="30" stroke-linecap="round"/><path d="M28 384C34 364 46 350 62 344" pathLength="100" stroke-dasharray="52 200" fill="none" stroke="#3d2a24" stroke-width="36" stroke-linecap="butt"/><path d="M28 384C34 364 46 350 62 344" pathLength="100" stroke-dasharray="51 200" fill="none" stroke="#8796b6" stroke-width="30" stroke-linecap="butt"/><path d="M28 384C34 364 46 350 62 344" pathLength="100" stroke-dasharray="44 200" fill="none" stroke="#9eabc8" stroke-width="30" stroke-linecap="butt"/><g transform="rotate(-12 110 330)">
 <rect x="68" y="282" width="86" height="104" rx="8" fill="#c99560" stroke="#3d2a24" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
 <rect x="76" y="292" width="70" height="88" rx="3" fill="#fff" stroke="#3d2a24" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
 <rect x="94" y="275" width="34" height="15" rx="5" fill="#d3d8e2" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>
 <path d="M84 308l4 4 7-8M84 328l4 4 7-8M84 348l4 4 7-8" fill="none" stroke="#2fa868" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M102 308h34M102 328h26M102 348h30" stroke="#cfd4e2" stroke-width="4" stroke-linecap="round"/>
-</g><g transform="rotate(-20 140 348)"><ellipse cx="140" cy="348" rx="15" ry="15.8" fill="#ffe6d5" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M129.5 344.2h18.0M129.5 351.0h18.0" stroke="#e2a78d" stroke-width="2" stroke-linecap="round"/></g><path d="M290 380C292 340 284 300 270 268" fill="none" stroke="#3d2a24" stroke-width="38" stroke-linecap="round"/><path d="M290 380C292 340 284 300 270 268" fill="none" stroke="#353b66" stroke-width="32" stroke-linecap="round"/><path d="M258 288l26-6" stroke="#fff" stroke-width="5" stroke-linecap="round"/><g transform="rotate(28 268 250)"><rect x="263" y="204" width="10" height="70" rx="4" fill="#4b4f86" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><rect x="263" y="216" width="10" height="6" fill="#f2d27a"/><path d="M263 274l5 12 5-12z" fill="#e9eef5" stroke="#3d2a24" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M266.5 282l1.5 4 1.5-4z" fill="#3d2a24"/><rect x="273" y="208" width="4" height="22" rx="2" fill="#d9dce8" stroke="#3d2a24" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></g><g transform="rotate(0 268 254)"><ellipse cx="268" cy="254" rx="15" ry="15.8" fill="#ffe6d5" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M257.5 250.2h18.0M257.5 257.0h18.0" stroke="#e2a78d" stroke-width="2" stroke-linecap="round"/></g><path d="M256 250q12 6 24 0" fill="none" stroke="#e2a78d" stroke-width="2" stroke-linecap="round"/></g></g></svg>
-<svg class="qcgirl ch-pln" viewBox="0 0 320 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="น้อง Nani ประเภทผู้ใช้งาน Planner ถักเปียสองข้าง เสื้อเชิ้ตสีฟ้าขาว ถือแท็บเล็ต จับแว่นยิ้มสดใส"><defs>
+</g><g transform="rotate(10 66 342)"><ellipse cx="66" cy="342" rx="14" ry="14.7" fill="#ffe6d5" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M56.2 338.5h16.8M56.2 344.8h16.8" stroke="#e2a78d" stroke-width="2" stroke-linecap="round"/></g><path d="M290 380C292 340 284 300 270 268" fill="none" stroke="#3d2a24" stroke-width="38" stroke-linecap="round"/><path d="M290 380C292 340 284 300 270 268" fill="none" stroke="#ffe6d5" stroke-width="32" stroke-linecap="round"/><path d="M290 380C292 340 284 300 270 268" pathLength="100" stroke-dasharray="60 200" fill="none" stroke="#3d2a24" stroke-width="38" stroke-linecap="butt"/><path d="M290 380C292 340 284 300 270 268" pathLength="100" stroke-dasharray="59 200" fill="none" stroke="#9eabc8" stroke-width="32" stroke-linecap="butt"/><g transform="rotate(28 268 250)"><rect x="263" y="204" width="10" height="70" rx="4" fill="#4b4f86" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><rect x="263" y="216" width="10" height="6" fill="#f2d27a"/><path d="M263 274l5 12 5-12z" fill="#e9eef5" stroke="#3d2a24" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/><path d="M266.5 282l1.5 4 1.5-4z" fill="#3d2a24"/><rect x="273" y="208" width="4" height="22" rx="2" fill="#d9dce8" stroke="#3d2a24" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/></g><g transform="rotate(0 268 254)"><ellipse cx="268" cy="254" rx="15" ry="15.8" fill="#ffe6d5" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M257.5 250.2h18.0M257.5 257.0h18.0" stroke="#e2a78d" stroke-width="2" stroke-linecap="round"/></g><path d="M256 250q12 6 24 0" fill="none" stroke="#e2a78d" stroke-width="2" stroke-linecap="round"/></g></g></svg>
+<svg class="qcgirl ch-pln" viewBox="0 0 320 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="น้อง Nani ประเภทผู้ใช้งาน Planner ถักเปียสองข้าง เสื้อโปโลสีกรมท่าเข้มมีแถบส้ม ถือแท็บเล็ต จับแว่นยิ้มสดใส"><defs>
 <linearGradient id="lh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7b5444"/><stop offset=".6" stop-color="#644335"/><stop offset="1" stop-color="#55382d"/></linearGradient>
 <filter id="lw" x="-10%" y="-10%" width="120%" height="120%"><feMorphology in="SourceAlpha" operator="dilate" radius="4" result="d"/><feFlood flood-color="#ffffff"/><feComposite in2="d" operator="in" result="o"/><feMerge><feMergeNode in="o"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-<clipPath id="lcut"><rect x="0" y="0" width="320" height="372"/></clipPath>
-<pattern id="lst" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#fff"/><rect width="3.5" height="10" fill="#cfe3f8"/></pattern></defs><circle cx="160" cy="200" r="150" fill="#fde9f2"/><g fill="#f6b4d1"><path d="M30 110l4 11 11 4-11 4-4 11-4-11-11-4 11-4z"/><path d="M286 84l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/><circle cx="292" cy="220" r="4"/><circle cx="34" cy="250" r="5"/></g><g clip-path="url(#lcut)"><g filter="url(#lw)"><g transform="translate(0 14)"><path d="M84 176C76 100 114 66 160 66s84 34 76 110c0 20-4 34-12 46Q160 234 96 222c-8-12-12-26-12-46z" fill="url(#lh)" stroke="#4a3029" stroke-width="2.8" stroke-linejoin="round"/></g><path d="M132 268C138 246 182 246 188 268L180 270C174 256 146 256 140 270z" fill="#ffffff" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M145 224C146 244 145 256 142 266V304H178V266C175 256 174 244 175 224z" fill="#ffe6d5"/><path d="M145 224C146 244 145 256 142 266M175 224C174 244 175 256 178 266" fill="none" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M145 240C152 250 168 250 175 240V224H145z" fill="#efbca3" opacity=".75"/><path d="M150 276Q160 284 170 276" fill="none" stroke="#efbca3" stroke-width="2.4" stroke-linecap="round"/><path d="M36 380C38 316 70 282 118 270C128 266 136 262 140 258Q148 282 160 294Q172 282 180 258C184 262 192 266 202 270C250 282 282 316 284 380z" fill="url(#lst)" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M140 257L160 294L142 308L121 268zM180 257L160 294L178 308L199 268z" fill="#fff" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M160 294v86" stroke="#3d2a24" stroke-width="2.6"/><circle cx="160" cy="312" r="2.6" fill="#3d2a24"/><circle cx="160" cy="334" r="2.6" fill="#3d2a24"/><circle cx="160" cy="356" r="2.6" fill="#3d2a24"/><path d="M210 276c40 14 62 46 66 104h8c-2-64-36-98-74-104z" fill="#000" opacity=".06"/><g transform="rotate(3 188 313)"><rect x="166" y="304" width="46" height="19" rx="5" fill="#fff" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><rect x="168" y="306" width="7" height="15" rx="2.5" fill="#e66d9f"/><text x="194" y="317.5" text-anchor="middle" font-family="Arial Rounded MT Bold,Arial,sans-serif" font-size="11" font-weight="700" fill="#a3245f">Nani</text></g><g transform="translate(0 14)"><g transform="translate(97.5 236.0) rotate(30)"><path d="M0 -15.6C13.0 -8.6 13.0 8.6 0 15.6C-13.0 8.6 -13.0 -8.6 0 -15.6z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.9 -6.2Q1.3 0 -1.9 7.0" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(100.9 249.2) rotate(-30)"><path d="M0 -14.8C12.3 -8.1 12.3 8.1 0 14.8C-12.3 8.1 -12.3 -8.1 0 -14.8z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.7 -5.9Q1.2 0 -1.8 6.6" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(94.3 262.4) rotate(30)"><path d="M0 -13.9C11.6 -7.7 11.6 7.7 0 13.9C-11.6 7.7 -11.6 -7.7 0 -13.9z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.5 -5.6Q1.2 0 -1.7 6.3" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(97.7 275.6) rotate(-30)"><path d="M0 -13.1C10.9 -7.2 10.9 7.2 0 13.1C-10.9 7.2 -10.9 -7.2 0 -13.1z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.3 -5.2Q1.1 0 -1.6 5.9" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(91.1 288.8) rotate(30)"><path d="M0 -12.2C10.2 -6.7 10.2 6.7 0 12.2C-10.2 6.7 -10.2 -6.7 0 -12.2z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.1 -4.9Q1.0 0 -1.5 5.5" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(94.5 302.0) rotate(-30)"><path d="M0 -11.4C9.5 -6.3 9.5 6.3 0 11.4C-9.5 6.3 -9.5 -6.3 0 -11.4z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-2.9 -4.6Q1.0 0 -1.4 5.1" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><rect x="85.0" y="310.0" width="14" height="7" rx="3.5" fill="#f6a1c6" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M85.0 317.0C83.0 328.0 88.0 336.0 92.0 340.0C96.0 335.0 101.0 328.0 99.0 317.0z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><g transform="translate(217.5 236.0) rotate(30)"><path d="M0 -15.6C13.0 -8.6 13.0 8.6 0 15.6C-13.0 8.6 -13.0 -8.6 0 -15.6z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.9 -6.2Q1.3 0 -1.9 7.0" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(224.1 249.2) rotate(-30)"><path d="M0 -14.8C12.3 -8.1 12.3 8.1 0 14.8C-12.3 8.1 -12.3 -8.1 0 -14.8z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.7 -5.9Q1.2 0 -1.8 6.6" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(220.7 262.4) rotate(30)"><path d="M0 -13.9C11.6 -7.7 11.6 7.7 0 13.9C-11.6 7.7 -11.6 -7.7 0 -13.9z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.5 -5.6Q1.2 0 -1.7 6.3" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(227.3 275.6) rotate(-30)"><path d="M0 -13.1C10.9 -7.2 10.9 7.2 0 13.1C-10.9 7.2 -10.9 -7.2 0 -13.1z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.3 -5.2Q1.1 0 -1.6 5.9" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(223.9 288.8) rotate(30)"><path d="M0 -12.2C10.2 -6.7 10.2 6.7 0 12.2C-10.2 6.7 -10.2 -6.7 0 -12.2z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.1 -4.9Q1.0 0 -1.5 5.5" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(230.5 302.0) rotate(-30)"><path d="M0 -11.4C9.5 -6.3 9.5 6.3 0 11.4C-9.5 6.3 -9.5 -6.3 0 -11.4z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-2.9 -4.6Q1.0 0 -1.4 5.1" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><rect x="221.0" y="310.0" width="14" height="7" rx="3.5" fill="#f6a1c6" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M221.0 317.0C219.0 328.0 224.0 336.0 228.0 340.0C232.0 335.0 237.0 328.0 235.0 317.0z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/></g><path d="M30 384C36 362 46 346 60 338" fill="none" stroke="#3d2a24" stroke-width="36" stroke-linecap="round"/><path d="M30 384C36 362 46 346 60 338" fill="none" stroke="#eef5fd" stroke-width="30" stroke-linecap="round"/><g transform="rotate(-8 100 330)">
+<clipPath id="lbody"><path d="M36 380C38 316 70 282 118 270C128 266 136 262 140 258Q148 282 160 294Q172 282 180 258C184 262 192 266 202 270C250 282 282 316 284 380z"/></clipPath><clipPath id="lcut"><rect x="0" y="0" width="320" height="372"/></clipPath>
+<pattern id="lst" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#fff"/><rect width="3.5" height="10" fill="#cfe3f8"/></pattern></defs><circle cx="160" cy="200" r="150" fill="#fde9f2"/><g fill="#f6b4d1"><path d="M30 110l4 11 11 4-11 4-4 11-4-11-11-4 11-4z"/><path d="M286 84l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/><circle cx="292" cy="220" r="4"/><circle cx="34" cy="250" r="5"/></g><g clip-path="url(#lcut)"><g filter="url(#lw)"><g transform="translate(0 14)"><path d="M84 176C76 100 114 66 160 66s84 34 76 110c0 20-4 34-12 46Q160 234 96 222c-8-12-12-26-12-46z" fill="url(#lh)" stroke="#4a3029" stroke-width="2.8" stroke-linejoin="round"/></g><path d="M132 268C138 246 182 246 188 268L180 270C174 256 146 256 140 270z" fill="#262b3a" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M145 224C146 244 145 256 142 266V304H178V266C175 256 174 244 175 224z" fill="#ffe6d5"/><path d="M145 224C146 244 145 256 142 266M175 224C174 244 175 256 178 266" fill="none" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M145 240C152 250 168 250 175 240V224H145z" fill="#efbca3" opacity=".75"/><path d="M150 276Q160 284 170 276" fill="none" stroke="#efbca3" stroke-width="2.4" stroke-linecap="round"/><path d="M36 380C38 316 70 282 118 270C128 266 136 262 140 258Q148 282 160 294Q172 282 180 258C184 262 192 266 202 270C250 282 282 316 284 380z" fill="#262b3a" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M140 257L160 294L142 308L121 268zM180 257L160 294L178 308L199 268z" fill="#323850" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M160 294v36" stroke="#11131a" stroke-width="2.6"/><circle cx="160" cy="306" r="2.6" fill="#8b91a6"/><circle cx="160" cy="320" r="2.6" fill="#8b91a6"/><g clip-path="url(#lbody)"><path d="M10 334Q160 328 310 334" fill="none" stroke="#f07a2a" stroke-width="3.6"/></g><path d="M197 340v14" stroke="#0e1016" stroke-width="2.6" stroke-linecap="round"/><path d="M197 352l-3 9h6z" fill="#c9ccd6" stroke="#3d2a24" stroke-width="1.4" stroke-linejoin="round"/><path d="M210 276c40 14 62 46 66 104h8c-2-64-36-98-74-104z" fill="#000" opacity=".06"/><g transform="rotate(3 188 313)"><rect x="166" y="304" width="46" height="19" rx="5" fill="#fff" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><rect x="168" y="306" width="7" height="15" rx="2.5" fill="#e66d9f"/><text x="194" y="317.5" text-anchor="middle" font-family="Arial Rounded MT Bold,Arial,sans-serif" font-size="11" font-weight="800" letter-spacing=".6" fill="#ea6a1e">EPE</text></g><g transform="translate(0 14)"><g transform="translate(97.5 236.0) rotate(30)"><path d="M0 -15.6C13.0 -8.6 13.0 8.6 0 15.6C-13.0 8.6 -13.0 -8.6 0 -15.6z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.9 -6.2Q1.3 0 -1.9 7.0" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(100.9 249.2) rotate(-30)"><path d="M0 -14.8C12.3 -8.1 12.3 8.1 0 14.8C-12.3 8.1 -12.3 -8.1 0 -14.8z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.7 -5.9Q1.2 0 -1.8 6.6" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(94.3 262.4) rotate(30)"><path d="M0 -13.9C11.6 -7.7 11.6 7.7 0 13.9C-11.6 7.7 -11.6 -7.7 0 -13.9z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.5 -5.6Q1.2 0 -1.7 6.3" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(97.7 275.6) rotate(-30)"><path d="M0 -13.1C10.9 -7.2 10.9 7.2 0 13.1C-10.9 7.2 -10.9 -7.2 0 -13.1z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.3 -5.2Q1.1 0 -1.6 5.9" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(91.1 288.8) rotate(30)"><path d="M0 -12.2C10.2 -6.7 10.2 6.7 0 12.2C-10.2 6.7 -10.2 -6.7 0 -12.2z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.1 -4.9Q1.0 0 -1.5 5.5" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(94.5 302.0) rotate(-30)"><path d="M0 -11.4C9.5 -6.3 9.5 6.3 0 11.4C-9.5 6.3 -9.5 -6.3 0 -11.4z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-2.9 -4.6Q1.0 0 -1.4 5.1" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><rect x="85.0" y="310.0" width="14" height="7" rx="3.5" fill="#f6a1c6" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M85.0 317.0C83.0 328.0 88.0 336.0 92.0 340.0C96.0 335.0 101.0 328.0 99.0 317.0z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><g transform="translate(217.5 236.0) rotate(30)"><path d="M0 -15.6C13.0 -8.6 13.0 8.6 0 15.6C-13.0 8.6 -13.0 -8.6 0 -15.6z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.9 -6.2Q1.3 0 -1.9 7.0" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(224.1 249.2) rotate(-30)"><path d="M0 -14.8C12.3 -8.1 12.3 8.1 0 14.8C-12.3 8.1 -12.3 -8.1 0 -14.8z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.7 -5.9Q1.2 0 -1.8 6.6" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(220.7 262.4) rotate(30)"><path d="M0 -13.9C11.6 -7.7 11.6 7.7 0 13.9C-11.6 7.7 -11.6 -7.7 0 -13.9z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.5 -5.6Q1.2 0 -1.7 6.3" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(227.3 275.6) rotate(-30)"><path d="M0 -13.1C10.9 -7.2 10.9 7.2 0 13.1C-10.9 7.2 -10.9 -7.2 0 -13.1z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.3 -5.2Q1.1 0 -1.6 5.9" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(223.9 288.8) rotate(30)"><path d="M0 -12.2C10.2 -6.7 10.2 6.7 0 12.2C-10.2 6.7 -10.2 -6.7 0 -12.2z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-3.1 -4.9Q1.0 0 -1.5 5.5" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(230.5 302.0) rotate(-30)"><path d="M0 -11.4C9.5 -6.3 9.5 6.3 0 11.4C-9.5 6.3 -9.5 -6.3 0 -11.4z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M-2.9 -4.6Q1.0 0 -1.4 5.1" fill="none" stroke="#8b604f" stroke-width="2" stroke-linecap="round"/></g><rect x="221.0" y="310.0" width="14" height="7" rx="3.5" fill="#f6a1c6" stroke="#3d2a24" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><path d="M221.0 317.0C219.0 328.0 224.0 336.0 228.0 340.0C232.0 335.0 237.0 328.0 235.0 317.0z" fill="url(#lh)" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/></g><path d="M30 384C36 362 46 346 60 338" fill="none" stroke="#3d2a24" stroke-width="36" stroke-linecap="round"/><path d="M30 384C36 362 46 346 60 338" fill="none" stroke="#ffe6d5" stroke-width="30" stroke-linecap="round"/><path d="M30 384C36 362 46 346 60 338" pathLength="100" stroke-dasharray="54 200" fill="none" stroke="#3d2a24" stroke-width="36" stroke-linecap="butt"/><path d="M30 384C36 362 46 346 60 338" pathLength="100" stroke-dasharray="53 200" fill="none" stroke="#f07a2a" stroke-width="30" stroke-linecap="butt"/><path d="M30 384C36 362 46 346 60 338" pathLength="100" stroke-dasharray="46 200" fill="none" stroke="#262b3a" stroke-width="30" stroke-linecap="butt"/><g transform="rotate(-8 100 330)">
 <rect x="56" y="274" width="92" height="112" rx="12" fill="#474a66" stroke="#3d2a24" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
 <rect x="63" y="282" width="78" height="96" rx="6" fill="#fff"/>
 <rect x="63" y="282" width="78" height="16" rx="6" fill="#f8b6d2"/><rect x="63" y="290" width="78" height="8" fill="#f8b6d2"/>
@@ -803,7 +890,7 @@
 <rect x="70" y="306" width="40" height="4" rx="2" fill="#d9dce8"/><rect x="70" y="314" width="28" height="4" rx="2" fill="#e8eaf2"/>
 <rect x="72" y="342" width="10" height="22" rx="2" fill="#f6a1c6"/><rect x="87" y="330" width="10" height="34" rx="2" fill="#e66d9f"/><rect x="102" y="336" width="10" height="28" rx="2" fill="#f6a1c6"/><rect x="117" y="322" width="10" height="42" rx="2" fill="#d9568f"/>
 <path d="M134 312c-4-4-8-1-6 3l6 5 6-5c2-4-2-7-6-3z" fill="#ff7aa2"/>
-</g><g transform="rotate(10 64 336)"><ellipse cx="64" cy="336" rx="14" ry="14.7" fill="#ffe6d5" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M54.2 332.5h16.8M54.2 338.8h16.8" stroke="#e2a78d" stroke-width="2" stroke-linecap="round"/></g><path d="M250 384C228 376 196 370 162 366" fill="none" stroke="#3d2a24" stroke-width="36" stroke-linecap="round"/><path d="M250 384C228 376 196 370 162 366" fill="none" stroke="#eef5fd" stroke-width="30" stroke-linecap="round"/><g transform="rotate(-10 150 364)"><ellipse cx="150" cy="364" rx="15" ry="15.8" fill="#ffe6d5" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M139.5 360.2h18.0M139.5 367.0h18.0" stroke="#e2a78d" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(0 14)"><path d="M92 162C92 108 122 84 160 84s68 24 68 78c0 46-28 76-68 76s-68-30-68-76z" fill="#ffe6d5" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M100 132c20-14 100-14 120 0v-12H100z" fill="#f6cbb3" opacity=".6"/><path d="M119 176Q130 164 141 176" fill="none" stroke="#2e1c18" stroke-width="3.6" stroke-linecap="round"/><ellipse cx="190" cy="176" rx="10.5" ry="12.5" fill="#3a2420"/><ellipse cx="190" cy="182" rx="7" ry="5.5" fill="#8a5638"/><circle cx="193" cy="171" r="4.2" fill="#fff"/><circle cx="186" cy="183" r="1.8" fill="#fff"/><path d="M178 172Q190 159 202 172" fill="none" stroke="#2e1c18" stroke-width="3.4" stroke-linecap="round"/><path d="M201 170l4 -4" stroke="#2e1c18" stroke-width="2.6" stroke-linecap="round"/><ellipse cx="111" cy="203" rx="13" ry="8" fill="#ff9fb2" opacity=".55"/><ellipse cx="209" cy="203" rx="13" ry="8" fill="#ff9fb2" opacity=".55"/><path d="M159 193q2 2 4 0" fill="none" stroke="#d99a83" stroke-width="2.4" stroke-linecap="round"/><path d="M146 207Q160 224 174 207z" fill="#c4485c" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M148 208h24v3q-12 3-24 0z" fill="#fff"/><path d="M153 216q7 4 14 0q-7-3-14 0z" fill="#ff9aab"/><path d="M86 178C80 110 112 72 160 70c46 0 80 34 74 106-4-18-12-30-22-36-6 8-10 12-16 12-4-8-10-14-16-16-6 10-12 16-20 18-4-8-8-14-14-16-6 10-14 16-22 16-4-6-8-10-12-12-6 10-10 24-12 44z" fill="url(#lh)" stroke="#4a3029" stroke-width="2.8" stroke-linejoin="round"/><path d="M95 150C88 176 90 202 101 226c2-18 4-38 9-58zM225 150c7 26 5 52-6 76-2-18-4-38-9-58z" fill="url(#lh)" stroke="#4a3029" stroke-width="2.6" stroke-linejoin="round"/><path d="M150 84c-10 14-14 30-14 46M182 88c6 12 8 24 6 38M118 100c-8 12-12 24-12 36M206 104c6 10 8 22 8 34" fill="none" stroke="#86594a" stroke-width="2" stroke-linecap="round" opacity=".7"/><path d="M112 92C130 78 186 76 210 94" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".1"/><path d="M124 86q18-8 34-8" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" opacity=".45"/><g fill="#ffffff" fill-opacity=".15" stroke="#3a2a26" stroke-width="3.4"><circle cx="130" cy="176" r="24"/><circle cx="190" cy="176" r="24"/></g><path d="M154 174q6-5 12 0M106 172l-12-4M214 172l12-4" fill="none" stroke="#3a2a26" stroke-width="3.2" stroke-linecap="round"/><path d="M116 162l8-5M176 162l8-5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".9"/></g></g></g></svg>
+</g><g transform="rotate(10 64 336)"><ellipse cx="64" cy="336" rx="14" ry="14.7" fill="#ffe6d5" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M54.2 332.5h16.8M54.2 338.8h16.8" stroke="#e2a78d" stroke-width="2" stroke-linecap="round"/></g><path d="M250 384C228 376 196 370 162 366" fill="none" stroke="#3d2a24" stroke-width="36" stroke-linecap="round"/><path d="M250 384C228 376 196 370 162 366" fill="none" stroke="#ffe6d5" stroke-width="30" stroke-linecap="round"/><path d="M250 384C228 376 196 370 162 366" pathLength="100" stroke-dasharray="47 200" fill="none" stroke="#3d2a24" stroke-width="36" stroke-linecap="butt"/><path d="M250 384C228 376 196 370 162 366" pathLength="100" stroke-dasharray="46 200" fill="none" stroke="#f07a2a" stroke-width="30" stroke-linecap="butt"/><path d="M250 384C228 376 196 370 162 366" pathLength="100" stroke-dasharray="39 200" fill="none" stroke="#262b3a" stroke-width="30" stroke-linecap="butt"/><g transform="rotate(-10 150 364)"><ellipse cx="150" cy="364" rx="15" ry="15.8" fill="#ffe6d5" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M139.5 360.2h18.0M139.5 367.0h18.0" stroke="#e2a78d" stroke-width="2" stroke-linecap="round"/></g><g transform="translate(0 14)"><path d="M92 162C92 108 122 84 160 84s68 24 68 78c0 46-28 76-68 76s-68-30-68-76z" fill="#ffe6d5" stroke="#3d2a24" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round"/><path d="M100 132c20-14 100-14 120 0v-12H100z" fill="#f6cbb3" opacity=".6"/><path d="M119 176Q130 164 141 176" fill="none" stroke="#2e1c18" stroke-width="3.6" stroke-linecap="round"/><ellipse cx="190" cy="176" rx="10.5" ry="12.5" fill="#3a2420"/><ellipse cx="190" cy="182" rx="7" ry="5.5" fill="#8a5638"/><circle cx="193" cy="171" r="4.2" fill="#fff"/><circle cx="186" cy="183" r="1.8" fill="#fff"/><path d="M178 172Q190 159 202 172" fill="none" stroke="#2e1c18" stroke-width="3.4" stroke-linecap="round"/><path d="M201 170l4 -4" stroke="#2e1c18" stroke-width="2.6" stroke-linecap="round"/><ellipse cx="111" cy="203" rx="13" ry="8" fill="#ff9fb2" opacity=".55"/><ellipse cx="209" cy="203" rx="13" ry="8" fill="#ff9fb2" opacity=".55"/><path d="M159 193q2 2 4 0" fill="none" stroke="#d99a83" stroke-width="2.4" stroke-linecap="round"/><path d="M146 207Q160 224 174 207z" fill="#c4485c" stroke="#3d2a24" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/><path d="M148 208h24v3q-12 3-24 0z" fill="#fff"/><path d="M153 216q7 4 14 0q-7-3-14 0z" fill="#ff9aab"/><path d="M86 178C80 110 112 72 160 70c46 0 80 34 74 106-4-18-12-30-22-36-6 8-10 12-16 12-4-8-10-14-16-16-6 10-12 16-20 18-4-8-8-14-14-16-6 10-14 16-22 16-4-6-8-10-12-12-6 10-10 24-12 44z" fill="url(#lh)" stroke="#4a3029" stroke-width="2.8" stroke-linejoin="round"/><path d="M95 150C88 176 90 202 101 226c2-18 4-38 9-58zM225 150c7 26 5 52-6 76-2-18-4-38-9-58z" fill="url(#lh)" stroke="#4a3029" stroke-width="2.6" stroke-linejoin="round"/><path d="M150 84c-10 14-14 30-14 46M182 88c6 12 8 24 6 38M118 100c-8 12-12 24-12 36M206 104c6 10 8 22 8 34" fill="none" stroke="#86594a" stroke-width="2" stroke-linecap="round" opacity=".7"/><path d="M112 92C130 78 186 76 210 94" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".1"/><path d="M124 86q18-8 34-8" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" opacity=".45"/><g fill="#ffffff" fill-opacity=".15" stroke="#3a2a26" stroke-width="3.4"><circle cx="130" cy="176" r="24"/><circle cx="190" cy="176" r="24"/></g><path d="M154 174q6-5 12 0M106 172l-12-4M214 172l12-4" fill="none" stroke="#3a2a26" stroke-width="3.2" stroke-linecap="round"/><path d="M116 162l8-5M176 162l8-5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" opacity=".9"/></g></g></g></svg>
 <div class="lg-cl"><span class="c1">Operator</span><span class="c3">Supervisor</span><span class="c2">Planner</span></div>
 </div>
 
@@ -846,6 +933,7 @@
     <button class="pk-back" id="pkBack" aria-label="ย้อนกลับ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
     <div class="logo ok">QC<i></i></div>
     <div class="pk-ttl"><b>เลือกพาร์ทงาน</b><small id="pkHello"></small></div>
+    <button class="pk-mst hide" id="pkMaster" title="เช็คกล้องด้วยมาสเตอร์อีกครั้ง"></button>
     <button class="pk-x hide" id="pkClose" aria-label="ปิด">✕</button>
   </div>
   <div class="pk-search">
@@ -866,6 +954,7 @@
       <button data-tab="svPlanPg" id="svTabPlan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="17" rx="2"/><path d="M9 2v4M15 2v4M8 11h8M8 15h5"/></svg>แผนงานรายวัน</button>
       <button class="on" data-tab="svDash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Dashboard</button>
       <button data-tab="svPartsPg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg>พาร์ทงาน</button>
+      <button data-tab="svSysPg" id="svTabSys"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>ตั้งค่าระบบ</button>
     </nav>
     <div class="sp"></div>
     <button class="sv-out" id="svSet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>ตั้งค่าเครื่องนี้</button>
@@ -878,13 +967,14 @@
       <div class="sv-q sv-q2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="svPQ" type="search" placeholder="ค้นหาพาร์ท" autocomplete="off"></div>
       <span class="sv-upd" id="svPSum"></span>
     </div>
-    <p class="sv-pmeta">แตะพาร์ทเพื่อกรอกจำนวนงานที่ต้องการในวันนั้น · ใส่ 0 เพื่อยกเลิกแผน</p>
+    <p class="sv-pmeta" id="svPlanMeta">แตะพาร์ทเพื่อกรอกจำนวนงานที่ต้องการในวันนั้น · ใส่ 0 เพื่อยกเลิกแผน</p>
     <div class="sv-plist pl-list" id="svPlanList"></div>
   </section>
   <section class="sv-page" id="svDash">
     <div class="sv-tool">
       <div class="sv-date"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><input type="date" id="svDay"></div>
       <button class="sv-chip" id="svToday">วันนี้</button>
+      <select class="sv-chip sv-shift" id="svShift" title="เลือกกะ"><option value="">ทั้งวัน (ทุกกะ)</option></select>
       <button class="sv-ref" id="svRef"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg><span>รีเฟรช</span></button>
       <button class="sv-csv" id="svCsv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>ดาวน์โหลด CSV</button>
       <label class="sv-auto"><input type="checkbox" class="tog" id="svAuto"> อัปเดตอัตโนมัติทุก 1 นาที</label>
@@ -892,13 +982,47 @@
     </div>
     <div class="sv-kpis" id="svKpis"></div>
     <div class="sv-grid">
-      <div class="sv-card s3"><h3>แผนงาน vs ผลจริง</h3><div id="svPlanBox"></div></div>
-      <div class="sv-card s2"><h3>แยกตามพาร์ท</h3><div id="svByPart"></div></div>
-      <div class="sv-card"><h3>สาเหตุที่ไม่ผ่าน</h3><div id="svReasons"></div></div>
+      <div class="sv-card s3"><h3 class="sv-hq">แผนงาน vs ผลจริง <span class="sv-ngn b" id="svPlanN"></span><input class="sv-cf" id="svPlanQ" type="search" placeholder="พิมพ์เลขพาร์ท เช่น 01" autocomplete="off"></h3><div id="svPlanBox"></div></div>
+      <div class="sv-card sh"><h3 class="sv-hq">แยกตามพาร์ท <span class="sv-ngn b" id="svPartN"></span><input class="sv-cf" id="svPartQ" type="search" placeholder="พิมพ์เลขพาร์ท" autocomplete="off"></h3><div id="svByPart"></div></div>
+      <div class="sv-card sh"><h3 class="sv-hq">สาเหตุที่ไม่ผ่าน <span class="sv-ngn" id="svRsN"></span></h3><div id="svReasons"></div></div>
       <div class="sv-card s2"><h3>จำนวนตรวจรายชั่วโมง <span class="sv-lg"><i class="p"></i>ผ่าน <i class="f"></i>ไม่ผ่าน</span></h3><div id="svHours"></div></div>
-      <div class="sv-card"><h3>ผู้ตรวจ</h3><div id="svUsers"></div></div>
-      <div class="sv-card s3"><h3>รายการตรวจล่าสุด</h3><div id="svRecent"></div></div>
+      <div class="sv-card"><h3 class="sv-hq">ผู้ตรวจ <span class="sv-ngn b" id="svUsrN"></span></h3><div id="svUsers"></div></div>
+      <div class="sv-card s3"><h3 class="sv-hq">เช็คมาสเตอร์ <span class="sv-ngn b" id="svMstN"></span><input class="sv-cf" id="svMstQ" type="search" placeholder="ค้นหา สถานี / ผู้ตรวจ" autocomplete="off"></h3><div id="svMst"></div></div>
+      <div class="sv-card s3"><h3 class="sv-hq">ชิ้นงาน NG <span class="sv-ngn" id="svNgN"></span><input class="sv-cf" id="svNgQ" type="search" placeholder="พิมพ์เลขพาร์ท เช่น 01 หรือ Lot" autocomplete="off"></h3><div id="svNg"></div></div>
+      <div class="sv-card s3"><h3 class="sv-hq">รายการตรวจล่าสุด <span class="sv-ngn b" id="svRecN"></span><input class="sv-cf" id="svRecQ" type="search" placeholder="ค้นหา พาร์ท / #ชิ้น / Lot / ผู้ตรวจ" autocomplete="off"></h3><div id="svRecent"></div></div>
     </div>
+  </section>
+  <div class="sv-dlg fx" id="svAllDlg">
+    <div class="sv-dbox sv-allbox">
+      <div class="sv-allhd"><h3 id="svAllT"></h3><input class="sv-cf" id="svAllQ" type="search" placeholder="ค้นหา…" autocomplete="off"><button id="svAllX" aria-label="ปิด">✕</button></div>
+      <div class="sv-allm" id="svAllM"></div>
+      <div id="svAllB"></div>
+    </div>
+  </div>
+  <section class="sv-page hide" id="svSysPg">
+    <div class="sys-card">
+      <h3>เช็คกล้องด้วยมาสเตอร์ก่อนเริ่มกะ</h3>
+      <p>Operator ต้องวัดมาสเตอร์ (Gauge block) ผ่านก่อน จึงจะเลือกพาร์ทตรวจได้ · ทุกสถานี ทุกกะ และทุกครั้งที่เปลี่ยนกล้อง/ความสูงกล้อง</p>
+      <div class="sys-row"><span>เปิดใช้งาน</span><input type="checkbox" class="tog" id="yMOn"></div>
+      <div class="sys-row"><span>ชื่อมาสเตอร์</span><input type="text" id="yMName" class="w"></div>
+      <div class="sys-row"><span>ยาว (mm) · ค่าจริงตามใบรับรอง</span><input type="number" id="yML" step="0.001" inputmode="decimal"></div>
+      <div class="sys-row"><span>กว้าง (mm)</span><input type="number" id="yMW" step="0.001" inputmode="decimal"></div>
+      <div class="sys-row"><span>หนา (mm)</span><input type="number" id="yMT" step="0.001" inputmode="decimal"></div>
+      <div class="sys-row"><span>ยอมรับต่างได้ ± (mm)</span><input type="number" id="yMTol" step="0.01" inputmode="decimal"></div>
+    </div>
+    <div class="sys-card">
+      <h3>กะการทำงาน</h3>
+      <p>ระบบบันทึกกะให้เองตามเวลาเริ่ม · กะที่ข้ามเที่ยงคืนนับเป็นวันที่เริ่มกะ</p>
+      <div id="yShifts"></div>
+      <button class="sys-add" id="yShAdd">+ เพิ่มกะ</button>
+    </div>
+    <div class="sys-card">
+      <h3>เลข Lot</h3>
+      <p>ถามเลข Lot ตอน Operator เลือกพาร์ท (สแกนบาร์โค้ดหรือพิมพ์) และเปลี่ยนได้ระหว่างตรวจ</p>
+      <div class="sys-row"><span>เปิดใช้งาน</span><input type="checkbox" class="tog" id="yLOn"></div>
+      <div class="sys-row"><span>บังคับใส่เลข Lot (ไม่มีปุ่ม "ไม่มีเลข Lot")</span><input type="checkbox" class="tog" id="yLReq"></div>
+    </div>
+    <div class="sys-foot"><button id="ySave">บันทึกตั้งค่าระบบ</button><span id="yNote"></span></div>
   </section>
   <section class="sv-page hide" id="svPartsPg">
     <div class="sv-pl">
@@ -932,6 +1056,7 @@
       <p class="sv-dsub" id="qDims"></p>
       <div class="q-row"><button class="q-pm" data-d="-1">−</button><input id="qQty" type="number" inputmode="numeric" min="0" step="1"><button class="q-pm" data-d="1">+</button></div>
       <div class="q-chips"><button data-d="10">+10</button><button data-d="50">+50</button><button data-d="100">+100</button><button data-d="0">ล้าง</button></div>
+      <label class="q-urg"><input type="checkbox" id="qUrg"><span>งานด่วน (แทรกเข้ามา)<small>Operator จะเห็นป้าย "ด่วน" และพาร์ทนี้ขึ้นเป็นอันดับแรก</small></span></label>
       <p class="sv-dsub" id="qInfo"></p>
       <div class="sv-err" id="qErr"></div>
       <div class="sv-fbtn"><button class="sv-save" id="qSave">บันทึกจำนวนงาน</button><button class="sv-cancel" id="qCancel">ยกเลิก</button></div>
@@ -1060,7 +1185,7 @@
     </section>
 
     <aside class="right">
-      <div class="piece"><div><b id="pieceNo">ชิ้นที่ #1</b><span class="rt hide" id="rtTag"></span><small id="pieceSub"></small></div><button id="resetBtn">เริ่มชิ้นนี้ใหม่</button></div>
+      <div class="piece"><div><b id="pieceNo">ชิ้นที่ #1</b><span class="rt hide" id="rtTag"></span><small id="pieceSub"></small><small class="rnd" id="roundTag"></small></div><button id="resetBtn">เริ่มชิ้นนี้ใหม่</button></div>
       <div class="dims">
         <div class="dim wait" id="dL">
           <div class="dh"><div class="dic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"/></svg></div>
@@ -1129,6 +1254,12 @@
     <div class="grp">
       <h4>กล้องและการชดเชยความสูง</h4>
       <div class="fl"><label>กล้องสด + ถ่ายอัตโนมัติ</label><input type="checkbox" class="tog" id="fLive"></div>
+      <div class="fl"><label>กล้องที่ใช้</label><select id="fCam" class="sel"></select></div>
+      <div class="fl"><label><small id="camHint" style="color:#64748b"></small></label><button type="button" class="mini" id="camFind">↻ ค้นหากล้อง</button></div>
+      <div class="fl"><label>ความละเอียดที่ขอจากกล้อง</label><select id="fRes" class="sel"><option value="auto">อัตโนมัติ (แนะนำ)</option><option value="1920x1440">1920 × 1440</option><option value="2592x1944">2592 × 1944 (5MP)</option><option value="3264x2448">3264 × 2448 (8MP)</option><option value="3840x2160">3840 × 2160 (4K 16:9)</option><option value="4032x3024">4032 × 3024 (12MP)</option></select></div>
+      <div class="fl"><label>ความละเอียดที่ใช้วัด</label><select id="fPpm" class="sel"><option value="auto">อัตโนมัติ (แนะนำ)</option><option value="3">3 px/mm (เร็ว)</option><option value="4">4 px/mm</option><option value="5">5 px/mm (ละเอียด)</option><option value="6">6 px/mm (ละเอียดมาก ใช้เครื่องแรง)</option></select></div>
+      <div class="fl"><label>ล็อกโฟกัสกล้อง USB (กันภาพวูบ)</label><input type="checkbox" class="tog" id="fFocus"></div>
+      <p class="note" id="camInfo" style="margin:4px 0 10px"></p>
       <div class="fl"><label>ชดเชยความสูงชิ้นงาน</label><input type="checkbox" class="tog" id="fComp"></div>
       <div class="fl"><label>ความสูงกล้องถึงบอร์ด (mm)</label><input type="number" id="fZ" step="1" inputmode="decimal"></div>
       <div class="fl"><label>รอยเว้า / ขอบแหว่ง ลึกได้ไม่เกิน (mm)</label><input type="number" id="fDent" step="0.1" inputmode="decimal"></div>
@@ -1182,6 +1313,30 @@
     <div class="kpf" style="margin-top:16px"><button id="endsNg" style="color:#b42318">✗ มีตำหนิ</button><button class="ok" id="endsOk">✓ ไม่มีตำหนิ</button></div>
   </div>
 </div>
+<div class="kp" id="lotDlg">
+  <div class="kpb" style="text-align:center">
+    <h3 style="margin:0">เลข Lot</h3>
+    <p id="lotFor" style="margin:4px 0 0;color:#667085"></p>
+    <input id="lotIn" class="lot-in" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="สแกนบาร์โค้ด หรือพิมพ์">
+    <p class="lot-err" id="lotErr"></p>
+    <div class="kpf" style="margin-top:6px"><button id="lotSkip">ไม่มีเลข Lot</button><button id="lotCancel">ยกเลิก</button><button class="ok" id="lotOk">ยืนยัน</button></div>
+  </div>
+</div>
+<div class="kp" id="mstDlg">
+  <div class="kpb mst">
+    <h3 id="mstT" style="margin:0 0 8px">ผลเช็คกล้องด้วยมาสเตอร์</h3>
+    <div id="mstBody"></div>
+    <div class="kpf" id="mstBtns" style="margin-top:12px"></div>
+  </div>
+</div>
+<div class="kp ngdlg" id="ngDlg">
+  <div class="kpb">
+    <div class="ng-hd"><b id="ngT">ภาพชิ้นงาน NG</b><button id="ngX" aria-label="ปิด">✕</button></div>
+    <div class="ng-im" id="ngIm"></div>
+    <p class="ng-r" id="ngR"></p>
+    <div class="ng-ft"><a id="ngDl" download="NG.jpg">⬇ บันทึกภาพ</a><button id="ngC">ปิด</button></div>
+  </div>
+</div>
 <div class="kp" id="surfDlg">
   <div class="kpb" style="text-align:center">
     <h3 id="surfT">กล้องพบตำหนิบนผิว</h3>
@@ -1200,9 +1355,10 @@
   const MARKER_MM = 50;                  // ขนาดสี่เหลี่ยมดำที่พิมพ์จริง (บอร์ด A3)
   const BOARD_W = 300.0, BOARD_H = 200.0; // ระยะกลางมาร์กเกอร์ ID0→ID1 และ ID0→ID3 (วัดจริงหลังพิมพ์)
   const CENTERS = { 0: [0, 0], 1: [BOARD_W, 0], 2: [BOARD_W, BOARD_H], 3: [0, BOARD_H] };
-  const PX_PER_MM = 3;
+  let PX_PER_MM = 3;   // ความละเอียดภาพที่ใช้วัด (ปรับตามกล้อง: กล้อง iPad 3 · กล้อง USB ความละเอียดสูง 5)
   const MARGIN_MM = 60;
-  const MAX_W = 2000;
+  const MAX_W = 2000;   // ภาพจากกล้องในตัว / ไฟล์ภาพ
+  const maxW = () => (cfg.camId ? 4096 : MAX_W);   // กล้อง USB ภายนอก: ใช้ความละเอียดเต็ม
   const MASK_PAD_MM = 12;
   const MIN_PART_MM2 = 300;
   const DARK_BOARD = true;               // พื้นดำด้าน + ชิ้นงานสีขาว
@@ -1237,15 +1393,40 @@
   let models = store.get('models', DEFAULT_MODELS);
   models.forEach((m) => { if (!m.ends) m.ends = m.L.n / Math.min(m.W.n, m.T.n) > 5 ? 'manual' : 'cam'; m.name = m.name.replace(/^รุ่น(?=\s*\d)/, 'พาร์ท'); });
   let selId = store.get('sel', models[0].id);
-  const cfg = Object.assign({ Z: 800, comp: true, lchk: 1.5, snd: true, sheet: true, station: 'iPad-1', dent: 0.8, shots: 6, surfOn: true, surf: 1.0, zoom: true, live: true }, store.get('cfg', {}));
+  const cfg = Object.assign({ Z: 800, comp: true, lchk: 1.5, snd: true, sheet: true, station: 'iPad-1', dent: 0.8, shots: 6, surfOn: true, surf: 1.0, zoom: true, live: true, camId: '', camLabel: '', res: 'auto', focusLock: true, ppm: 'auto' }, store.get('cfg', {}));
+  // กล้อง: camId ว่าง = กล้องในตัว (iPad: กล้องหลัง) ทำงานแบบเดิม · เลือกกล้อง USB = ขอความละเอียดสูงสุด + วัดละเอียดขึ้น
+  // ----- ตั้งค่าระบบ (Supervisor ตั้ง ใช้ร่วมทุกเครื่อง) -----
+  const SYS_DEF = { masterOn: true, masterName: 'Gauge block 50 mm', mL: 50, mW: 35, mT: 9, mTol: 0.2,
+    shifts: [{ name: 'กะเช้า', start: '08:00' }, { name: 'กะดึก', start: '20:00' }],
+    lotOn: true, lotRequired: true };
+  let SYS = Object.assign({}, SYS_DEF, store.get('sys', {}));
+  try { ['alertOpen', 'alertLog', 'alertAck'].forEach((k) => localStorage.removeItem('qc5.' + k)); store.set('auxQ', store.get('auxQ', []).filter((x) => x.action === 'masterLog')); } catch (e) {}   // ยกเลิกระบบแจ้งเตือนแล้ว
+  const sysLocal = () => !!window.QC_DEMO_LOGIN || !hasBackend();
+  function loadSys() {
+    if (sysLocal() || !sessOk()) return Promise.resolve(SYS);
+    return api('config', { token: sess.token }).then((j) => { if (j && j.cfg) { SYS = Object.assign({}, SYS_DEF, j.cfg); store.set('sys', SYS); } return SYS; }).catch(() => SYS);
+  }
+  // กะ: หากะล่าสุดที่เริ่มแล้ว · ก่อนกะแรกของวัน = กะสุดท้ายของเมื่อวาน
+  function shiftOf(t) {
+    const d = new Date(t), mins = d.getHours() * 60 + d.getMinutes();
+    const sh = (SYS.shifts && SYS.shifts.length ? SYS.shifts : SYS_DEF.shifts).map((x) => ({ name: x.name, m: (+x.start.slice(0, 2)) * 60 + (+x.start.slice(3, 5)) })).sort((a, b) => a.m - b.m);
+    let cur = sh.filter((x) => x.m <= mins).pop(), day = ymd(d);
+    if (!cur) { cur = sh[sh.length - 1]; day = ymd(new Date(d.getTime() - 864e5)); }
+    return { name: cur.name, day, key: day + '|' + cur.name };
+  }
+  let masterMode = false;
+  const masterModel = () => ({ id: '__master', name: SYS.masterName || 'มาสเตอร์', L: { n: +SYS.mL, p: +SYS.mTol, m: +SYS.mTol }, W: { n: +SYS.mW, p: +SYS.mTol, m: +SYS.mTol }, T: { n: +SYS.mT, p: +SYS.mTol, m: +SYS.mTol }, ends: 'manual' });
+  const ppmFor = () => (cfg.ppm === 'auto' ? (cfg.camId ? 5 : 3) : Math.max(2, Math.min(8, +cfg.ppm || 3)));
+  PX_PER_MM = ppmFor();
+  const CAM_RES = { auto: null, '1920x1440': [1920, 1440], '2592x1944': [2592, 1944], '3264x2448': [3264, 2448], '3840x2160': [3840, 2160], '4032x3024': [4032, 3024] };
   let queue = store.get('queue', []);   // ผลตรวจที่ยังส่งขึ้นชีตไม่สำเร็จ
   let hist = store.get('hist', []);
   let retakes = store.get('retakes', 0);
-  const M = () => models.find((m) => m.id === selId) || models[0];
+  const M = () => (masterMode ? masterModel() : models.find((m) => m.id === selId) || models[0]);
   const NAMES = { L: 'ความยาว', W: 'ความกว้าง', T: 'ความหนา', F: 'ความเต็มกรอบ', S: 'ผิวหน้า', E: 'หน้าปลาย' };
   if (cfg.full === false && !cfg.shotsSet) cfg.shots = 2;
   const endsManual = () => cfg.shots === 6 && M().ends === 'manual';
-  const S = () => (cfg.shots === 2 ? 2 : cfg.shots === 4 || endsManual() ? 4 : 6);      // จำนวนภาพต่อการตรวจ 1 ครั้ง
+  const S = () => (masterMode ? 2 : cfg.shots === 2 ? 2 : cfg.shots === 4 || endsManual() ? 4 : 6);      // จำนวนภาพต่อการตรวจ 1 ครั้ง
   const RES = () => S() + 1;               // ขั้น "ผลตรวจ"
 
   // ชิ้นงานปัจจุบัน: p1/p2 = ค่าที่เห็นในภาพ (ก่อนชดเชยความสูง) {La, Xa, ...}
@@ -1314,14 +1495,27 @@
   }
   function fillSet() {
     $('fSheet').checked = cfg.sheet; $('fLive').checked = cfg.live; $('fStation').value = cfg.station; loadSheetLink();
+    $('fRes').value = cfg.res; $('fPpm').value = String(cfg.ppm); $('fFocus').checked = !!cfg.focusLock;
+    $('camInfo').textContent = LIVE.info ? 'กำลังใช้: ' + LIVE.info : 'ยังไม่ได้เปิดกล้อง · เปิดหน้าตรวจงานเพื่อดูว่ากล้องส่งภาพความละเอียดเท่าไหร่';
+    listCameras(false);
     $('fComp').checked = cfg.comp; $('fZ').value = Math.round(cfg.Z); $('fLchk').value = cfg.lchk; $('fDent').value = cfg.dent; $('fShots').value = String(cfg.shots); $('fSurfOn').checked = cfg.surfOn; $('fSurf').value = cfg.surf; $('fSnd').checked = cfg.snd;
   }
   function readSet() {
     const num = (id, d, z) => { const v = parseFloat($(id).value); return v > 0 || (z && v === 0) ? v : d; };
     cfg.sheet = $('fSheet').checked; { const lv = $('fLive').checked; if (cfg.live && !lv) stopLive(); cfg.live = lv; if (lv) LIVE.failed = false; } cfg.station = $('fStation').value.trim() || cfg.station;
+    {   // กล้อง: ถ้าเปลี่ยน ต้องเปิดกล้องใหม่ และควรคาลิเบรตใหม่
+      const id = $('fCam').value, o = $('fCam').selectedOptions[0];
+      const changed = id !== cfg.camId || $('fRes').value !== cfg.res || $('fPpm').value !== String(cfg.ppm) || $('fFocus').checked !== !!cfg.focusLock;
+      if (id !== cfg.camId) setTimeout(() => toast('เปลี่ยนกล้องแล้ว · อย่าลืมวัดความสูงกล้องและคาลิเบรตด้วยชิ้นต้นแบบใหม่'), 900);
+      cfg.camId = id; cfg.camLabel = id && o ? o.textContent.replace(/ \(ไม่ได้เสียบอยู่\)$/, '') : ''; cfg.res = $('fRes').value; cfg.ppm = $('fPpm').value; cfg.focusLock = $('fFocus').checked;
+      PX_PER_MM = ppmFor(); LIVE.focus = '';   // เปลี่ยนกล้อง → ต้องเช็คมาสเตอร์ใหม่ (masterKey เปลี่ยนเอง)
+      if (changed && (LIVE.stream || LIVE.sim)) { stopLive(); LIVE.failed = false; if (cfg.live) setTimeout(() => startLive(), 300); }
+    }
     cfg.comp = $('fComp').checked; cfg.Z = num('fZ', cfg.Z); cfg.lchk = num('fLchk', cfg.lchk); cfg.dent = num('fDent', cfg.dent); cfg.shots = +$('fShots').value; cfg.shotsSet = true; cfg.surfOn = $('fSurfOn').checked; cfg.surf = num('fSurf', cfg.surf); cfg.snd = $('fSnd').checked;
     store.set('models', models); store.set('cfg', cfg); applyModel();
   }
+  $('camFind').onclick = () => { $('camHint').textContent = 'กำลังค้นหา…'; listCameras(true); };
+  if (navigator.mediaDevices && navigator.mediaDevices.addEventListener) navigator.mediaDevices.addEventListener('devicechange', () => { if (document.querySelector('#setSheet.on')) listCameras(false); });
   $('saveSet').onclick = () => { readSet(); sheet(null); resetPiece(); toast('บันทึกแล้ว'); };
 
   // =============== ชดเชยความสูง (parallax) ===============
@@ -1466,8 +1660,50 @@
     if (inSeq) $('rtTag').textContent = cur.pending === 'visual' ? 'รอยืนยันด้วยเครื่องมือวัด' : (cur.recheckOf ? 'ขอตรวจซ้ำ · ' : 'ตรวจซ้ำ · ') + 'ครั้งที่ ' + (nA + 1) + '/5';
     $('resetBtn').classList.toggle('hide', nA > 0 && !cur.done);   // ระหว่างตรวจซ้ำ ยกเลิกชิ้นไม่ได้ (กันหลบผลไม่ผ่าน)
     $('pieceSub').textContent = cur.calib || cur.step === R ? '' : '· ภาพที่ ' + cur.step + '/' + S();
+    renderRound();
   }
-  const lastNo = () => hist.reduce((a, h) => Math.max(a, h.n), 0);
+  // เลขชิ้นนับแยกตามพาร์ทต่อวัน: สลับไปพาร์ทอื่นแล้วกลับมา จะนับต่อจากเดิม
+  function lastNo() {
+    const m = M(), d = today();
+    const mine = hist.filter((h) => h.model === m.name && ymd(new Date(h.t)) === d).reduce((a, h) => Math.max(a, h.n || 0), 0);
+    let srv = 0;
+    try { if (opPlan && opPlan.live && opPlan.day === d) srv = (((opPlan.counts || {})[m.name] || {}).total || 0) + queue.filter((r) => r.model === m.name && !r.replaces && ymd(new Date(r.t)) === d).length; } catch (e) { /* ยังไม่โหลดแผนงาน */ }
+    return Math.max(mine, srv);
+  }
+  // ----- รอบการตรวจ: เริ่มรอบใหม่เมื่อเปลี่ยนพาร์ท / เปลี่ยนคน / ขึ้นวันใหม่ · เลือกพาร์ทเดิมซ้ำ = รอบเดิม -----
+  let round = store.get('round', null);
+  function roundsKnown(m) {   // รอบของพาร์ทนี้วันนี้ (จากเซิร์ฟเวอร์ + ที่เครื่องนี้เริ่มเอง)
+    const p = planFor(opPlan, m), keys = new Set(((p && p.rounds) || []).map((r) => r.k));
+    ((store.get('myRounds', {})[today()] || {})[m.id] || []).forEach((k) => keys.add(k));
+    return keys;
+  }
+  function startRound(m) {
+    const user = sess ? sess.name : '';
+    if (round && round.mid === m.id && round.day === today() && round.user === user) return false;
+    const no = roundsKnown(m).size + 1;
+    round = { k: (cfg.station || 'st') + '-' + Date.now().toString(36), mid: m.id, day: today(), s: Date.now(), no, user };
+    store.set('round', round);
+    const mr = store.get('myRounds', {}); Object.keys(mr).forEach((d) => { if (d < today()) delete mr[d]; });
+    ((mr[today()] || (mr[today()] = {}))[m.id] || (mr[today()][m.id] = [])).push(round.k); store.set('myRounds', mr);
+    return true;
+  }
+  // ไม่มีหลังบ้าน (เดโม/ออฟไลน์): บันทึกรอบไว้ในแผนงานในเครื่อง แบบเดียวกับที่เซิร์ฟเวอร์ทำ
+  function roundLocal(rec) {
+    if (!rec.round || !rec.mid) return;
+    const d = ymd(new Date(rec.t)), p = plansLocal(d).find((x) => x.id === rec.mid); if (!p) return;
+    const rs = p.rounds || (p.rounds = []);
+    let r = rs.find((x) => x.k === rec.round.k);
+    if (!r) { r = { k: rec.round.k, no: rs.length + 1, s: rec.round.s, e: rec.t, n: 0 }; rs.push(r); }
+    if (!rec.replaces) r.n++;
+    r.e = Math.max(r.e || 0, rec.t);
+    planLocalSet(d, p);
+  }
+  function renderRound() {
+    const el = $('roundTag'); if (!el) return;
+    const ok = round && round.mid === selId && round.day === today() && !cur.calib;
+    el.innerHTML = ok ? '<b>ตรวจครั้งที่ ' + round.no + '</b> · เริ่ม ' + new Date(round.s).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น. · ' + esc(shiftOf(Date.now()).name) +
+      (SYS.lotOn ? ' · Lot <b>' + esc(round.lot || '–') + '</b><button class="mini" data-a="lot">เปลี่ยน Lot</button>' : '') : masterMode ? '<b>เช็คกล้องด้วยมาสเตอร์</b> · ' + esc(SYS.masterName) : '';
+  }
 
   function setDim(k, v, prov, extra) {
     const s = M()[k], el = $('d' + k);
@@ -1589,6 +1825,7 @@
   }
   // หลังถ่ายแต่ละภาพ: ตำหนิผิว (อย่างเดียว) → ถามพนักงานก่อน / จุดอื่นไม่ผ่าน → หยุดวัด / ผ่าน → ไปภาพถัดไป
   function shotDone(n) {
+    if (masterMode) return masterShot(n);
     renderDims();
     if (surfAsk(n)) return;
     advance(n);
@@ -1708,7 +1945,9 @@
     pick.best = true;
     const v2 = (l) => (l || []).map((o) => [o.s, +o.v.toFixed(3)]);
     const log = A.map((a, i) => ({ i: i + 1, t: a.t || Date.now(), v: a.v, Ls: v2(a.Ls), Ws: v2(a.Ws), Ts: v2(a.Ts), dent: a.dent, surf: a.surf, stopAt: a.stopAt || null, reason: a.v === 'F' ? reasonTxt(a) : (a.surfOk && a.surfOk.length ? 'พนักงานยืนยันผิวดี (ภาพที่ ' + a.surfOk.join(', ') + ')' : '') }));
-    const rec = { uid: Date.now().toString(36) + Math.random().toString(36).slice(2, 7), n: lastNo() + 1, t: Date.now(), verdict, model: m.name, station: cfg.station, user: sess ? sess.name : '',
+    const rec = { uid: Date.now().toString(36) + Math.random().toString(36).slice(2, 7), n: lastNo() + 1, t: Date.now(), verdict, model: m.name, mid: m.id,
+      round: round && round.mid === m.id ? { k: round.k, no: round.no, s: round.s } : null,
+      lot: round && round.mid === m.id ? round.lot || '' : '', shift: shiftOf(Date.now()).name, station: cfg.station, user: sess ? sess.name : '',
       L: pick.L, W: pick.W, T: pick.T, L1: pick.L1, L2: pick.L2, tm: pick.tm, swap: pick.swap, Ls: v2(pick.Ls), Ws: v2(pick.Ws), Ts: v2(pick.Ts), log,
       dL: pick.L != null ? pick.L - m.L.n : null, dW: pick.W != null ? pick.W - m.W.n : null, dT: pick.T != null ? pick.T - m.T.n : null, stopAt: pick.stopAt, sL: m.L, sW: m.W, sT: m.T,
       dent: pick.dent, fill: pick.fill, faces: pick.faces, dentLim: cfg.dent, surf: pick.surf, surfN: pick.surfN, ends: pick.ends, reason: reasonTxt(pick),
@@ -1723,9 +1962,27 @@
       cur.recheckOf = null;
     } else hist.push(rec);
     store.set('hist', hist.slice(-3000));
+    if (!(opPlan && opPlan.live)) roundLocal(rec);
     cur.step = RES(); cur.done = true; cur.pending = null; cur.uid = rec.uid;
     renderSteps(); renderStats(); showStage(); showDimsOf(pick);
-    if (cfg.sheet) { queue.push(rec); store.set('queue', queue); syncNow(); }
+    if (cfg.sheet) {
+      // ภาพ NG: ส่งไปกับผลตรวจ แต่ไม่เก็บใน hist (กันพื้นที่ในเครื่องเต็ม) · คิวรอส่งเก็บภาพได้สูงสุด 12 ชิ้น
+      const q = Object.assign({}, rec);
+      if (verdict === 'fail') {
+        if (queue.filter((x) => x.img).length < 12) { try { q.img = ngImage(rec, pick); } catch (e) { q.img = null; } }
+        if (!q.img) q.imgNote = 'ไม่มีภาพ (คิวรอส่งเต็ม หรือจับภาพไม่ได้)';
+        rec.img = q.img ? 'pending' : null;
+        if (q.img) {
+          NG_LOCAL[rec.uid] = q.img.b64;
+          if (sysLocal()) {   // เดโม/ยังไม่มีหลังบ้าน: เก็บภาพไว้ในเครื่อง (ล่าสุด 20 ภาพ) เปิดดูได้แม้รีเฟรชหน้า
+            const nl = store.get('ngLocal', {}); nl[rec.uid] = q.img.b64;
+            const ks = Object.keys(nl); ks.slice(0, Math.max(0, ks.length - 20)).forEach((k) => delete nl[k]);
+            try { localStorage.setItem('qc5.ngLocal', JSON.stringify(nl)); } catch (e) { const k2 = Object.keys(nl); k2.slice(0, Math.ceil(k2.length / 2)).forEach((k) => delete nl[k]); store.set('ngLocal', nl); }
+          }
+        }
+      }
+      queue.push(q); saveQueue(); syncNow();
+    }
     showVerdict(verdict, pick, { rec }); beep(verdict);
   }
 
@@ -1844,6 +2101,50 @@
     v.className = 'vsync ' + (h.synced ? 'ok' : pend && syncing ? 'busy' : 'err');
     v.querySelector('span').textContent = h.synced ? 'บันทึกลง Google Sheet แล้ว' : syncing ? 'กำลังบันทึกลง Google Sheet…' : 'ยังส่งไม่สำเร็จ · จะลองส่งใหม่อัตโนมัติ';
   }
+  function saveQueue() {
+    try { localStorage.setItem('qc5.queue', JSON.stringify(queue)); }
+    catch (e) {   // พื้นที่ในเครื่องเต็ม → ทิ้งภาพที่รอส่ง (เก็บผลตรวจไว้ก่อน)
+      queue.forEach((x) => { if (x.img) { x.img = null; x.imgNote = 'ภาพหาย: พื้นที่ใน iPad เต็มระหว่างรอส่ง'; } });
+      store.set('queue', queue);
+    }
+  }
+  // ภาพหลักฐานชิ้น NG: ภาพวิเคราะห์ (มีเส้นขอบและวงตำหนิ) ของภาพที่เจอจุดไม่ผ่าน · ครอปรอบชิ้นงาน · ด้านยาว ≤ 1000 px · JPEG 80%
+  function ngShot(a) {
+    if (!a) return 1;
+    if (a.stopAt) return a.stopAt;
+    const m = M(), b = a.bad || [], has = (n) => !!cur['p' + n];
+    const ex = (v, s) => Math.max(v - (s.n + s.p), (s.n - s.m) - v);
+    for (const k of ['L', 'W', 'T']) {
+      const l = a[k + 's'];
+      if (b.includes(k) && l && l.length) return l.reduce((w, o) => (ex(o.v, m[k]) > ex(w.v, m[k]) ? o : w)).s;
+    }
+    const arg = (f) => [1, 2, 3, 4, 5, 6].filter(has).reduce((w, n) => (f(cur['p' + n]) > f(cur['p' + w]) ? n : w), [1, 2, 3, 4, 5, 6].find(has) || 1);
+    if (b.includes('F')) return arg((p) => p.dentA || 0);
+    if (b.includes('S')) return arg((p) => (p.surfOk ? -1 : p.surfA || 0));
+    return 1;
+  }
+  function ngImage(rec, a) {
+    const n = ngShot(a);
+    let c = $('c' + n + 'ana'); if (!c.width) c = $('c' + n + 'raw'); if (!c.width) return null;
+    const p = cur['p' + n], pad = 15 * PX_PER_MM;
+    let x = 0, y = 0, w = c.width, h = c.height;
+    if (c.id.endsWith('ana') && p && p.box) {
+      const bx = p.box;
+      x = Math.max(0, Math.floor(bx.cx - bx.w / 2 - pad)); y = Math.max(0, Math.floor(bx.cy - bx.h / 2 - pad));
+      w = Math.min(c.width - x, Math.ceil(bx.w + 2 * pad)); h = Math.min(c.height - y, Math.ceil(bx.h + 2 * pad));
+    }
+    const sc = Math.min(1, 1000 / Math.max(w, h)), W = Math.max(480, Math.round(w * sc)), H = Math.round(h * (W / w)), cap = 44;
+    const o = document.createElement('canvas'); o.width = W; o.height = H + cap;
+    const g = o.getContext('2d');
+    g.fillStyle = '#000'; g.fillRect(0, 0, W, H); g.drawImage(c, x, y, w, h, 0, 0, W, H);
+    g.fillStyle = '#b91c1c'; g.fillRect(0, H, W, cap);
+    g.fillStyle = '#fff'; g.font = '600 15px Sarabun, "Noto Sans Thai", sans-serif'; g.textBaseline = 'middle';
+    const d = new Date(rec.t), ts = d.toLocaleDateString('th-TH') + ' ' + d.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+    g.fillText(('NG · ' + rec.model + ' · ชิ้น #' + rec.n + ' · ภาพ ' + n + '/' + S() + ' · ' + ts).slice(0, 90), 10, H + 14);
+    g.font = '13px Sarabun, "Noto Sans Thai", sans-serif';
+    g.fillText(String(rec.reason || 'ไม่ผ่าน').slice(0, 110), 10, H + 32);
+    return { shot: n, b64: o.toDataURL('image/jpeg', 0.8).split(',')[1] };
+  }
   function syncNow() {
     setSync();
     if (!cfg.sheet || syncing || !queue.length) return;
@@ -1853,8 +2154,8 @@
       syncing = false;
       if (ok) {
         queue.shift(); syncErr = '';
-        const h = hist.find((x) => x.uid === rec.uid); if (h) h.synced = true;
-        store.set('queue', queue); store.set('hist', hist.slice(-3000)); renderStats();
+        const h = hist.find((x) => x.uid === rec.uid); if (h) { h.synced = true; if (h.img === 'pending') h.img = 'drive'; }
+        saveQueue(); store.set('hist', hist.slice(-3000)); renderStats();
         updateVSync(); syncNow(); if (!queue.length) { clearTimeout(window._rjT); window._rjT = setTimeout(() => { try { refreshJob(); } catch (e) {} }, 800); }
       } else if (/SESSION/.test(err || '')) { syncErr = 'หมดเวลาเข้าใช้งาน'; sess = null; store.set('sess', null); setSync(); updateVSync(); showLogin('หมดเวลาเข้าใช้งาน กรุณาเข้าสู่ระบบใหม่ (ข้อมูลที่ค้างจะส่งต่อให้อัตโนมัติ)'); }
       else { syncErr = err || 'ส่งไม่สำเร็จ'; setSync(); updateVSync(); setTimeout(syncNow, 15000); }
@@ -2160,7 +2461,7 @@
     const n = cur.calib ? 1 : cur.step, raw = $('c' + n + 'raw');
     try {
       const bmp = await createImageBitmap(f, { imageOrientation: 'from-image' });
-      const scale = Math.min(1, MAX_W / bmp.width);
+      const scale = Math.min(1, maxW() / bmp.width);
       raw.width = Math.round(bmp.width * scale); raw.height = Math.round(bmp.height * scale);
       raw.getContext('2d').drawImage(bmp, 0, 0, raw.width, raw.height);
       await analyzeRaw(n, 'ภาพที่ ' + n + ': ' + bmp.width + 'x' + bmp.height + ' → ' + raw.width + 'x' + raw.height + ' px\n');
@@ -2241,13 +2542,60 @@
     try {
       if (window.QC_DEMO_LIVE && !cvReady) throw new Error('demo-no-cv');
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error('no-media');
-      LIVE.stream = await navigator.mediaDevices.getUserMedia({ audio: false, video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1440 } } });
+      LIVE.stream = await openCamera();
       const v = $('liveVid'); v.srcObject = LIVE.stream; await v.play(); LIVE.feed = v;
+      camReport(); if (cfg.camId && cfg.focusLock) setTimeout(lockFocus, 1800);
     } catch (e) {
       if (window.QC_DEMO_LIVE) { switchToSim(); }
       else { LIVE.failed = true; toast('เปิดกล้องสดไม่ได้ · ใช้ปุ่มถ่ายภาพแทน (' + (e.name || e.message) + ')'); renderSteps(); showStage(); return false; }
     }
     LIVE.armed = true; LIVE.stableSince = 0; LIVE.prev = null; loopLive(); renderSteps(); showStage(); return true;
+  }
+  // ----- เลือกกล้อง / ความละเอียด / ล็อกโฟกัส -----
+  function camConstraints(useId) {
+    const r = CAM_RES[cfg.res] || (useId ? [4096, 3072] : [1920, 1440]);   // auto: กล้องในตัว = แบบเดิม · กล้อง USB = สูงสุดที่รองรับ
+    const v = { width: { ideal: r[0] }, height: { ideal: r[1] } };
+    if (useId) v.deviceId = { exact: cfg.camId }; else v.facingMode = { ideal: 'environment' };
+    return { audio: false, video: v };
+  }
+  async function openCamera() {
+    if (cfg.camId) {
+      try { return await navigator.mediaDevices.getUserMedia(camConstraints(true)); }
+      catch (e) { toast('ไม่พบกล้องที่เลือก (' + (cfg.camLabel || 'กล้อง USB') + ') · ใช้กล้องเริ่มต้นแทน — ตรวจสาย USB แล้วเปิดกล้องใหม่'); }
+    }
+    return navigator.mediaDevices.getUserMedia(camConstraints(false));
+  }
+  function camTrack() { return LIVE.stream ? LIVE.stream.getVideoTracks()[0] : null; }
+  function camReport() {
+    const t = camTrack(); if (!t) { LIVE.info = ''; return; }
+    const s = t.getSettings ? t.getSettings() : {}, v = $('liveVid');
+    const w = s.width || v.videoWidth, h = s.height || v.videoHeight;
+    LIVE.info = (t.label || 'กล้อง') + ' · ' + w + ' × ' + h + ' px · วัดที่ ' + PX_PER_MM + ' px/mm' + (LIVE.focus ? ' · โฟกัส: ' + LIVE.focus : '');
+    if ($('camInfo')) $('camInfo').textContent = 'กำลังใช้: ' + LIVE.info;
+  }
+  async function lockFocus() {
+    const t = camTrack(); if (!t) return;
+    const c = t.getCapabilities ? t.getCapabilities() : {};
+    if (!c.focusMode || c.focusMode.indexOf('manual') < 0) { LIVE.focus = 'กล้องนี้ล็อกผ่านเบราว์เซอร์ไม่ได้'; camReport(); return; }
+    try {
+      const d = (t.getSettings() || {}).focusDistance;
+      await t.applyConstraints({ advanced: [d != null ? { focusMode: 'manual', focusDistance: d } : { focusMode: 'manual' }] });
+      LIVE.focus = 'ล็อกแล้ว';
+    } catch (e) { LIVE.focus = 'ล็อกไม่สำเร็จ'; }
+    camReport();
+  }
+  async function listCameras(ask) {
+    const sel = $('fCam'); if (!sel || !navigator.mediaDevices) return;
+    try {
+      if (ask && !LIVE.stream) { const s = await navigator.mediaDevices.getUserMedia({ video: true, audio: false }); s.getTracks().forEach((t) => t.stop()); }   // ขอสิทธิ์ก่อน จึงจะเห็นชื่อกล้อง
+      const cams = (await navigator.mediaDevices.enumerateDevices()).filter((d) => d.kind === 'videoinput');
+      const named = cams.some((d) => d.label);
+      sel.innerHTML = '<option value="">กล้องในตัว (แบบเดิม)</option>' +
+        cams.map((d, i) => '<option value="' + esc(d.deviceId) + '">' + esc(d.label || 'กล้อง ' + (i + 1)) + '</option>').join('') +
+        (cfg.camId && !cams.some((d) => d.deviceId === cfg.camId) ? '<option value="' + esc(cfg.camId) + '">' + esc(cfg.camLabel || 'กล้องที่เลือกไว้') + ' (ไม่ได้เสียบอยู่)</option>' : '');
+      sel.value = cfg.camId || '';
+      $('camHint').textContent = !cams.length ? 'ไม่พบกล้อง' : named ? 'พบ ' + cams.length + ' กล้อง' : 'กด "ค้นหากล้อง" แล้วอนุญาตให้ใช้กล้อง เพื่อแสดงชื่อกล้อง';
+    } catch (e) { $('camHint').textContent = 'ค้นหากล้องไม่ได้: ' + (e.name || e.message); }
   }
   function stopLive() {
     if (LIVE.stream) LIVE.stream.getTracks().forEach((t) => t.stop());
@@ -2333,7 +2681,7 @@
       LIVE.holdUntil = Date.now() + 1700; LIVE.autoView = true;
       if (LIVE.sim) { await QC_DEMO.shoot(cur.calib ? 'cal' : n, true); QC_DEMO_LIVE.captured(); }
       else {
-        const v = LIVE.feed, raw = $('c' + n + 'raw'), k = Math.min(1, MAX_W / v.videoWidth);
+        const v = LIVE.feed, raw = $('c' + n + 'raw'), k = Math.min(1, maxW() / v.videoWidth);
         raw.width = Math.round(v.videoWidth * k); raw.height = Math.round(v.videoHeight * k);
         raw.getContext('2d').drawImage(v, 0, 0, raw.width, raw.height);
         $('busy').classList.add('on'); await sleep(20);
@@ -2386,7 +2734,8 @@
       sess = { user: r.user, name: r.name, role: r.role || 'op', mode, token: r.token, exp: r.exp }; store.set('sess', sess);
       store.set('lastUser_' + mode, $('lgRem').checked ? u : '');
       $('lgPass').value = ''; $('login').classList.add('hide'); applyUser();
-      if (mode === 'sup' || mode === 'pln') showSup(); else { syncNow(); showPicker(false); }
+      if (mode === 'sup' || mode === 'pln') { loadSys().then(() => { if (mode === 'sup') sysFill(); }); showSup(); }
+      else { syncNow(); flushAux(); showPicker(false); loadSys().then(() => { if (!$('picker').classList.contains('hide')) renderPicker(); }); }
     };
     if (window.QC_DEMO_LOGIN) return setTimeout(() => done(window.QC_DEMO_LOGIN(u, p, mode)), 500);
     if (!hasBackend()) return done({ ok: false, msg: 'ยังไม่ได้ตั้งค่า API_URL ในไฟล์ index.html (ดูคู่มือขั้นที่ 4)' });
@@ -2421,15 +2770,16 @@
     $('pkClr').classList.toggle('hide', !q);
     const today = new Date().toDateString();
     const cnt = {}; hist.forEach((h) => { if (new Date(h.t).toDateString() === today) cnt[h.model] = (cnt[h.model] || 0) + 1; });
-    const list = models.filter((m) => !q || pkHay(m).includes(q)).map((m, i) => [m, i]).sort((a, b) => { const r = (m) => (canPick(m) ? 0 : planFor(opPlan, m) ? 1 : 2); return r(a[0]) - r(b[0]) || a[1] - b[1]; }).map((x) => x[0]);
+    const list = models.filter((m) => !q || pkHay(m).includes(q)).map((m, i) => [m, i]).sort((a, b) => { const r = (m) => { const p = planFor(opPlan, m); return canPick(m) ? (p && p.urgent ? 0 : 1) : p ? 2 : 3; }; return r(a[0]) - r(b[0]) || a[1] - b[1]; }).map((x) => x[0]);
     const np = planReady() ? models.filter((m) => planFor(opPlan, m)).length : 0;
     $('pkMeta').textContent = (q ? 'พบ ' + list.length + ' พาร์ท จากทั้งหมด ' + models.length : 'ทั้งหมด ' + models.length + ' พาร์ท') + (np ? ' · เลือกได้เฉพาะงานที่เรียกวันนี้ ' + np + ' พาร์ท' : '');
     $('pkGrid').innerHTML = list.length ? list.map((m, i) => {
       const num = (m.name.match(/(\d+)\s*$/) || [null, String(models.indexOf(m) + 1).padStart(2, '0')])[1];
       const dims = m.L.n + ' × ' + m.W.n + ' × ' + m.T.n;
       const ok = canPick(m), jb = jobOf(m);
-      const tag = jb.sent ? '<span class="pk-tag sent">✓ ส่งงานแล้ว · ผ่าน ' + jb.pass + '</span>' : !ok ? '<span class="pk-tag none">' + (planReady() ? 'ไม่มีในแผนวันนี้' : 'รอแผนงาน') + '</span>' : jb.qty ? '<span class="pk-tag ' + (jb.rem ? 'plan' : 'done') + '">' + (jb.rem ? 'เรียก ' + jb.qty + ' · เหลือ ' + jb.rem : 'ครบ ' + jb.qty + ' · รอส่งงาน') + '</span>' : m.id === selId && pkChosen ? '<span class="pk-tag last">กำลังตรวจ</span>' : '';
-      return '<button class="pk-tile' + (!ok ? ' off' + (jb.sent ? ' done' : '') : m.id === selId ? ' cur' : '') + '" data-id="' + m.id + '"' + (!ok ? ' aria-disabled="true"' : '') + '>' + tag +
+      const tag = jb.sent ? '<span class="pk-tag sent">✓ ส่งงานแล้ว · ผ่าน ' + jb.pass + '</span>' : !ok ? '<span class="pk-tag none">' + (masterRequired() && planFor(opPlan, m) ? 'รอเช็คมาสเตอร์' : planReady() ? 'ไม่มีในแผนวันนี้' : 'รอแผนงาน') + '</span>' : jb.qty ? '<span class="pk-tag ' + (jb.rem ? 'plan' : 'done') + '">' + (jb.rem ? 'เรียก ' + jb.qty + ' · เหลือ ' + jb.rem : 'ครบ ' + jb.qty + ' · รอส่งงาน') + '</span>' : m.id === selId && pkChosen ? '<span class="pk-tag last">กำลังตรวจ</span>' : '';
+      const urg = !!(jb.p && jb.p.urgent && !jb.sent);
+      return '<button class="pk-tile' + (!ok ? ' off' + (jb.sent ? ' done' : '') : m.id === selId ? ' cur' : '') + (urg && ok ? ' urg' : '') + '" data-id="' + m.id + '"' + (!ok ? ' aria-disabled="true"' : '') + '>' + (urg ? '<i class="urg-b">ด่วน</i>' : '') + tag +
         '<span class="pk-num">' + hlTxt(num, q) + '</span><span class="pk-name">' + hlTxt(m.name, q) + '</span>' +
         '<span class="pk-dim">' + hlTxt(dims, q) + '</span><span class="pk-tol">L +' + m.L.p + '/−' + m.L.m + ' · W +' + m.W.p + '/−' + m.W.m + ' · T +' + m.T.p + '/−' + m.T.m + '</span></button>';
     }).join('') : '<div class="pk-empty">ไม่พบพาร์ทที่ค้นหา “' + esc($('pkQ').value.trim()) + '”</div>';
@@ -2437,6 +2787,12 @@
     if (!planReady()) note = planErr ? '<div class="pk-note"><span>โหลดแผนงานวันนี้ไม่ได้<small>ตรวจสอบอินเทอร์เน็ต แล้วกดโหลดใหม่ · ระหว่างนี้ยังเลือกพาร์ทไม่ได้</small></span><button data-a="reload">↻ โหลดแผนงานใหม่</button></div>'
       : '<div class="pk-note load"><span>กำลังโหลดแผนงานวันนี้…</span></div>';
     else if (!np) note = '<div class="pk-note"><span>วันนี้ยังไม่มีงานเรียก<small>กรุณาติดต่อ Planner ให้เรียกงานก่อน แล้วกดโหลดใหม่</small></span><button data-a="reload">↻ โหลดแผนงานใหม่</button></div>';
+    {   // ปุ่ม "เช็คมาสเตอร์อีกครั้ง" (เมื่อเช็คผ่านแล้วในกะนี้)
+      const lm = store.get('lastMaster', null), show = SYS.masterOn && sess && sess.mode === 'op' && !masterRequired();
+      $('pkMaster').classList.toggle('hide', !show);
+      if (show) $('pkMaster').innerHTML = '↻ เช็คมาสเตอร์อีกครั้ง<small>✓ ผ่านแล้ว ' + (lm && lm.t ? new Date(lm.t).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' }) + ' น. · ' : '') + esc(shiftOf(Date.now()).name) + '</small>';
+    }
+    if (masterRequired()) note = '<div class="pk-note mst"><span>ต้องเช็คกล้องด้วยมาสเตอร์ก่อนเริ่ม' + esc(shiftOf(Date.now()).name) + '<small>วาง ' + esc(SYS.masterName) + ' (' + SYS.mL + ' × ' + SYS.mW + ' × ' + SYS.mT + ' mm) แล้วให้กล้องวัด 2 ภาพ · ผ่านแล้วจึงเลือกพาร์ทได้</small></span><button data-a="master">▶ เริ่มเช็คมาสเตอร์</button></div>' + (planReady() || !note ? '' : note);
     if (note && !q) $('pkGrid').insertAdjacentHTML('afterbegin', note);
     $('pkClose').classList.toggle('hide', !($('picker').dataset.closable === '1' && canPick(M())));
   }
@@ -2444,20 +2800,119 @@
   $('pkQ').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); const t = $('pkGrid').querySelectorAll('.pk-tile'); if (t.length === 1) t[0].click(); else $('pkQ').blur(); } });
   $('pkClr').onclick = () => { $('pkQ').value = ''; renderPicker(); $('pkQ').focus(); };
   $('pkGrid').onclick = (e) => {
+    if (e.target.closest('[data-a=master]')) { startMaster(); return; }
     if (e.target.closest('[data-a=reload]')) { const n = $('pkGrid').querySelector('.pk-note span'); if (n) n.textContent = 'กำลังโหลดแผนงาน…'; refreshJob(); return; }
     const b = e.target.closest('.pk-tile'); if (!b) return;
     const pm = models.find((x) => x.id === b.dataset.id);
+    if (pm && masterRequired()) { beep('retake'); toast('ต้องเช็คกล้องด้วยมาสเตอร์ก่อน · กดปุ่ม "เริ่มเช็คมาสเตอร์" ด้านบน'); return; }
     if (!pm || !canPick(pm)) {
       beep('retake');
       toast(pm && jobOf(pm).sent ? pm.name + ' ส่งงานแล้ว · เข้าตรวจอีกไม่ได้ ถ้าต้องตรวจเพิ่ม ให้ Planner เพิ่มจำนวนเรียก'
         : planReady() ? (pm ? pm.name + ' ' : '') + 'ไม่มีในแผนงานวันนี้ · ติดต่อ Planner ให้เรียกงานก่อน' : 'ยังไม่มีแผนงานวันนี้ · ติดต่อ Planner');
       return;
     }
-    selId = b.dataset.id; store.set('sel', selId); pkChosen = true;
-    applyModel(); resetPiece(); hidePicker(); renderJob(); toast('เลือก ' + M().name + ' แล้ว พร้อมตรวจ');
-    if (cfg.live && !liveOn()) setTimeout(() => startLive(), 250);   // เข้ากล้องสดทันที
+    const sameRound = round && round.mid === pm.id && round.day === today() && round.user === (sess ? sess.name : '');
+    if (SYS.lotOn && !sameRound) { openLot(pm, (lot) => pickPart(pm, lot)); return; }
+    pickPart(pm, null);
   };
+  function pickPart(pm, lot) {
+    const wasMid = cur.p1 && !cur.done && selId !== pm.id;   // มีภาพค้างของพาร์ทเดิม
+    selId = pm.id; store.set('sel', selId); pkChosen = true;
+    const isNew = startRound(pm), before = lastNo();
+    if (lot !== null && round) { round.lot = lot; store.set('round', round); }
+    applyModel(); resetPiece(); hidePicker(); renderJob();
+    toast((wasMid ? 'ยกเลิกภาพที่ถ่ายค้างของพาร์ทเดิม · ' : '') + (isNew && before > 0 ? 'กลับมาตรวจ ' + pm.name + ' ต่อ · ตรวจครั้งที่ ' + round.no + ' (ทำไปแล้ว ' + before + ' ชิ้น นับต่อจาก #' + before + ')' : 'เลือก ' + pm.name + ' แล้ว · ตรวจครั้งที่ ' + round.no) + ((planFor(opPlan, pm) || {}).urgent ? ' · ด่วน' : ''));
+    if (cfg.live && !liveOn()) setTimeout(() => startLive(), 250);   // เข้ากล้องสดทันที
+  }
   $('pkClose').onclick = hidePicker;
+  $('pkMaster').onclick = () => {
+    if (cur.attempts.length && !cur.done) { toast('ตรวจชิ้นนี้ให้จบก่อน แล้วค่อยเช็คมาสเตอร์'); return; }
+    startMaster();
+  };
+  // ----- เลข Lot -----
+  let lotCb = null, lotFor = null;
+  function openLot(pm, cb) {
+    lotCb = cb; lotFor = pm.id;
+    const last = round && round.mid === pm.id && round.day === today() ? round.lot || '' : ((store.get('lastLot', {})[today()] || {})[pm.id] || '');   // กลับมาพาร์ทเดิม → เติม Lot ล่าสุดให้
+    $('lotFor').textContent = pm.name + ' · ' + shiftOf(Date.now()).name;
+    $('lotIn').value = last; $('lotErr').textContent = ''; $('lotSkip').classList.toggle('hide', !!SYS.lotRequired);
+    $('lotDlg').classList.add('on'); setTimeout(() => { $('lotIn').focus(); $('lotIn').select(); }, 80);
+  }
+  function lotDone(v) {
+    const lot = String(v == null ? '' : v).trim().replace(/\s+/g, ' ').slice(0, 40);
+    if (v !== '' && !lot) { $('lotErr').textContent = 'กรุณาใส่เลข Lot'; return; }
+    if (v !== '' && !/^[\w\-./#() ]+$/.test(lot)) { $('lotErr').textContent = 'เลข Lot ใช้ได้เฉพาะ ตัวอักษร ตัวเลข - _ . / #'; return; }
+    $('lotDlg').classList.remove('on'); const cb = lotCb; lotCb = null;
+    if (lotFor) { const ll = store.get('lastLot', {}), d = today(); Object.keys(ll).forEach((k) => { if (k < d) delete ll[k]; }); (ll[d] || (ll[d] = {}))[lotFor] = lot; store.set('lastLot', ll); }
+    if (cb) cb(lot);
+  }
+  $('lotOk').onclick = () => { if (!$('lotIn').value.trim()) { $('lotErr').textContent = 'สแกนหรือพิมพ์เลข Lot'; return; } lotDone($('lotIn').value); };
+  $('lotSkip').onclick = () => lotDone('');
+  $('lotCancel').onclick = () => { $('lotDlg').classList.remove('on'); lotCb = null; };
+  $('lotIn').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); $('lotOk').click(); } });   // เครื่องสแกนส่ง Enter ต่อท้าย
+  $('roundTag').addEventListener('click', (e) => {
+    if (!e.target.closest('[data-a=lot]')) return;
+    if (cur.attempts.length && !cur.done) { toast('ตรวจชิ้นนี้ให้จบก่อน แล้วค่อยเปลี่ยน Lot'); return; }
+    openLot(M(), (lot) => { if (round) { round.lot = lot; store.set('round', round); } renderRound(); toast('เปลี่ยนเป็น Lot ' + (lot || '–') + ' แล้ว · ชิ้นต่อไปบันทึกเป็น Lot นี้'); });
+  });
+
+  // ----- เช็คกล้องด้วยมาสเตอร์ (Gauge block) ก่อนเริ่มกะ -----
+  const masterKey = () => shiftOf(Date.now()).key + '|' + (cfg.station || '') + '|' + Math.round(cfg.Z) + '|' + (cfg.camId || '') + '|' + ppmFor();
+  function masterRequired() {
+    if (!SYS.masterOn || !sess || sess.mode !== 'op') return false;
+    const lm = store.get('lastMaster', null);
+    return !(lm && lm.ok && lm.key === masterKey());
+  }
+  function startMaster() {
+    masterMode = true; hidePicker(); resetPiece(); applyModel(); renderJob();
+    setAlert('เช็คกล้องด้วยมาสเตอร์ · ภาพที่ 1', 'วาง ' + SYS.masterName + ' นอนราบ (ด้านกว้างหงายขึ้น) ทับจุดกลาง แล้วรอกล้องถ่าย', true);
+    if (cfg.live && !liveOn()) setTimeout(() => startLive(), 250);
+  }
+  function exitMaster(toPicker) {
+    masterMode = false; $('mstDlg').classList.remove('on'); resetPiece(); applyModel(); setAlert();
+    if (toPicker) { try { if (liveOn()) stopLive(); } catch (e) {} showPicker(false); }
+  }
+  function masterShot(n) {
+    renderDims();
+    if (n === 1) {
+      cur.step = 2; renderSteps(); showStage(); beep('step');
+      setAlert('เช็คกล้องด้วยมาสเตอร์ · ภาพที่ 2', 'ตั้งมาสเตอร์ขึ้นด้านข้าง (หมุน 90° ตามแนวยาว ให้ด้านหนาอยู่บน) แล้วรอกล้องถ่าย', true);
+      return;
+    }
+    const r = solve(), tol = +SYS.mTol;
+    const it = [['ยาว (ภาพ 1)', r.Ls[0].v, +SYS.mL], ['ยาว (ภาพ 2)', r.Ls[1].v, +SYS.mL], ['กว้าง', r.W, +SYS.mW], ['หนา', r.T, +SYS.mT]].map(([k, v, nn]) => ({ k, v, n: nn, d: v - nn, ok: Math.abs(v - nn) <= tol }));
+    const ok = it.every((x) => x.ok), t = Date.now(), sh = shiftOf(t);
+    const log = { t, station: cfg.station, user: sess ? sess.name : '', shift: sh.name, name: SYS.masterName, tol, L1: it[0].v, L2: it[1].v, W: it[2].v, T: it[3].v, nL: +SYS.mL, nW: +SYS.mW, nT: +SYS.mT, ok, Z: Math.round(cfg.Z), cam: cfg.camLabel || 'กล้องในตัว', ppm: PX_PER_MM };
+    const ml = store.get('masterLog', []); ml.push(Object.assign({ day: ymd(new Date(t)) }, log)); store.set('masterLog', ml.slice(-300));
+    auxSend('masterLog', { log });
+    store.set('lastMaster', { key: masterKey(), ok, t });   // เช็คซ้ำแล้วไม่ผ่าน → ต้องเช็คให้ผ่านก่อนตรวจต่อ
+    cur.done = true; beep(ok ? 'pass' : 'fail'); setAlert();
+    $('mstT').textContent = 'ผลเช็คกล้องด้วยมาสเตอร์ · ' + sh.name;
+    $('mstBody').innerHTML = '<div class="mst-bn ' + (ok ? 'p">✓ ผ่าน · เริ่มตรวจงานได้' : 'f">✗ ไม่ผ่าน · ยังตรวจงานไม่ได้') + '</div>' +
+      '<table class="mst-t"><tr><th></th><th>วัดได้</th><th>ค่าจริง</th><th>ต่าง</th></tr>' + it.map((x) => '<tr><td>' + x.k + '</td><td>' + x.v.toFixed(2) + '</td><td>' + x.n.toFixed(2) + '</td><td class="' + (x.ok ? 'ok' : 'ng') + '">' + (x.d >= 0 ? '+' : '') + x.d.toFixed(2) + (x.ok ? ' ✓' : ' ✗') + '</td></tr>').join('') + '</table>' +
+      '<p style="margin:0;color:#667085;font-size:13.5px">ยอมรับต่างได้ ±' + tol + ' mm · ' + esc(cfg.station) + ' · ' + esc(cfg.camLabel || 'กล้องในตัว') + ' · Z ' + Math.round(cfg.Z) + ' mm</p>' +
+      (ok ? '' : '<ul class="mst-why"><li>เช็ดเลนส์ แผ่นพื้นดำ และมาสเตอร์ แล้ววัดใหม่</li><li>ตรวจว่ามาสเตอร์วางราบ ทับจุดกลาง ไม่เอียง</li><li>ถ้ายังไม่ผ่าน กล้องหรือเสาอาจถูกขยับ: แจ้ง Supervisor ให้วัดความสูงกล้องและคาลิเบรตใหม่</li></ul>');
+    $('mstBtns').innerHTML = ok ? '<button class="ok" data-m="go">เริ่มตรวจงาน</button>' : '<button data-m="back">กลับ</button><button class="ok" data-m="again">วัดใหม่</button>';
+    $('mstDlg').classList.add('on');
+  }
+  $('mstBtns').onclick = (e) => {
+    const b = e.target.closest('[data-m]'); if (!b) return;
+    if (b.dataset.m === 'again') { $('mstDlg').classList.remove('on'); startMaster(); }
+    else exitMaster(true);
+  };
+
+  // ----- ส่งผลเช็คมาสเตอร์ขึ้นเซิร์ฟเวอร์ · ค้างได้ถ้าเน็ตหลุด -----
+  let auxBusy = false;
+  function auxSend(action, data) { if (sysLocal()) return; const q = store.get('auxQ', []); q.push({ action, data }); store.set('auxQ', q.slice(-200)); flushAux(); }
+  function flushAux() {
+    if (auxBusy || sysLocal() || !sessOk()) return;
+    const q = store.get('auxQ', []); if (!q.length) return;
+    auxBusy = true;
+    api(q[0].action, Object.assign({ token: sess.token }, q[0].data))
+      .then(() => { q.shift(); store.set('auxQ', q); auxBusy = false; flushAux(); })
+      .catch(() => { auxBusy = false; setTimeout(flushAux, 20000); });
+  }
+
   $('pkLogout').onclick = () => { doLogout(); }; const _oldPkLogout = () => { hidePicker(); pkChosen = false; outArm = 0; sess = null; store.set('sess', null); resetPiece(); showLogin(); };
   // ปุ่มพาร์ทบนแถบด้านบน → เปิดหน้าเลือกพาร์ท (ห้ามเปลี่ยนระหว่างตรวจซ้ำ)
   $('modelBtn').onclick = () => {
@@ -2496,7 +2951,7 @@
   function localRows(day) {
     return hist.filter((h) => ymd(new Date(h.t)) === day).map((h) => ({ day, time: hms(new Date(h.t)), n: h.n, model: h.model, pass: h.verdict === 'pass',
       L: h.L, W: h.W, T: h.T, reason: h.reason || '', attempts: h.attempts || 1, op: h.by === 'operator', user: h.user || '', station: h.station || '',
-      dent: h.dent, surf: h.surf }));
+      dent: h.dent, surf: h.surf, uid: h.uid, img: h.img ? 'local:' + h.uid : '', lot: h.lot || '', shift: h.shift || '' }));
   }
   // ไม่มีหลังบ้าน (หรือเดโม): ข้อมูลจากเครื่องนี้ (+ ข้อมูลจำลองของเดโม)
   const offRows = (day) => (window.QC_DEMO_DASH ? window.QC_DEMO_DASH(day).map((r) => Object.assign({ day }, r)) : []).concat(localRows(day));
@@ -2509,12 +2964,12 @@
     if (hasBackend() && sessOk()) return api('plan', { day, token: sess.token }).then((r) => ({ day, plans: r.plans || [], counts: r.counts || {}, live: true }));
     return Promise.resolve({ day, plans: plansLocal(day), counts: countRows(offRows(day)), live: false });
   }
-  function savePlanItem(day, m, qty) {
-    const item = { id: m.id, model: m.name, name: m.name, qty };
+  function savePlanItem(day, m, qty, urgent) {
+    const item = { id: m.id, model: m.name, name: m.name, qty, urgent: !!urgent };
     if (hasBackend()) return api('savePlan', { day, item, token: sess.token }).then((r) => { if (!r || !r.ok) throw new Error((r && r.msg) || 'บันทึกไม่สำเร็จ'); });
     const old = plansLocal(day).find((p) => p.id === m.id);
     const reopen = old && old.sub && qty > old.qty ? { sub: false, subBy: '', subAt: '', note: 'เปิดใหม่ (เพิ่มจาก ' + old.qty + ')' } : {};
-    planLocalSet(day, Object.assign(old || {}, { id: m.id, model: m.name, qty, by: sess ? sess.name : '' }, reopen)); return Promise.resolve();
+    planLocalSet(day, Object.assign(old || {}, { id: m.id, model: m.name, qty, urgent: !!urgent, by: sess ? sess.name : '' }, reopen)); return Promise.resolve();
   }
   const planFor = (P, m) => P && (P.plans.find((p) => p.id === m.id) || P.plans.find((p) => p.model === m.name));
 
@@ -2529,7 +2984,7 @@
   // Operator เลือกได้เฉพาะพาร์ทที่ Planner เรียกในวันนี้
   const planReady = () => !!(opPlan && opPlan.day === today());
   //  ส่งงานแล้ว = ปิดงาน เข้าตรวจอีกไม่ได้ (ก่อนส่งตรวจเกินจำนวนเรียกได้) · Planner เพิ่มจำนวนเรียก = เปิดงานใหม่
-  const canPick = (m) => { const p = planReady() && planFor(opPlan, m); return !!p && !p.sub; };
+  const canPick = (m) => { const p = planReady() && planFor(opPlan, m); return !!p && !p.sub && !masterRequired(); };
   function jobOf(m) {
     const p = planFor(opPlan, m), qty = p ? p.qty : 0, d = today();
     let pass = ((opPlan && opPlan.counts[m.name]) || {}).pass || 0;
@@ -2539,6 +2994,7 @@
   }
   function renderJob() {
     const j = jobOf(M());
+    $('modelBtn').classList.toggle('urg', !masterMode && !!(j.p && j.p.urgent && !j.sent));
     $('jCall').textContent = j.qty ? j.qty.toLocaleString() : '–';
     $('jPass').textContent = j.pass.toLocaleString();
     $('jRem').textContent = j.qty ? j.rem.toLocaleString() : '–';
@@ -2573,11 +3029,14 @@
     $('svHello').textContent = 'สวัสดีค่ะ คุณ' + (sess ? sess.name : '') + (mgrMode === 'pln' ? ' · วางแผนงานรายวัน' : ' · ภาพรวมงานตรวจ QC');
     if (!$('svDay').value) $('svDay').value = today();
     if (!$('svPDay').value) $('svPDay').value = today();
+    $('svPlanMeta').textContent = mgrMode === 'pln' ? 'แตะพาร์ทเพื่อกรอกจำนวนงานที่ต้องการในวันนั้น · ใส่ 0 เพื่อยกเลิก · ติ๊ก ด่วน ถ้าเป็นงานแทรก' : '👁 ดูอย่างเดียว · แผนงานกรอกโดย Planner (พาร์ทที่มีแผนแสดงก่อน งานด่วนอยู่บนสุด)';
     svTab(mgrMode === 'pln' ? 'svPlanPg' : 'svDash'); svNewForm(); svRenderParts(); svLoad(); svPlanLoad(); pullModels();
   }
-  function hideSup() { $('sup').classList.add('hide'); clearInterval(svTimer); svTimer = 0; $('svAuto').checked = false; ['svQtyDlg', 'svCsvDlg', 'svPartDlg'].forEach((d) => $(d).classList.remove('on')); }
+  function hideSup() { $('sup').classList.add('hide'); clearInterval(svTimer); svTimer = 0; $('svAuto').checked = false; ['svQtyDlg', 'svCsvDlg', 'svPartDlg', 'svAllDlg'].forEach((d) => $(d).classList.remove('on')); }
   function svTab(id) {
-    ['svPlanPg', 'svDash', 'svPartsPg'].forEach((p) => $(p).classList.toggle('hide', p !== id));
+    if (id === 'svSysPg' && mgrMode !== 'sup') id = 'svDash';
+    if (id === 'svSysPg') sysFill();
+    ['svPlanPg', 'svDash', 'svPartsPg', 'svSysPg'].forEach((p) => $(p).classList.toggle('hide', p !== id));
     $('svTabs').querySelectorAll('button').forEach((b) => b.classList.toggle('on', b.dataset.tab === id));
     if (id === 'svDash') svLoad(); if (id === 'svPlanPg') svPlanLoad();
   }
@@ -2591,17 +3050,49 @@
     if (svLoading) return; svLoading = true;
     const day = $('svDay').value || today();
     $('svRef').classList.add('spin'); $('svRef').querySelector('span').textContent = 'กำลังโหลด…';
-    const fin = (rows, plans, src, err) => {
-      svLoading = false; $('svRef').classList.remove('spin'); $('svRef').querySelector('span').textContent = 'รีเฟรช';
+    const fin = (rows, plans, src, err, extra) => {
+      svLoading = false;
+      if (!err) svData = { day, rows: rows || [], plans: plans || [], aux: extra || { masters: store.get('masterLog', []).filter((x) => x.day === day).map((x) => Object.assign({}, x, { time: hms(new Date(x.t)).slice(0, 5) })) } }; $('svRef').classList.remove('spin'); $('svRef').querySelector('span').textContent = 'รีเฟรช';
       if (err) { $('svUpd').innerHTML = '<span style="color:#b42318">โหลดไม่สำเร็จ: ' + esc(err) + '</span>'; return; }
-      svRender(rows, day, plans);
+      svApply();
       $('svUpd').innerHTML = 'อัปเดตล่าสุด <b>' + hms(new Date()) + '</b><br>' + src;
     };
     if (hasBackend()) {
-      api('dashboard', { day, token: sess && sess.token }).then((r) => fin(r.rows || [], r.plans || [], 'จาก Google Sheet'))
+      api('dashboard', { day, token: sess && sess.token }).then((r) => fin(r.rows || [], r.plans || [], 'จาก Google Sheet', null, { masters: r.masters || [] }))
         .catch((er) => { const m = String(er && er.message || er); if (/SESSION/.test(m)) { doLogout('หมดเวลาเข้าระบบ กรุณาเข้าใหม่', mgrMode); } fin(null, null, '', m); });
     } else setTimeout(() => fin(offRows(day), plansLocal(day), window.QC_DEMO_DASH ? 'ข้อมูลจำลอง (เดโม) + ผลตรวจในเครื่องนี้' : 'ข้อมูลในเครื่องนี้ (ยังไม่ได้เชื่อม Google Sheet)'), 350);
   }
+  // การ์ดเช็คมาสเตอร์
+  function svRenderAux(x) {
+    const ms = (x.masters || []).slice().reverse(), f2 = (v) => (v === '' || v == null ? '–' : (+v).toFixed(2));
+    svList('mst', ms.map((m) => ({ q: [m.station, m.user, m.name, m.shift].join(' '), html: '<div class="sv-mi"><b class="' + (m.ok ? 'p">ผ่าน' : 'f">ไม่ผ่าน') + '</b><span>' + esc(m.station) + ' · ' + esc(m.shift || '') + ' · ' + esc(String(m.time).slice(0, 5)) + '<br><small>' + esc(m.user || '') + ' · ' + f2(m.L1) + ' / ' + f2(m.L2) + ' × ' + f2(m.W) + ' × ' + f2(m.T) + '</small></span></div>' })),
+      '<div class="sv-empty">ยังไม่มีการเช็คมาสเตอร์' + ($('svShift').value ? 'ใน' + esc($('svShift').value) : 'วันนี้') + '</div>');
+  }
+  // ----- หน้า ตั้งค่าระบบ (Supervisor) -----
+  function sysShiftRows(list) {
+    $('yShifts').innerHTML = list.map((s, i) => '<div class="sys-sh"><input data-k="name" value="' + esc(s.name) + '" placeholder="ชื่อกะ"><input type="time" data-k="start" value="' + esc(s.start) + '"><button data-del="' + i + '" title="ลบ">✕</button></div>').join('');
+  }
+  function sysReadShifts() { return [...$('yShifts').querySelectorAll('.sys-sh')].map((r) => ({ name: r.querySelector('[data-k=name]').value.trim(), start: r.querySelector('[data-k=start]').value })).filter((s) => s.name && /^\d{2}:\d{2}$/.test(s.start)); }
+  function sysFill() {
+    if (!$('yMOn')) return;
+    $('yMOn').checked = !!SYS.masterOn; $('yMName').value = SYS.masterName; $('yML').value = SYS.mL; $('yMW').value = SYS.mW; $('yMT').value = SYS.mT; $('yMTol').value = SYS.mTol;
+    $('yLOn').checked = !!SYS.lotOn; $('yLReq').checked = !!SYS.lotRequired;
+    sysShiftRows(SYS.shifts || SYS_DEF.shifts); $('yNote').textContent = sysLocal() ? 'เดโม/ออฟไลน์: บันทึกในเครื่องนี้' : 'ใช้ร่วมกันทุกเครื่อง';
+  }
+  $('yShAdd').onclick = () => { const l = sysReadShifts(); if (l.length >= 4) return toast('ตั้งได้สูงสุด 4 กะ'); l.push({ name: 'กะ ' + (l.length + 1), start: '00:00' }); sysShiftRows(l); };
+  $('yShifts').onclick = (e) => { const b = e.target.closest('[data-del]'); if (!b) return; const l = sysReadShifts(); if (l.length <= 1) return toast('ต้องมีอย่างน้อย 1 กะ'); l.splice(+b.dataset.del, 1); sysShiftRows(l); };
+  $('ySave').onclick = () => {
+    const n = (id, d) => { const v = parseFloat($(id).value); return isFinite(v) && v > 0 ? v : d; };
+    const c = { masterOn: $('yMOn').checked, masterName: $('yMName').value.trim() || SYS_DEF.masterName, mL: n('yML', SYS.mL), mW: n('yMW', SYS.mW), mT: n('yMT', SYS.mT), mTol: n('yMTol', SYS.mTol),
+      lotOn: $('yLOn').checked, lotRequired: $('yLReq').checked, shifts: sysReadShifts() };
+    if (!c.shifts.length) return toast('ต้องมีอย่างน้อย 1 กะ (ใส่ชื่อและเวลาเริ่ม)');
+    if (c.mT >= c.mW || c.mW >= c.mL) return toast('ขนาดมาสเตอร์ต้องเป็น ยาว > กว้าง > หนา');
+    const done = (cfgS) => { SYS = Object.assign({}, SYS_DEF, cfgS); store.set('sys', SYS); sysFill(); toast('บันทึกตั้งค่าระบบแล้ว'); $('yNote').textContent = 'บันทึกแล้ว ' + hms(new Date()); };
+    if (sysLocal()) return done(c);
+    $('ySave').disabled = true;
+    api('saveConfig', { cfg: c, token: sess.token }).then((j) => { $('ySave').disabled = false; if (j && j.ok) done(j.cfg); else toast('บันทึกไม่สำเร็จ'); })
+      .catch((e) => { $('ySave').disabled = false; toast('บันทึกไม่สำเร็จ: ' + (e && e.message || e)); });
+  };
   function svCause(r) {
     const s = r.reason || '', c = [];
     if (r.op && !r.pass) c.push('op');
@@ -2612,39 +3103,112 @@
     return c;
   }
   const pct = (a, b) => b ? (a / b * 100).toFixed(1) : '–';
-  function svRender(rows, day, plans) {
+  // ----- ตัวกรอง Dashboard: กะ / ค้นหาพาร์ท -----
+  let svData = null;
+  const normQ = (s) => String(s || '').toLowerCase().replace(/\s+/g, '');
+  function svShiftOpts() {
+    const sel = $('svShift'), keep = sel.value;
+    const names = [...new Set((SYS.shifts || []).map((s) => s.name).concat(((svData && svData.rows) || []).map((r) => r.shift).filter(Boolean)))];
+    sel.innerHTML = '<option value="">ทั้งวัน (ทุกกะ)</option>' + names.map((n) => '<option>' + esc(n) + '</option>').join('');
+    sel.value = names.includes(keep) ? keep : '';
+  }
+  function svApply() {
+    if (!svData) return;
+    svShiftOpts();
+    const sh = $('svShift').value, byShift = (x) => !sh || x.shift === sh;
+    svRender(svData.rows.filter(byShift), svData.day, svData.plans, svData.rows, sh);
+    svRenderAux({ masters: (svData.aux.masters || []).filter(byShift) });
+  }
+  $('svShift').onchange = svApply;
+  $('svNgQ').oninput = () => svRenderNg();
+  $('svMstQ').oninput = () => svApply();
+  // ----- การ์ดแบบย่อ: แสดงไม่เกิน N รายการ + ปุ่ม "ดูทั้งหมด" เปิดป็อปอัพ -----
+  const SV_LIM = { plan: 5, part: 5, reason: 5, user: 5, mst: 3, ng: 4, rec: 10 };
+  const SV_POP_MAX = 500;   // ป็อปอัพแสดงสูงสุด 500 รายการ (วันละหลายพันชิ้น) · ค้นหาเพื่อหาชิ้นที่ต้องการ
+  const SV_KIND = {
+    plan: { t: 'แผนงาน vs ผลจริง', box: 'svPlanBox', q: 'svPlanQ', n: 'svPlanN', unit: 'พาร์ท', open: '<div class="sv-pbox">', close: '</div>' },
+    part: { t: 'แยกตามพาร์ท', box: 'svByPart', q: 'svPartQ', n: 'svPartN', unit: 'พาร์ท', head: '<div class="sv-prow h"><span>พาร์ท</span><span></span><span class="n">ผ่าน</span><span class="n">ไม่ผ่าน</span><span class="n">Yield</span></div>' },
+    reason: { t: 'สาเหตุที่ไม่ผ่าน', box: 'svReasons', n: 'svRsN', unit: 'สาเหตุ', foot: '<div class="sv-src">1 ชิ้นอาจมีมากกว่า 1 สาเหตุ</div>' },
+    user: { t: 'ผู้ตรวจ', box: 'svUsers', n: 'svUsrN', unit: 'คน' },
+    mst: { t: 'เช็คมาสเตอร์', box: 'svMst', q: 'svMstQ', n: 'svMstN', unit: 'รายการ', open: '<div class="sv-mst">', close: '</div>' },
+    rec: { t: 'รายการตรวจ', box: 'svRecent', q: 'svRecQ', n: 'svRecN', unit: 'ชิ้น', open: '<table class="sv-tbl"><tr><th>เวลา</th><th>ชิ้นที่</th><th>พาร์ท</th><th>ผล</th><th>ยาว × กว้าง × หนา</th><th>ผู้ตรวจ</th><th>สาเหตุ</th></tr>', close: '</table>' },
+    ng: { t: 'ชิ้นงาน NG', box: 'svNg', q: 'svNgQ', n: 'svNgN', unit: 'ชิ้น', open: '<div class="sv-ng">', close: '</div>' }
+  };
+  const svLists = {};
+  function svList(kind, items, emptyHtml) {
+    const K = SV_KIND[kind], lim = SV_LIM[kind];
+    svLists[kind] = { items, emptyHtml };
+    const q = K.q ? normQ($(K.q).value) : '', hit = q ? items.filter((x) => normQ(x.q).includes(q)) : items, show = hit.slice(0, lim), more = hit.length - show.length;
+    if (K.n) $(K.n).textContent = items.length ? (q ? hit.length + ' / ' : '') + items.length + ' ' + K.unit : '';
+    let h;
+    if (!items.length) h = emptyHtml;
+    else if (!hit.length) h = '<div class="sv-empty">ไม่พบ “' + esc($(K.q).value.trim()) + '”</div>';
+    else h = (K.head || '') + (K.open || '') + show.map((x) => x.html).join('') + (K.close || '') + (K.foot || '');
+    if (more > 0) h += '<button class="sv-more" data-all="' + kind + '"><b>+' + more + '</b> ' + K.unit + 'อื่น ๆ' + (q ? 'ที่ตรงกับคำค้น' : '') + '<span>ดูทั้งหมด (' + hit.length + ') ›</span></button>';
+    else if (items.length > lim && q) h += '<button class="sv-more" data-all="' + kind + '"><span>ดูทั้งหมด (' + items.length + ') ›</span></button>';
+    $(K.box).innerHTML = h;
+  }
+  let svAllKind = '';
+  function svAllRender() {
+    const K = SV_KIND[svAllKind], L = svLists[svAllKind] || { items: [] }, q = normQ($('svAllQ').value);
+    const hit = q ? L.items.filter((x) => normQ(x.q).includes(q)) : L.items;
+    const cut = hit.length > SV_POP_MAX;
+    $('svAllM').textContent = (q ? 'พบ ' + hit.length + ' จาก ' : 'ทั้งหมด ') + L.items.length + ' ' + K.unit + ($('svShift').value ? ' · ' + $('svShift').value : '') + ' · ' + ($('svDay').value || today()) +
+      (cut ? ' · แสดง ' + SV_POP_MAX + ' รายการล่าสุด (พิมพ์ค้นหาเพื่อหาชิ้นที่ต้องการ หรือดาวน์โหลด CSV เพื่อดูครบ)' : '');
+    $('svAllB').innerHTML = hit.length ? (K.head || '') + (K.open || '') + hit.slice(0, SV_POP_MAX).map((x) => x.html).join('') + (K.close || '') + (K.foot || '') : '<div class="sv-empty">ไม่พบรายการ</div>';
+  }
+  function svAllOpen(kind) {
+    svAllKind = kind; const K = SV_KIND[kind];
+    $('svAllT').textContent = K.t; $('svAllQ').value = K.q ? $(K.q).value : ''; $('svAllQ').placeholder = 'ค้นหา' + (kind === 'mst' ? ' สถานี / ผู้ตรวจ' : kind === 'user' ? 'ชื่อผู้ตรวจ' : kind === 'reason' ? 'สาเหตุ' : kind === 'rec' ? ' พาร์ท / #ชิ้น / Lot / ผู้ตรวจ / ไม่ผ่าน' : ' เลขพาร์ท' + (kind === 'ng' ? ' / Lot' : ''));
+    svAllRender(); $('svAllDlg').classList.add('on'); setTimeout(() => $('svAllQ').focus(), 60);
+  }
+  $('svAllQ').oninput = svAllRender;
+  $('svAllX').onclick = () => $('svAllDlg').classList.remove('on');
+  $('svAllDlg').addEventListener('click', (e) => { if (e.target.id === 'svAllDlg') $('svAllDlg').classList.remove('on'); });
+  document.addEventListener('click', (e) => { const b = e.target.closest('[data-all]'); if (b) svAllOpen(b.dataset.all); });
+  [['svPlanQ', 'plan'], ['svPartQ', 'part'], ['svRecQ', 'rec']].forEach(([id, k]) => { $(id).oninput = () => { if (svLists[k]) svList(k, svLists[k].items, svLists[k].emptyHtml); }; });
+  // สาเหตุแบบละเอียด (แยก ยาว / กว้าง / หนา)
+  function svCauseD(r) {
+    const s = r.reason || '', c = [];
+    if (/ความยาว/.test(s)) c.push('L'); if (/ความกว้าง/.test(s)) c.push('W'); if (/ความหนา/.test(s)) c.push('T');
+    if (/รอยเว้า/.test(s)) c.push('dent'); if (/ตำหนิผิว/.test(s)) c.push('surf'); if (/หน้าปลาย/.test(s)) c.push('ends');
+    if (r.op && !r.pass) c.push('op');
+    if (!c.length) c.push('other');
+    return c;
+  }
+  function svRender(rows, day, plans, allRows, shiftName) {
     rows = rows.slice().sort((a, b) => a.time < b.time ? -1 : a.time > b.time ? 1 : 0);
     const N = rows.length, P = rows.filter((r) => r.pass).length, F = N - P, R = rows.filter((r) => r.attempts > 1).length;
     const isToday = day === today();
     $('svKpis').innerHTML =
-      '<div class="sv-kpi"><small>ตรวจทั้งหมด</small><b>' + N.toLocaleString() + '</b><span>ชิ้น · ' + (isToday ? 'วันนี้' : day) + '</span></div>' +
+      '<div class="sv-kpi"><small>ตรวจทั้งหมด</small><b>' + N.toLocaleString() + '</b><span>ชิ้น · ' + (isToday ? 'วันนี้' : day) + (shiftName ? ' · ' + esc(shiftName) : '') + '</span></div>' +
       '<div class="sv-kpi p"><small>ผ่าน</small><b>' + P.toLocaleString() + '</b><span>ชิ้น</span></div>' +
       '<div class="sv-kpi f"><small>ไม่ผ่าน</small><b>' + F.toLocaleString() + '</b><span>ชิ้น</span></div>' +
       '<div class="sv-kpi y"><small>Yield</small><b>' + pct(P, N) + (N ? '<span style="font-size:.5em">%</span>' : '') + '</b><span>ผ่าน ÷ ทั้งหมด</span></div>' +
       '<div class="sv-kpi r"><small>ต้องตรวจซ้ำ</small><b>' + R.toLocaleString() + '</b><span>ชิ้น · ' + pct(R, N) + (N ? '%' : '') + '</span></div>';
     const empty = '<div class="sv-empty">ยังไม่มีข้อมูลการตรวจของวันนี้</div>';
-    const cnt = countRows(rows);
+    const cnt = countRows(rows), cntDay = countRows(allRows || rows);   // แผนงานนับทั้งวันเสมอ
     // แผน vs ผลจริง
-    plans = (plans || []).slice().sort((a, b) => a.model.localeCompare(b.model, 'th', { numeric: true }));
-    $('svPlanBox').innerHTML = plans.length ? '<div class="sv-pbox">' + plans.map((p) => {
-      const ps = (cnt[p.model] || {}).pass || 0, rem = Math.max(0, p.qty - ps), done = rem === 0;
-      return '<div class="sv-pi"><b>' + esc(p.model) + '</b><div class="nums"><span>เรียก <b>' + p.qty + '</b></span><span>ผ่าน <b>' + ps + '</b></span><span>คงเหลือ <b>' + rem + '</b></span></div>' +
+    plans = (plans || []).slice().sort((a, b) => (b.urgent ? 1 : 0) - (a.urgent ? 1 : 0) || a.model.localeCompare(b.model, 'th', { numeric: true }));
+    svList('plan', plans.map((p) => {
+      const ps = (cntDay[p.model] || {}).pass || 0, rem = Math.max(0, p.qty - ps), done = rem === 0;
+      return { q: p.model + (p.urgent ? ' ด่วน' : ''), html: '<div class="sv-pi' + (p.urgent ? ' urg' : '') + '">' + (p.urgent ? '<i class="urg-b">ด่วน</i>' : '') + '<b>' + esc(p.model) + '</b><div class="nums"><span>เรียก <b>' + p.qty + '</b></span><span>ผ่าน <b>' + ps + '</b></span><span>คงเหลือ <b>' + rem + '</b></span></div>' +
         '<div class="pr"><i class="' + (done ? 'ok' : '') + '" style="width:' + Math.min(100, ps / p.qty * 100) + '%"></i></div>' +
-        '<div class="pst ' + (p.sub ? 'sent' : done ? 'ok' : '') + '">' + (p.sub ? '✓ ส่งงานแล้ว' + (p.subBy ? ' · ' + esc(p.subBy) : '') + (p.subAt ? ' ' + esc(p.subAt) : '') : done ? 'ครบแล้ว · รอ Operator ส่งงาน' : 'กำลังตรวจ · ' + Math.round(ps / p.qty * 100) + '%') + '</div></div>';
-    }).join('') + '</div>' : '<div class="sv-empty">ยังไม่มีแผนงานของวันนี้ (Planner เป็นผู้กรอก)</div>';
+        '<div class="pst ' + (p.sub ? 'sent' : done ? 'ok' : '') + '">' + (p.sub ? '✓ ส่งงานแล้ว' + (p.subBy ? ' · ' + esc(p.subBy) : '') + (p.subAt ? ' ' + esc(p.subAt) : '') : done ? 'ครบแล้ว · รอ Operator ส่งงาน' : 'กำลังตรวจ · ' + Math.round(ps / p.qty * 100) + '%') + '</div></div>' };
+    }), '<div class="sv-empty">ยังไม่มีแผนงานของวันนี้ (Planner เป็นผู้กรอก)</div>');
     // แยกตามพาร์ท
     const ml = Object.keys(cnt).sort((a, b) => a.localeCompare(b, 'th', { numeric: true })), mx = Math.max(1, ...ml.map((k) => cnt[k].total));
-    $('svByPart').innerHTML = ml.length ? '<div class="sv-prow h"><span>พาร์ท</span><span></span><span class="n">ผ่าน</span><span class="n">ไม่ผ่าน</span><span class="n">Yield</span></div>' + ml.map((k) => {
+    svList('part', ml.map((k) => {
       const o = cnt[k];
-      return '<div class="sv-prow"><b>' + esc(k) + '</b><div class="sv-bar2" style="width:' + Math.max(8, o.total / mx * 100) + '%"><i class="p" style="width:' + (o.pass / o.total * 100) + '%"></i><i class="f" style="width:' + (o.fail / o.total * 100) + '%"></i></div>' +
-        '<span class="n">' + o.pass + '</span><span class="n' + (o.fail ? ' f' : '') + '">' + o.fail + '</span><span class="n y">' + pct(o.pass, o.total) + '%</span></div>';
-    }).join('') : empty;
+      return { q: k, html: '<div class="sv-prow"><b>' + esc(k) + '</b><div class="sv-bar2" style="width:' + Math.max(8, o.total / mx * 100) + '%"><i class="p" style="width:' + (o.pass / o.total * 100) + '%"></i><i class="f" style="width:' + (o.fail / o.total * 100) + '%"></i></div>' +
+        '<span class="n">' + o.pass + '</span><span class="n' + (o.fail ? ' f' : '') + '">' + o.fail + '</span><span class="n y">' + pct(o.pass, o.total) + '%</span></div>' };
+    }), empty);
     // สาเหตุ
-    const C = { size: 0, dent: 0, surf: 0, ends: 0, op: 0 }; rows.filter((r) => !r.pass).forEach((r) => svCause(r).forEach((c) => C[c]++));
-    const CN = { size: 'ขนาดเกินพิกัด', dent: 'รอยเว้า / ขอบแหว่ง', surf: 'ตำหนิผิว', ends: 'หน้าปลายมีตำหนิ', op: 'พนักงานตัดสิน (เครื่องมือวัด)' };
-    const cm = Math.max(1, ...Object.values(C));
-    $('svReasons').innerHTML = F ? Object.keys(CN).map((k) => '<div class="sv-rs"><span>' + CN[k] + '</span><b>' + C[k] + '</b><div class="sv-bar2"><i style="width:' + (C[k] / cm * 100) + '%"></i></div></div>').join('') +
-      '<div class="sv-src">1 ชิ้นอาจมีมากกว่า 1 สาเหตุ</div>' : '<div class="sv-empty">' + (N ? 'ไม่มีชิ้นที่ไม่ผ่าน' : 'ยังไม่มีข้อมูล') + '</div>';
+    const CN = { L: 'ความยาวเกินพิกัด', W: 'ความกว้างเกินพิกัด', T: 'ความหนาเกินพิกัด', dent: 'รอยเว้า / ขอบแหว่ง', surf: 'ตำหนิผิว', ends: 'หน้าปลายมีตำหนิ', op: 'พนักงานตัดสิน (เครื่องมือวัด)', other: 'อื่น ๆ' };
+    const C = {}; rows.filter((r) => !r.pass).forEach((r) => svCauseD(r).forEach((c) => { C[c] = (C[c] || 0) + 1; }));
+    const ck = Object.keys(C).sort((a, b) => C[b] - C[a]), cm = Math.max(1, ...Object.values(C));
+    svList('reason', ck.map((k) => ({ q: CN[k], html: '<div class="sv-rs"><span>' + CN[k] + '</span><b>' + C[k] + ' <small style="color:#98a0b5;font-weight:500">(' + pct(C[k], F) + '%)</small></b><div class="sv-bar2"><i style="width:' + (C[k] / cm * 100) + '%"></i></div></div>' })),
+      '<div class="sv-empty">' + (N ? 'ไม่มีชิ้นที่ไม่ผ่าน' : 'ยังไม่มีข้อมูล') + '</div>');
     // รายชั่วโมง
     const H = {}; rows.forEach((r) => { const h = +r.time.slice(0, 2); const o = H[h] || (H[h] = { p: 0, f: 0 }); r.pass ? o.p++ : o.f++; });
     const hs = Object.keys(H).map(Number); let h0 = Math.min(7, ...hs), h1 = Math.max(17, ...hs); if (!hs.length) { h0 = 7; h1 = 17; }
@@ -2663,13 +3227,48 @@
     // ผู้ตรวจ
     const U = {}; rows.forEach((r) => { const k = r.user || '–'; const o = U[k] || (U[k] = { t: 0, p: 0 }); o.t++; if (r.pass) o.p++; });
     const ul = Object.keys(U).sort((a, b) => U[b].t - U[a].t);
-    $('svUsers').innerHTML = ul.length ? ul.map((k) => '<div class="sv-urow"><i>' + esc(k.charAt(0).toUpperCase()) + '</i><span>' + esc(k) + '</span><b>' + U[k].t + '</b><small>ผ่าน ' + pct(U[k].p, U[k].t) + '%</small></div>').join('') : '<div class="sv-empty">ยังไม่มีข้อมูล</div>';
+    svList('user', ul.map((k) => ({ q: k, html: '<div class="sv-urow"><i>' + esc(k.charAt(0).toUpperCase()) + '</i><span>' + esc(k) + '</span><b>' + U[k].t + '</b><small>ผ่าน ' + pct(U[k].p, U[k].t) + '%</small></div>' })), '<div class="sv-empty">ยังไม่มีข้อมูล</div>');
     // ล่าสุด
-    const rec = rows.slice(-20).reverse(), f2 = (v) => v == null || v === '' ? '–' : (+v).toFixed(2);
-    $('svRecent').innerHTML = rec.length ? '<table class="sv-tbl"><tr><th>เวลา</th><th>ชิ้นที่</th><th>พาร์ท</th><th>ผล</th><th>ยาว × กว้าง × หนา</th><th>ผู้ตรวจ</th><th>สาเหตุ</th></tr>' + rec.map((r) =>
-      '<tr><td class="m">' + esc(r.time.slice(0, 5)) + '</td><td class="m">#' + esc(r.n) + '</td><td>' + esc(r.model) + '</td><td><span class="sv-pill ' + (r.pass ? 'p">ผ่าน' : 'f">ไม่ผ่าน') + '</span>' + (r.attempts > 1 ? ' <small style="color:#b54708">×' + r.attempts + '</small>' : '') + '</td>' +
-      '<td class="m">' + f2(r.L) + ' × ' + f2(r.W) + ' × ' + f2(r.T) + '</td><td>' + esc(r.user || '–') + '</td><td class="r">' + (r.pass ? '' : esc(r.reason)) + '</td></tr>').join('') + '</table>' : empty;
+    const rec = rows.slice().reverse(), f2 = (v) => v == null || v === '' ? '–' : (+v).toFixed(2);
+    svList('rec', rec.map((r) => ({ q: [r.model, '#' + r.n, r.lot, r.user, r.pass ? 'ผ่าน' : 'ไม่ผ่าน', r.reason].join(' '), html:
+      '<tr><td class="m">' + esc(r.time.slice(0, 5)) + '</td><td class="m">#' + esc(r.n) + '</td><td>' + esc(r.model) + (r.lot ? '<br><small style="color:#667085">Lot ' + esc(r.lot) + '</small>' : '') + '</td><td><span class="sv-pill ' + (r.pass ? 'p">ผ่าน' : 'f">ไม่ผ่าน') + '</span>' + (r.attempts > 1 ? ' <small style="color:#b54708">×' + r.attempts + '</small>' : '') + '</td>' +
+      '<td class="m">' + f2(r.L) + ' × ' + f2(r.W) + ' × ' + f2(r.T) + '</td><td>' + esc(r.user || '–') + '</td><td class="r">' + (r.pass ? '' : esc(r.reason) + (r.img ? '<button class="sv-imb" data-ng="' + esc(r.img) + '">🖼 ภาพ</button>' : '')) + '</td></tr>' })), empty);
+    // ชิ้นงาน NG ทั้งหมดของวัน (ล่าสุดก่อน) + ปุ่มดูภาพ
+    svNgRows = {}; rows.forEach((r) => { if (r.img) svNgRows[r.img] = r; });
+    svNgAll = rows.filter((r) => !r.pass).reverse();
+    svRenderNg();
   }
+  let svNgAll = [];
+  function svRenderNg() {
+    svList('ng', svNgAll.map((r) => ({ q: r.model + ' ' + (r.lot || '') + ' #' + r.n, html: '<div class="sv-ngi"><div><b>' + esc(r.model) + ' · #' + esc(r.n) + '</b> · ' + esc(String(r.time).slice(0, 5)) + ' · ' + esc(r.user || '–') + (r.lot ? ' · Lot ' + esc(r.lot) : '') + '<small title="' + esc(r.reason) + '">' + esc(r.reason || 'ไม่ผ่าน') + '</small></div>' +
+      (r.img ? '<button data-ng="' + esc(r.img) + '">🖼 ดูภาพ</button>' : '<button class="no" disabled>ไม่มีภาพ</button>') + '</div>' })), '<div class="sv-empty">ยังไม่มีชิ้นงาน NG' + ($('svShift').value ? 'ใน' + esc($('svShift').value) : 'วันนี้') + '</div>');
+  }
+  // ----- ดูภาพ NG (Supervisor / Planner) -----
+  let svNgRows = {};
+  const NG_LOCAL = {};   // ภาพที่ถ่ายในเครื่องนี้ (โหมดเดโม/ยังไม่มีหลังบ้าน)
+  function openNg(key) {
+    const r = svNgRows[key] || {};
+    $('ngT').textContent = 'ภาพชิ้นงาน NG · ' + (r.model || '') + (r.n ? ' · ชิ้น #' + r.n : '') + (r.time ? ' · ' + String(r.time).slice(0, 5) + ' น.' : '');
+    $('ngR').textContent = r.reason || '';
+    $('ngIm').textContent = 'กำลังโหลดภาพ…'; $('ngDl').classList.add('off'); $('ngDlg').classList.add('on');
+    const show = (b64) => {
+      const src = 'data:image/jpeg;base64,' + b64;
+      $('ngIm').innerHTML = '<img alt="ภาพชิ้นงาน NG" src="' + src + '">';
+      $('ngDl').href = src; $('ngDl').download = ((r.model || 'NG') + '_ชิ้น' + (r.n || '') + '.jpg').replace(/\s+/g, '_'); $('ngDl').classList.remove('off');
+    };
+    if (key.indexOf('local:') === 0) {
+      const b = NG_LOCAL[key.slice(6)] || store.get('ngLocal', {})[key.slice(6)];
+      if (b) show(b); else $('ngIm').textContent = sysLocal() ? 'ไม่พบภาพในเครื่องนี้ (โหมดเดโมเก็บภาพล่าสุด 20 ภาพ)' : 'ภาพนี้ยังไม่ได้ขึ้นระบบ · รอเครื่องที่ตรวจส่งข้อมูลขึ้น Google Sheet';
+      return;
+    }
+    if (!hasBackend() || !sessOk()) { $('ngIm').textContent = 'เชื่อมต่อเซิร์ฟเวอร์ไม่ได้'; return; }
+    api('ngImage', { id: key, token: sess.token }).then((j) => { if (j && j.ok && j.b64) show(j.b64); else $('ngIm').textContent = (j && j.error) || 'โหลดภาพไม่ได้'; })
+      .catch((e) => { $('ngIm').textContent = 'โหลดภาพไม่ได้: ' + (e && e.message || e); });
+  }
+  document.addEventListener('click', (e) => { const b = e.target.closest('[data-ng]'); if (b) openNg(b.dataset.ng); });
+  const ngClose = () => { $('ngDlg').classList.remove('on'); $('ngIm').innerHTML = ''; };
+  $('ngX').onclick = ngClose; $('ngC').onclick = ngClose;
+  $('ngDlg').addEventListener('click', (e) => { if (e.target.id === 'ngDlg') ngClose(); });
   $('svRef').onclick = svLoad;
   $('svDay').onchange = svLoad;
   $('svToday').onclick = () => { $('svDay').value = today(); svLoad(); };
@@ -2687,13 +3286,14 @@
   function svPlanRender() {
     if (!svPlan) return;
     const q = $('svPQ').value.trim().toLowerCase().replace(/\s+/g, '');
-    const list = models.filter((m) => !q || pkHay(m).includes(q));
-    const tot = svPlan.plans.reduce((a, p) => a + p.qty, 0);
+    const rk = (m) => { const p = planFor(svPlan, m); return p && p.urgent ? 0 : p ? 1 : 2; };
+    const list = models.filter((m) => !q || pkHay(m).includes(q)).map((m, i) => [m, i]).sort((a, b) => rk(a[0]) - rk(b[0]) || a[1] - b[1]).map((x) => x[0]);
+    const tot = svPlan.plans.reduce((a, p) => a + p.qty, 0), nu = svPlan.plans.filter((p) => p.urgent).length;
     $('svPSum').innerHTML = svPlan.day === today() ? 'วันนี้' : svPlan.day;
-    $('svPSum').innerHTML += ' · เรียกงาน <b>' + svPlan.plans.length + '</b> พาร์ท รวม <b>' + tot.toLocaleString() + '</b> ชิ้น';
+    $('svPSum').innerHTML += ' · เรียกงาน <b>' + svPlan.plans.length + '</b> พาร์ท รวม <b>' + tot.toLocaleString() + '</b> ชิ้น' + (nu ? ' · <span class="urg-b">ด่วน ' + nu + '</span>' : '');
     $('svPlanList').innerHTML = list.map((m) => {
       const p = planFor(svPlan, m), ps = ((svPlan.counts || {})[m.name] || {}).pass || 0;
-      return '<button class="pl-t' + (p ? ' has' : '') + '" data-id="' + esc(m.id) + '">' + (p && p.sub ? '<em>✓ ส่งแล้ว</em>' : '') + '<b>' + esc(m.name) + '</b><span class="d">' + m.L.n + ' × ' + m.W.n + ' × ' + m.T.n + '</span>' +
+      return '<button class="pl-t' + (p ? ' has' : '') + (p && p.urgent ? ' urg' : '') + '" data-id="' + esc(m.id) + '">' + (p && p.urgent ? '<i class="urg-b">ด่วน</i>' : '') + (p && p.sub ? '<em>✓ ส่งแล้ว</em>' : '') + '<b>' + esc(m.name) + '</b><span class="d">' + m.L.n + ' × ' + m.W.n + ' × ' + m.T.n + '</span>' +
         (p ? '<span class="q">' + p.qty.toLocaleString() + '<small>ชิ้น</small></span><div class="pr"><i style="width:' + Math.min(100, ps / p.qty * 100) + '%"></i></div><span class="s">ผ่านแล้ว ' + ps + ' · คงเหลือ ' + Math.max(0, p.qty - ps) + '</span>'
           : '<span class="q none">+ แตะเพื่อกรอกจำนวน</span>') + '</button>';
     }).join('') || '<div class="sv-empty">ไม่พบพาร์ทที่ค้นหา</div>';
@@ -2704,11 +3304,12 @@
   $('svPQ').addEventListener('input', svPlanRender);
   $('svPlanList').onclick = (e) => {
     const b = e.target.closest('.pl-t'); if (!b) return;
+    if (mgrMode === 'sup') { toast('Supervisor ดูแผนงานได้อย่างเดียว · การเรียกงาน / แก้ไขทำที่ Planner'); return; }
     qModel = models.find((m) => m.id === b.dataset.id); if (!qModel) return;
     const p = planFor(svPlan, qModel), ps = ((svPlan.counts || {})[qModel.name] || {}).pass || 0;
     $('qDay').textContent = 'แผนงานวันที่ ' + svPlan.day; $('qName').textContent = qModel.name;
     $('qDims').textContent = qModel.L.n + ' × ' + qModel.W.n + ' × ' + qModel.T.n + ' mm';
-    $('qQty').value = p ? p.qty : ''; $('qErr').textContent = '';
+    $('qQty').value = p ? p.qty : ''; $('qErr').textContent = ''; $('qUrg').checked = !!(p && p.urgent);
     $('qInfo').textContent = p ? 'ผ่านแล้ว ' + ps + ' ชิ้น' + (p.sub ? ' · ส่งงานแล้ว (ถ้าเพิ่มจำนวน Operator จะตรวจต่อได้)' : '') + (p.by ? ' · กรอกโดย ' + p.by : '') : 'ยังไม่มีแผนของพาร์ทนี้';
     $('svQtyDlg').classList.add('on'); setTimeout(() => $('qQty').focus(), 80);
   };
@@ -2722,8 +3323,9 @@
     const raw = $('qQty').value.trim(), v = raw === '' ? 0 : Number(raw);
     if (!Number.isInteger(v) || v < 0 || v > 100000) { $('qErr').textContent = 'กรอกจำนวนเป็นจำนวนเต็ม 0 – 100,000'; return; }
     $('qSave').disabled = true; $('qSave').textContent = 'กำลังบันทึก…';
-    savePlanItem(svPlan.day, qModel, v).then(() => {
-      $('svQtyDlg').classList.remove('on'); toast(v ? qModel.name + ' · เรียกงาน ' + v + ' ชิ้น' : 'ยกเลิกแผนของ ' + qModel.name + ' แล้ว'); svPlanLoad();
+    const urg = $('qUrg').checked;
+    savePlanItem(svPlan.day, qModel, v, urg).then(() => {
+      $('svQtyDlg').classList.remove('on'); toast(v ? qModel.name + ' · เรียกงาน ' + v + ' ชิ้น' + (urg ? ' · ด่วน' : '') : 'ยกเลิกแผนของ ' + qModel.name + ' แล้ว'); svPlanLoad();
     }).catch((er) => { $('qErr').textContent = 'บันทึกไม่สำเร็จ: ' + (er && er.message || er); })
       .finally(() => { $('qSave').disabled = false; $('qSave').textContent = 'บันทึกจำนวนงาน'; });
   };
@@ -2739,7 +3341,7 @@
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })); a.download = name;
     document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500);
   }
-  const CSV_LOCAL_H = ['วันที่', 'เวลาตรวจ', 'ชิ้นที่', 'พาร์ท', 'ผล', 'ยาว (mm)', 'กว้าง (mm)', 'หนา (mm)', 'รอยเว้าลึกสุด (mm)', 'ตำหนิผิวใหญ่สุด (mm)', 'สาเหตุไม่ผ่าน', 'จำนวนครั้งที่ตรวจ', 'ตัดสินโดย', 'ผู้ตรวจ', 'สถานี'];
+  const CSV_LOCAL_H = ['วันที่', 'เวลาตรวจ', 'ชิ้นที่', 'พาร์ท', 'ผล', 'ยาว (mm)', 'กว้าง (mm)', 'หนา (mm)', 'รอยเว้าลึกสุด (mm)', 'ตำหนิผิวใหญ่สุด (mm)', 'สาเหตุไม่ผ่าน', 'จำนวนครั้งที่ตรวจ', 'ตัดสินโดย', 'ผู้ตรวจ', 'สถานี', 'Lot', 'กะ'];
   const f2c = (v) => v == null || v === '' ? '' : (+v).toFixed(2);
   function summaryRows(norm, plans) {
     const key = {}, add = (d, m) => key[d + '|' + m] || (key[d + '|' + m] = { d, m, plan: null, t: 0, p: 0, f: 0, rt: 0, size: 0, dent: 0, surf: 0, ends: 0, op: 0 });
@@ -2812,7 +3414,7 @@
       for (let d = from; d <= to; d = addDay(d, 1)) { norm = norm.concat(offRows(d)); plans = plans.concat(plansLocal(d).map((p) => Object.assign({ day: d }, p))); }
       norm = norm.filter((r) => okP(r.model)); plans = plans.filter((p) => okP(p.model));
       if (kind === 'sum') return fin(summaryRows(norm, plans), norm.length);
-      const rows = norm.filter((r) => kind === 'all' || (kind === 'pass') === r.pass).map((r) => [r.day, r.time, r.n, r.model, r.pass ? 'ผ่าน' : 'ไม่ผ่าน', f2c(r.L), f2c(r.W), f2c(r.T), f2c(r.dent), f2c(r.surf), r.reason, r.attempts, r.op ? 'พนักงาน (เครื่องมือวัด)' : 'อัตโนมัติ', r.user, r.station]);
+      const rows = norm.filter((r) => kind === 'all' || (kind === 'pass') === r.pass).map((r) => [r.day, r.time, r.n, r.model, r.pass ? 'ผ่าน' : 'ไม่ผ่าน', f2c(r.L), f2c(r.W), f2c(r.T), f2c(r.dent), f2c(r.surf), r.reason, r.attempts, r.op ? 'พนักงาน (เครื่องมือวัด)' : 'อัตโนมัติ', r.user, r.station, r.lot || '', r.shift || '']);
       fin([CSV_LOCAL_H].concat(rows), rows.length);
     }
   }
@@ -2898,6 +3500,10 @@
   }
   function goBack() {
     const on = (id) => $(id).classList.contains('on'), vis = (id) => !$(id).classList.contains('hide');
+    if (on('ngDlg')) return $('ngX').click();
+    if (on('lotDlg')) return $('lotCancel').click();
+    if (on('mstDlg')) return exitMaster(true);
+    if (on('svAllDlg')) return $('svAllDlg').classList.remove('on');
     if (on('svQtyDlg')) return $('svQtyDlg').classList.remove('on');
     if (on('svPartDlg')) return $('pBack').click();
     if (on('svCsvDlg')) return $('svCsvDlg').classList.remove('on');
@@ -2907,6 +3513,7 @@
     if (vis('sup')) return confirmOut();
     if (vis('picker')) { if (!$('pkClose').classList.contains('hide')) return hidePicker(); return confirmOut(); }
     // หน้าตรวจงาน → กลับไปเลือกพาร์ท
+    if (masterMode) return exitMaster(true);
     if (cur.attempts.length && !cur.done) { toast('ตรวจชิ้นนี้ให้ครบตามกติกาก่อน แล้วค่อยย้อนกลับ'); return; }
     try { if (liveOn()) stopLive(); } catch (e) {}
     showPicker(true);
@@ -2917,7 +3524,7 @@
 
   // ---------- init ----------
   applyModel(); renderStats(); resetPiece();
-  if (sessOk()) { applyUser(); if (sess.mode === 'sup' || sess.mode === 'pln') showSup(); else showPicker(false); } else showLogin();
+  if (sessOk()) { applyUser(); loadSys(); if (sess.mode === 'sup' || sess.mode === 'pln') showSup(); else { showPicker(false); flushAux(); } } else showLogin();
   syncNow(); loadCV();
 </script>
 </body>
