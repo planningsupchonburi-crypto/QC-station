@@ -34,7 +34,7 @@
     button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;padding:0}
     input{font:inherit}
     .hide{display:none!important}
-    .app{display:grid;grid-template-rows:auto 1fr;height:100vh;height:100dvh;
+    .app{display:grid;grid-template-rows:auto 1fr;height:calc(100vh / var(--z,1));height:calc(100dvh / var(--z,1));
       padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 
     /* ---------- header (navy) ---------- */
@@ -316,18 +316,18 @@
 
 
     /* ===== พอดีจอ (ไม่ต้องเลื่อน) ===== */
-    .main{gap:clamp(10px,1.8vh,18px);padding:clamp(10px,1.8vh,18px)}
-    .right{gap:clamp(8px,1.4vh,14px)}
-    .dims{display:grid;grid-template-rows:repeat(5,minmax(0,1fr));gap:clamp(6px,1.1vh,10px);overflow:hidden}
-    .dim{min-height:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(6px,1.2vh,12px) 16px clamp(6px,1vh,10px) 18px}
+    .main{gap:clamp(10px,calc(1.8vh / var(--z,1)),18px);padding:clamp(10px,calc(1.8vh / var(--z,1)),18px)}
+    .right{gap:clamp(8px,calc(1.4vh / var(--z,1)),14px)}
+    .dims{display:grid;grid-template-rows:repeat(5,minmax(0,1fr));gap:clamp(6px,calc(1.1vh / var(--z,1)),10px);overflow:hidden}
+    .dim{min-height:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(6px,calc(1.2vh / var(--z,1)),12px) 16px clamp(6px,calc(1vh / var(--z,1)),10px) 18px}
     .dim::before{top:22%;bottom:22%}
-    .dv{margin:clamp(0px,.5vh,6px) 0 0 44px}
-    .dv b{font-size:clamp(20px,3.6vh,30px)}
-    .gauge{margin:clamp(5px,1vh,10px) 0 2px 44px}
-    .dn{font-size:clamp(14px,1.8vh,15.5px)}
-    .primary{height:clamp(60px,10vh,86px);font-size:clamp(18px,2.6vh,23px)}
-    .sec{height:clamp(44px,6.4vh,56px)}
-    .piece b{font-size:clamp(17px,2.4vh,21px)}
+    .dv{margin:clamp(0px,calc(.5vh / var(--z,1)),6px) 0 0 44px}
+    .dv b{font-size:clamp(20px,calc(3.6vh / var(--z,1)),30px)}
+    .gauge{margin:clamp(5px,calc(1vh / var(--z,1)),10px) 0 2px 44px}
+    .dn{font-size:clamp(14px,calc(1.8vh / var(--z,1)),15.5px)}
+    .primary{height:clamp(60px,calc(10vh / var(--z,1)),86px);font-size:clamp(18px,calc(2.6vh / var(--z,1)),23px)}
+    .sec{height:clamp(44px,calc(6.4vh / var(--z,1)),56px)}
+    .piece b{font-size:clamp(17px,calc(2.4vh / var(--z,1)),21px)}
     @media (max-height:860px){ .hint{display:none} .dn small{display:inline;margin-left:6px} }
     @media (max-height:700px){ .gauge{display:none} }
     .stage canvas.zoom{position:absolute;max-width:none;max-height:none}
@@ -337,8 +337,8 @@
     .login{position:fixed;inset:0;z-index:60;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);background:var(--bg)}
     .lg-art{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:24px;color:#fff;
       background:radial-gradient(700px 400px at 30% 0%,#3a4aa0 0,transparent 70%),linear-gradient(160deg,var(--navy),var(--navy2))}
-    .lg-art svg{width:min(78%,52vh,420px);height:auto}
-    .lg-art h1{margin:6px 0 0;font-size:clamp(24px,3.6vh,32px);letter-spacing:.3px}
+    .lg-art svg{width:min(78%,calc(52vh / var(--z,1)),420px);height:auto}
+    .lg-art h1{margin:6px 0 0;font-size:clamp(24px,calc(3.6vh / var(--z,1)),32px);letter-spacing:.3px}
     .lg-art p{margin:0;opacity:.75;font-size:15px;text-align:center}
     .lg-form{display:flex;align-items:center;justify-content:center;padding:24px;overflow:auto}
     .lg-card{width:min(400px,100%)}
@@ -456,7 +456,7 @@
     .sv-more span{margin-left:auto;font-weight:500;color:#6366f1}
     .sv-more:hover{background:#eef2ff}
     .sv-dlg.fx{position:fixed;z-index:60}
-    .sv-allbox{width:min(1040px,96vw) !important;max-height:88vh;display:flex;flex-direction:column;gap:10px}
+    .sv-allbox{width:min(1040px,96vw) !important;max-height:calc(88vh / var(--z,1));display:flex;flex-direction:column;gap:10px}
     .sv-allhd{display:flex;align-items:center;gap:10px}.sv-allhd h3{margin:0;font-size:19px;flex:none}
     .sv-allhd .sv-cf{margin-left:auto}
     .sv-allhd button{flex:none;width:38px;height:38px;border:0;border-radius:10px;background:#f2f4f7;font-size:16px;cursor:pointer}
@@ -527,11 +527,11 @@
     .sv-imb{padding:3px 8px;font-size:12px;margin-left:6px}
     .kp.ngdlg{z-index:80}
     #lotDlg,#mstDlg{z-index:70}   /* ต้องอยู่เหนือหน้าเลือกพาร์ท (z-index 55) */
-    .ngdlg .kpb{width:min(920px,96%);max-height:94vh;display:flex;flex-direction:column;gap:10px;background:#fff}
+    .ngdlg .kpb{width:min(920px,96%);max-height:calc(94vh / var(--z,1));display:flex;flex-direction:column;gap:10px;background:#fff}
     .ng-hd{display:flex;align-items:center;gap:10px}.ng-hd b{flex:1;font-size:17px}
     .ng-hd button{border:0;background:#f2f4f7;border-radius:10px;width:36px;height:36px;font-size:16px;cursor:pointer}
     .ng-im{flex:1;min-height:200px;display:flex;align-items:center;justify-content:center;background:#0b0f14;border-radius:14px;overflow:auto;color:#cbd5e1;font-size:15px}
-    .ng-im img{max-width:100%;max-height:70vh;display:block}
+    .ng-im img{max-width:100%;max-height:calc(70vh / var(--z,1));display:block}
     .ng-r{margin:0;color:#b42318;font-size:14px}
     .ng-ft{display:flex;gap:10px;justify-content:flex-end}
     .ng-ft a,.ng-ft button{border:0;border-radius:12px;padding:10px 16px;font:inherit;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer}
@@ -687,7 +687,7 @@
     .pm-tools{display:flex;align-items:center;gap:8px;margin:6px 0;font-size:13px;color:#7a839b}
     .pm-tools span{flex:1}
     .pm-tools button{height:34px;padding:0 10px;border-radius:10px;background:#f1f2f8;color:#4b5470;font-weight:600;font-size:13px}
-    .pm-list{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:min(260px,32vh);overflow:auto;padding:2px}
+    .pm-list{display:grid;grid-template-columns:1fr 1fr;gap:6px;max-height:min(260px,calc(32vh / var(--z,1)));overflow:auto;padding:2px}
     .pm-it{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;border:1.5px solid #e3e6f2;text-align:left;font-size:14px;color:#2a3352;background:#fff}
     .pm-it i{width:20px;height:20px;border-radius:6px;border:2px solid #c3c8da;display:grid;place-items:center;font-style:normal;font-size:13px;color:#fff;flex:none}
     .pm-it.on{border-color:#8f80e0;background:#faf9ff}.pm-it.on i{background:#6d5bd0;border-color:#6d5bd0}
@@ -696,7 +696,7 @@
     .sup.pln .pm-chips button{background:#fde7f1;color:#b0306c}
     .sup.pln .pm-it.on{border-color:#ec8fba;background:#fff7fb}.sup.pln .pm-it.on i{background:#d9568f;border-color:#d9568f}
     .sup.pln #svSet{display:none}
-    .lg-art .lg-chars{position:relative;width:min(96%,680px);height:min(52vh,430px);flex:none}
+    .lg-art .lg-chars{position:relative;width:min(96%,680px);height:min(calc(52vh / var(--z,1)),430px);flex:none}
     .lg-art .lg-chars svg.qcgirl{position:absolute;bottom:22px;height:calc(100% - 22px);width:auto;transform-origin:50% 100%;transform:translateX(-50%) scale(.55);opacity:0;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .35s,left .5s cubic-bezier(.2,.8,.2,1)}
     .lg-art .lg-chars svg.ch-op{left:17%}.lg-art .lg-chars svg.ch-sup{left:50%}.lg-art .lg-chars svg.ch-pln{left:83%}
     .login[data-mode="pick"] .lg-chars svg.qcgirl{opacity:1;transform:translateX(-50%) scale(.62)}
@@ -715,7 +715,7 @@
     .login[data-mode="pick"] .lg-role{border-color:#d8eedf;box-shadow:0 10px 26px -20px rgba(61,138,95,.45)}
     .login[data-mode="pick"] .lg-role:hover{border-color:#b3dcc0}
     .login[data-mode="pick"] .lg-card h2{color:#2f4a3b}
-    @media (max-width:960px),(orientation:portrait){ .lg-art .lg-chars{height:min(34vh,320px);width:min(94%,560px)} .lg-cl span{font-size:11px;padding:3px 10px} }
+    @media (max-width:960px),(orientation:portrait){ .lg-art .lg-chars{height:min(calc(34vh / var(--z,1)),320px);width:min(94%,560px)} .lg-cl span{font-size:11px;padding:3px 10px} }
     .login[data-mode="pick"]{background:#f7fbf8}
     .login[data-mode="pick"] .lg-art{background:radial-gradient(600px 380px at 25% 10%,#ffffff 0,transparent 70%),linear-gradient(160deg,#f8fcf9 0%,#e3f3e8 100%)}
     .login[data-mode="pick"] .lg-art h1{color:#3d8a5f}
@@ -781,7 +781,7 @@
     .pk-top{display:flex;align-items:center;gap:14px;padding:18px 24px 6px}
     .pk-top .logo{background:linear-gradient(135deg,#8ec0ec,#4a90d9)}
     .pk-ttl{flex:1;min-width:0}
-    .pk-ttl b{display:block;font-size:clamp(22px,3.2vh,28px);color:#2b3d55}
+    .pk-ttl b{display:block;font-size:clamp(22px,calc(3.2vh / var(--z,1)),28px);color:#2b3d55}
     .pk-ttl small{display:block;font-size:14px;color:#6b7f96;margin-top:2px}
     .pk-x{width:48px;height:48px;border-radius:14px;background:#fff;border:1px solid #d9e4f0;font-size:20px;color:#5b6f86}
     .pk-search{display:flex;align-items:center;gap:10px;margin:12px 24px 6px;height:60px;padding:0 16px;border-radius:18px;background:#fff;border:1.5px solid #d6e2ef;box-shadow:0 8px 24px -18px rgba(58,111,168,.5)}
@@ -827,7 +827,7 @@
     .user svg{width:16px;height:16px;opacity:.7}
     @media (max-width:960px),(orientation:portrait){
       .login{grid-template-columns:1fr;grid-template-rows:auto 1fr}
-      .lg-art{padding:18px 16px 14px} .lg-art svg{width:min(52%,30vh)} .lg-art p{display:none}
+      .lg-art{padding:18px 16px 14px} .lg-art svg{width:min(52%,calc(30vh / var(--z,1)))} .lg-art p{display:none}
       .user span{display:none}
     }
     .model span,.kpi small,.ttl small{white-space:nowrap}
@@ -842,12 +842,88 @@
       .demo{bottom:auto;top:84px;left:auto;right:18px}
     }
     @media (max-width:620px){ .kpi .p,.kpi .f{display:none} .step span{display:none} .step{padding:6px} .model b{display:none} }
-  </style>
+  
+/* ===== v20 · จัดการ์ด / หัวเพจ / ปุ่มออก / ค่ารายภาพ ===== */
+.pk-grid{grid-template-columns:repeat(auto-fill,minmax(212px,1fr));gap:12px}
+.pk-tile{min-height:0;padding:13px 15px 12px;border-radius:18px}
+.pk-tile .pk-num{display:none}
+.pk-tile .pk-hd{display:flex;align-items:center;gap:8px;width:100%}
+.pk-tile .pk-name{font-size:17px;font-weight:800;color:#1d3f6e;margin:0;line-height:1.3;margin-right:auto}
+.pk-tile .pk-hd .urg-b{margin:0;flex:none}
+.pk-tile .pk-dim{font-size:13.5px;font-weight:600;color:#3d5573;margin-top:5px;padding-top:0}
+.pk-tile .pk-tol{font-size:10.5px;margin-top:1px;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.pk-tile .pk-tag{position:static;margin:9px 0 0;align-self:flex-start}
+.pk-tile.off .pk-name{color:#7d8ea3}
+.pl-list{grid-template-columns:repeat(auto-fill,minmax(178px,1fr))}
+.pl-t{min-height:0;padding:12px 14px 11px}
+.pl-t .pl-hd{display:flex;align-items:center;gap:6px;width:100%}
+.pl-t .pl-hd b{font-size:16.5px;font-weight:800;color:#8a1f52;margin:0 auto 0 0;line-height:1.3}
+.sup:not(.pln) .pl-t .pl-hd b{color:#3b2d8f}
+.pl-t .pl-hd .urg-b,.pl-t .pl-hd em{position:static;flex:none;margin:0}
+.pl-t .pl-hd .urg-b{font-size:11.5px;padding:2px 9px}
+.pl-t .d{font-size:12px;margin-top:3px}
+.pl-t .q{font-size:22px;padding-top:7px;margin-top:4px}
+.pl-t .q small{font-size:12px}
+.pl-t .q.none{font-size:13.5px}
+.pl-t .pr{height:5px;margin-top:7px}
+.pl-t .s{font-size:11.5px;margin-top:4px}
+.sv-plist{grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px}
+.sv-pc{padding:12px 14px}
+.sup .sv-pc b{font-size:16.5px;font-weight:800;color:#3b2d8f}
+.sup.pln .sv-pc b{color:#8a1f52}
+.sv-pc .d{font-size:13.5px;margin-top:4px}
+.sv-pc small{font-size:10.5px;margin-top:2px}
+.sv-pc em{margin-top:7px}
+.sv-ttl b em{margin-left:0}
+.sv-tabs{min-width:0;overflow-x:auto;scrollbar-width:none;flex-shrink:1}
+.sv-tabs::-webkit-scrollbar{display:none}
+.sv-tabs button{white-space:nowrap;flex:none}
+@media (max-width:1440px){.sv-ttl small{display:none}}
+@media (max-width:1320px){.sv-tabs button{padding:0 13px;gap:6px}.sv-tabs{margin-left:8px}}
+.bar .user{margin-left:6px;flex:none;transition:background .15s}
+.bar .user.arm{background:linear-gradient(135deg,#f87171,#dc2626);border-color:#fecaca;animation:pl .7s infinite}
+.bar{position:relative;z-index:45;overflow:visible}.bar .user{position:relative}.bar .user.arm::after{content:'แตะอีกครั้งเพื่อออกจากระบบ';position:absolute;top:calc(100% + 10px);right:0;z-index:60;font-weight:700;font-size:14px;white-space:nowrap;padding:8px 14px;border-radius:12px;background:#dc2626;color:#fff;box-shadow:0 10px 24px -8px rgba(220,38,38,.7)}
+.bar .user.arm svg{opacity:1}
+.dv em.ps{display:grid;grid-template-columns:repeat(2,auto);gap:1px 10px;background:none;padding:0;font-size:11px;line-height:1.35;align-self:center}
+.dv em.ps span{color:#7a8699;white-space:nowrap}
+.dv em.ps span i{font-style:normal;color:#a3aec0;margin-right:3px}
+/* ปุ่มขนาดหน้าจอ */
+#uiZ{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:200;display:flex;align-items:center;font-family:inherit}
+#uiZ .zt{width:22px;height:58px;border-radius:0 12px 12px 0;background:rgba(30,41,59,.55);color:#fff;font-size:13px;font-weight:700;display:grid;place-items:center;box-shadow:0 4px 12px -4px rgba(0,0,0,.35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+#uiZ .zp{display:none;flex-direction:column;gap:6px;margin-left:6px;padding:8px;border-radius:16px;background:rgba(255,255,255,.96);box-shadow:0 12px 30px -10px rgba(15,23,42,.45);border:1px solid #e2e8f0}
+#uiZ.on .zp{display:flex}
+#uiZ .zp button{min-width:92px;height:42px;border-radius:11px;background:#f1f5f9;color:#1e293b;font-size:20px;font-weight:700}
+#uiZ .zp button.fit{font-size:14px;background:#1e293b;color:#fff}
+#uiZ .zp b{text-align:center;font-size:13px;color:#475569;font-family:var(--mono)}
+
+/* v20.1 · ตัวหนังสือ/ป้ายอยู่หน้าตัวการ์ตูนเสมอ */
+.lg-art .lg-chars,.lg-art>svg.qcgirl{z-index:1}
+.lg-art .lg-chars svg.qcgirl{z-index:1!important}
+.login .lg-bubble,.login .lg-deco{z-index:20}
+.login .lg-art h1,.login .lg-art p{position:relative;z-index:20}
+.login .lg-cl{z-index:20}
+
+/* v20.2 · ปุ่ม "ตั้งค่า" รวม ตั้งค่าระบบ / ตั้งค่าเครื่องนี้ */
+#svTabSys{display:none!important}
+#svSet.on{background:#fff;color:#3b2f9a;border-color:#fff;box-shadow:0 6px 16px -8px rgba(0,0,0,.4)}
+.set-seg{grid-column:1/-1;justify-self:start;align-self:start;display:inline-flex;gap:4px;padding:5px;border-radius:14px;background:#e9e7f7;margin:0 0 14px}
+.set-seg button{height:40px;padding:0 20px;border-radius:10px;font-size:15px;font-weight:700;color:#5b4bc4}
+.set-seg button.on{background:#fff;color:#3b2f9a;box-shadow:0 4px 12px -6px rgba(59,47,154,.45)}
+
+/* v20.3 · Planner/Sup: ไม่มีปุ่มย้อนกลับ · ออกจากระบบยืนยันสีแดง · ตัวกรองตัวใหญ่พอดีกรอบ */
+#svBack{display:none!important}
+.sv-bar{position:relative;z-index:45;overflow:visible}
+#svOut{position:relative;transition:background .15s}
+#svOut.arm{background:linear-gradient(135deg,#f87171,#dc2626)!important;border-color:#fecaca!important;color:#fff!important;animation:pl .7s infinite}
+#svOut.arm::after{content:'แตะอีกครั้งเพื่อออกจากระบบ';position:absolute;top:calc(100% + 10px);right:0;z-index:60;font-weight:700;font-size:14px;white-space:nowrap;padding:8px 14px;border-radius:12px;background:#dc2626;color:#fff;box-shadow:0 10px 24px -8px rgba(220,38,38,.7)}
+.sv-shift{font-size:17px;font-weight:700;min-width:0;padding:0 14px}
+.sv-date input{font-size:17px;font-weight:600}
+</style>
 </head>
 <body>
 <div class="login hide" id="login" data-mode="pick">
   <div class="lg-art">
-    <div class="lg-bubble" id="lgBubble">สวัสดีค่ะ กรุณาเลือกประเภทผู้ใช้งานของท่านเพื่อเริ่มต้นการใช้งานค่ะ</div>
+    <div class="lg-bubble" id="lgBubble">ยินดีต้อนรับสู่ระบบ กรุณาเลือกประเภทผู้ใช้งาน</div>
     <div class="lg-deco ok d-op1"><i>✓</i><div>ผ่าน<small>ชิ้นงานอยู่ในพิกัด</small></div></div>
     <div class="lg-deco d-op2"><svg viewBox="0 0 24 24" fill="none" stroke="#4a90d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><div>กล้องจับอัตโนมัติ<small>วาง · พลิก · เสร็จ</small></div></div>
     <div class="lg-deco pl d-pl1"><span class="ring"></span><div>แผนงานวันนี้<small>เรียกงาน · ติดตามความคืบหน้า</small></div></div>
@@ -949,7 +1025,7 @@
   <header class="sv-bar">
     <button class="sv-back" id="svBack" aria-label="ย้อนกลับ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>
     <div class="logo ok">QC<i></i></div>
-    <div class="sv-ttl"><b>QC Station <em id="svRole">Supervisor</em></b><small id="svHello"></small></div>
+    <div class="sv-ttl"><b><em id="svRole">Supervisor</em></b><small id="svHello"></small></div>
     <nav class="sv-tabs" id="svTabs">
       <button data-tab="svPlanPg" id="svTabPlan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="17" rx="2"/><path d="M9 2v4M15 2v4M8 11h8M8 15h5"/></svg>แผนงานรายวัน</button>
       <button class="on" data-tab="svDash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Dashboard</button>
@@ -957,7 +1033,7 @@
       <button data-tab="svSysPg" id="svTabSys"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>ตั้งค่าระบบ</button>
     </nav>
     <div class="sp"></div>
-    <button class="sv-out" id="svSet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>ตั้งค่าเครื่องนี้</button>
+    <button class="sv-out" id="svSet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>ตั้งค่า</button>
     <button class="sv-out" id="svOut"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>ออกจากระบบ</button>
   </header>
   <section class="sv-page hide" id="svPlanPg">
@@ -974,7 +1050,7 @@
     <div class="sv-tool">
       <div class="sv-date"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><input type="date" id="svDay"></div>
       <button class="sv-chip" id="svToday">วันนี้</button>
-      <select class="sv-chip sv-shift" id="svShift" title="เลือกกะ"><option value="">ทั้งวัน (ทุกกะ)</option></select>
+      <select class="sv-chip sv-shift" id="svShift" title="เลือกกะ"><option value="">ทั้งวัน</option></select>
       <button class="sv-ref" id="svRef"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg><span>รีเฟรช</span></button>
       <button class="sv-csv" id="svCsv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>ดาวน์โหลด CSV</button>
       <label class="sv-auto"><input type="checkbox" class="tog" id="svAuto"> อัปเดตอัตโนมัติทุก 1 นาที</label>
@@ -1000,6 +1076,7 @@
     </div>
   </div>
   <section class="sv-page hide" id="svSysPg">
+    <div class="set-seg" id="setSeg"><button class="on" data-s="sys">ตั้งค่าระบบ</button><button data-s="dev">ตั้งค่าเครื่องนี้</button></div>
     <div class="sys-card">
       <h3>เช็คกล้องด้วยมาสเตอร์ก่อนเริ่มกะ</h3>
       <p>Operator ต้องวัดมาสเตอร์ (Gauge block) ผ่านก่อน จึงจะเลือกพาร์ทตรวจได้ · ทุกสถานี ทุกกะ และทุกครั้งที่เปลี่ยนกล้อง/ความสูงกล้อง</p>
@@ -1101,7 +1178,6 @@
   <header class="bar">
     <div class="logo" id="logo">QC<i></i></div>
     <div class="ttl"><b>QC Station</b><small id="cvTxt">กำลังเตรียมระบบ…</small></div>
-    <button class="user" id="userBtn" title="ออกจากระบบ"><i id="userAv">?</i><span id="userName">–</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></button>
     <button class="opback" id="opBack" aria-label="ย้อนกลับไปเลือกพาร์ท"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg><span>เลือกพาร์ท</span></button>
     <button class="model" id="modelBtn" tabindex="-1">
       <span class="tag" id="mTag">–</span>
@@ -1114,7 +1190,7 @@
       <div class="p"><small>ผ่าน</small><b id="jPass">0</b></div>
       <div class="r" id="jRemBox"><small>คงเหลือ</small><b id="jRem">–</b></div>
     </div>
-    <button class="jsend off" id="jSend">ส่งงาน</button>
+    <button class="jsend off" id="jSend">ส่งงาน</button><button class="user out" id="userBtn" title="ออกจากระบบ"><i id="userAv">?</i><span id="userName">–</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg></button>
     <div class="hide"><b id="cPass"></b><b id="cFail"></b><b id="cYield"></b><button id="openHist"></button><button id="openSet"></button></div>
   </header>
 
@@ -1708,7 +1784,11 @@
   function setDim(k, v, prov, extra) {
     const s = M()[k], el = $('d' + k);
     el.className = 'dim';
-    $('x' + k).classList.toggle('hide', !extra); $('x' + k).textContent = extra || '';
+    $('x' + k).classList.toggle('hide', !extra);
+    const ps = extra && /^[①-⑥]/.test(extra);
+    $('x' + k).classList.toggle('ps', !!ps);
+    if (ps) $('x' + k).innerHTML = extra.split(/\s{2,}/).map((t) => '<span><i>' + t.charAt(0) + '</i>' + t.slice(1).trim() + '</span>').join('');
+    else $('x' + k).textContent = extra || '';
     if (v == null) { el.classList.add('wait'); $('v' + k).textContent = '—'; $('b' + k).textContent = 'รอวัด'; return; }
     const d = v - s.n, ok = inTol(v, s), R = Math.max(s.p, s.m, 0.5) * 2;
     $('v' + k).textContent = v.toFixed(2);
@@ -2696,10 +2776,10 @@
   let sess = store.get('sess', null), lgMode = 'pick';
   const sessOk = () => !!(sess && sess.exp > Date.now());
   const LG = {
-    pick: { bub: 'สวัสดีค่ะ กรุณาเลือกประเภทผู้ใช้งานของท่านเพื่อเริ่มต้นการใช้งานค่ะ' },
-    op: { bub: 'สวัสดีค่ะ น้อง Nani พร้อมช่วยตรวจงานแล้วค่ะ', chip: 'ประเภทผู้ใช้งาน Operator', sub: 'กรอกชื่อผู้ใช้และรหัสผ่านเพื่อเริ่มตรวจชิ้นงาน', btn: 'เข้าสู่ระบบ', demo: 'โหมดเดโม: ชื่อผู้ใช้อะไรก็ได้ · รหัสผ่าน 1234' },
-    sup: { bub: 'สวัสดีค่ะหัวหน้า มาดูสรุปงานวันนี้กันนะคะ', chip: 'ประเภทผู้ใช้งาน Supervisor', sub: 'ใช้บัญชีที่มีสิทธิ์ Supervisor เพื่อดูสรุปงานและจัดการพาร์ท', btn: 'เข้าสู่ระบบ Supervisor', demo: 'โหมดเดโม: ชื่อผู้ใช้อะไรก็ได้ · รหัส Supervisor 9999' },
-    pln: { bub: 'สวัสดีค่ะ วันนี้เรียกงานกี่ชิ้นดีคะ?', chip: 'ประเภทผู้ใช้งาน Planner', sub: 'ใช้บัญชีที่มีสิทธิ์ Planner เพื่อกรอกแผนงานและดูรายงาน', btn: 'เข้าสู่ระบบ Planner', demo: 'โหมดเดโม: ชื่อผู้ใช้อะไรก็ได้ · รหัส Planner 5555' }
+    pick: { bub: 'ยินดีต้อนรับสู่ระบบ กรุณาเลือกประเภทผู้ใช้งาน' },
+    op: { bub: 'ระบบพร้อมสำหรับการตรวจชิ้นงาน กรุณาเข้าสู่ระบบ', chip: 'ประเภทผู้ใช้งาน Operator', sub: 'กรอกชื่อผู้ใช้และรหัสผ่านเพื่อเริ่มตรวจชิ้นงาน', btn: 'เข้าสู่ระบบ', demo: 'โหมดเดโม: ชื่อผู้ใช้อะไรก็ได้ · รหัสผ่าน 1234' },
+    sup: { bub: 'ระบบพร้อมแสดงผลการปฏิบัติงาน กรุณาเข้าสู่ระบบ', chip: 'ประเภทผู้ใช้งาน Supervisor', sub: 'ใช้บัญชีที่มีสิทธิ์ Supervisor เพื่อดูสรุปงานและจัดการพาร์ท', btn: 'เข้าสู่ระบบ Supervisor', demo: 'โหมดเดโม: ชื่อผู้ใช้อะไรก็ได้ · รหัส Supervisor 9999' },
+    pln: { bub: 'ระบบพร้อมสำหรับการวางแผนงาน กรุณาเข้าสู่ระบบ', chip: 'ประเภทผู้ใช้งาน Planner', sub: 'ใช้บัญชีที่มีสิทธิ์ Planner เพื่อกรอกแผนงานและดูรายงาน', btn: 'เข้าสู่ระบบ Planner', demo: 'โหมดเดโม: ชื่อผู้ใช้อะไรก็ได้ · รหัส Planner 5555' }
   };
   function setLgMode(m) {
     lgMode = m; $('login').dataset.mode = m; $('lgBubble').textContent = LG[m].bub;
@@ -2745,8 +2825,9 @@
   ['lgUser', 'lgPass'].forEach((id) => $(id).addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); id === 'lgUser' && !$('lgPass').value ? $('lgPass').focus() : doLogin(); } }));
   let outArm = 0;
   $('userBtn').onclick = () => {
-    if (Date.now() - outArm > 2500) { outArm = Date.now(); toast('กดอีกครั้งเพื่อออกจากระบบ'); return; }
-    outArm = 0; pkChosen = false; sess = null; store.set('sess', null); resetPiece(); showLogin();
+    const ub = $('userBtn');
+    if (Date.now() - outArm > 2500) { outArm = Date.now(); ub.classList.add('arm'); beep('step'); clearTimeout(ub._t); ub._t = setTimeout(() => ub.classList.remove('arm'), 2500); return; }
+    outArm = 0; ub.classList.remove('arm'); pkChosen = false; sess = null; store.set('sess', null); resetPiece(); showLogin();
   };
 
 
@@ -2779,9 +2860,9 @@
       const ok = canPick(m), jb = jobOf(m);
       const tag = jb.sent ? '<span class="pk-tag sent">✓ ส่งงานแล้ว · ผ่าน ' + jb.pass + '</span>' : !ok ? '<span class="pk-tag none">' + (masterRequired() && planFor(opPlan, m) ? 'รอเช็คมาสเตอร์' : planReady() ? 'ไม่มีในแผนวันนี้' : 'รอแผนงาน') + '</span>' : jb.qty ? '<span class="pk-tag ' + (jb.rem ? 'plan' : 'done') + '">' + (jb.rem ? 'เรียก ' + jb.qty + ' · เหลือ ' + jb.rem : 'ครบ ' + jb.qty + ' · รอส่งงาน') + '</span>' : m.id === selId && pkChosen ? '<span class="pk-tag last">กำลังตรวจ</span>' : '';
       const urg = !!(jb.p && jb.p.urgent && !jb.sent);
-      return '<button class="pk-tile' + (!ok ? ' off' + (jb.sent ? ' done' : '') : m.id === selId ? ' cur' : '') + (urg && ok ? ' urg' : '') + '" data-id="' + m.id + '"' + (!ok ? ' aria-disabled="true"' : '') + '>' + (urg ? '<i class="urg-b">ด่วน</i>' : '') + tag +
-        '<span class="pk-num">' + hlTxt(num, q) + '</span><span class="pk-name">' + hlTxt(m.name, q) + '</span>' +
-        '<span class="pk-dim">' + hlTxt(dims, q) + '</span><span class="pk-tol">L +' + m.L.p + '/−' + m.L.m + ' · W +' + m.W.p + '/−' + m.W.m + ' · T +' + m.T.p + '/−' + m.T.m + '</span></button>';
+      return '<button class="pk-tile' + (!ok ? ' off' + (jb.sent ? ' done' : '') : m.id === selId ? ' cur' : '') + (urg && ok ? ' urg' : '') + '" data-id="' + m.id + '"' + (!ok ? ' aria-disabled="true"' : '') + '>' +
+        '<span class="pk-hd"><span class="pk-name">' + hlTxt(m.name, q) + '</span>' + (urg ? '<i class="urg-b">ด่วน</i>' : '') + '</span>' +
+        '<span class="pk-dim">' + hlTxt(dims, q) + '</span><span class="pk-tol">L +' + m.L.p + '/−' + m.L.m + ' · W +' + m.W.p + '/−' + m.W.m + ' · T +' + m.T.p + '/−' + m.T.m + '</span>' + tag + '</button>';
     }).join('') : '<div class="pk-empty">ไม่พบพาร์ทที่ค้นหา “' + esc($('pkQ').value.trim()) + '”</div>';
     let note = '';
     if (!planReady()) note = planErr ? '<div class="pk-note"><span>โหลดแผนงานวันนี้ไม่ได้<small>ตรวจสอบอินเทอร์เน็ต แล้วกดโหลดใหม่ · ระหว่างนี้ยังเลือกพาร์ทไม่ได้</small></span><button data-a="reload">↻ โหลดแผนงานใหม่</button></div>'
@@ -3038,18 +3119,32 @@
     if (id === 'svSysPg') sysFill();
     ['svPlanPg', 'svDash', 'svPartsPg', 'svSysPg'].forEach((p) => $(p).classList.toggle('hide', p !== id));
     $('svTabs').querySelectorAll('button').forEach((b) => b.classList.toggle('on', b.dataset.tab === id));
+    $('svSet').classList.toggle('on', id === 'svSysPg');
     if (id === 'svDash') svLoad(); if (id === 'svPlanPg') svPlanLoad();
   }
   $('svTabs').onclick = (e) => { const b = e.target.closest('button'); if (b) svTab(b.dataset.tab); };
-  $('svOut').onclick = () => confirmOut();
+  let svOutArm = 0;
+  $('svOut').onclick = () => {
+    const b = $('svOut');
+    if (Date.now() - svOutArm > 2500) { svOutArm = Date.now(); b.classList.add('arm'); beep('step'); clearTimeout(b._t); b._t = setTimeout(() => b.classList.remove('arm'), 2500); return; }
+    svOutArm = 0; b.classList.remove('arm'); doLogout();
+  };
   $('svBack').onclick = () => goBack();
-  $('svSet').onclick = () => { fillSet(); sheet('setSheet'); };
+  $('svSet').onclick = () => svTab('svSysPg');
+  $('setSeg').onclick = (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.s === 'dev') { segOn('dev'); fillSet(); sheet('setSheet'); }
+    else segOn('sys');
+  };
+  function segOn(k) { $('setSeg').querySelectorAll('button').forEach((x) => x.classList.toggle('on', x.dataset.s === k)); }
+  // ปิดหน้าตั้งค่าเครื่องนี้แล้ว กลับมาที่แท็บตั้งค่าระบบ
+  new MutationObserver(() => { if (!$('setSheet').classList.contains('on')) segOn('sys'); }).observe($('setSheet'), { attributes: true, attributeFilter: ['class'] });
 
   // ----- แดชบอร์ด -----
-  function svLoad() {
+  function svLoad(manual) {
     if (svLoading) return; svLoading = true;
     const day = $('svDay').value || today();
-    $('svRef').classList.add('spin'); $('svRef').querySelector('span').textContent = 'กำลังโหลด…';
+    if (manual === true) $('svRef').classList.add('spin');
     const fin = (rows, plans, src, err, extra) => {
       svLoading = false;
       if (!err) svData = { day, rows: rows || [], plans: plans || [], aux: extra || { masters: store.get('masterLog', []).filter((x) => x.day === day).map((x) => Object.assign({}, x, { time: hms(new Date(x.t)).slice(0, 5) })) } }; $('svRef').classList.remove('spin'); $('svRef').querySelector('span').textContent = 'รีเฟรช';
@@ -3109,7 +3204,7 @@
   function svShiftOpts() {
     const sel = $('svShift'), keep = sel.value;
     const names = [...new Set((SYS.shifts || []).map((s) => s.name).concat(((svData && svData.rows) || []).map((r) => r.shift).filter(Boolean)))];
-    sel.innerHTML = '<option value="">ทั้งวัน (ทุกกะ)</option>' + names.map((n) => '<option>' + esc(n) + '</option>').join('');
+    sel.innerHTML = '<option value="">ทั้งวัน</option>' + names.map((n) => '<option value="' + esc(n) + '">' + esc(String(n).replace(/^กะ\s*/, '') || n) + '</option>').join('');
     sel.value = names.includes(keep) ? keep : '';
   }
   function svApply() {
@@ -3269,7 +3364,7 @@
   const ngClose = () => { $('ngDlg').classList.remove('on'); $('ngIm').innerHTML = ''; };
   $('ngX').onclick = ngClose; $('ngC').onclick = ngClose;
   $('ngDlg').addEventListener('click', (e) => { if (e.target.id === 'ngDlg') ngClose(); });
-  $('svRef').onclick = svLoad;
+  $('svRef').onclick = () => svLoad(true);
   $('svDay').onchange = svLoad;
   $('svToday').onclick = () => { $('svDay').value = today(); svLoad(); };
   $('svAuto').onchange = () => {
@@ -3293,7 +3388,7 @@
     $('svPSum').innerHTML += ' · เรียกงาน <b>' + svPlan.plans.length + '</b> พาร์ท รวม <b>' + tot.toLocaleString() + '</b> ชิ้น' + (nu ? ' · <span class="urg-b">ด่วน ' + nu + '</span>' : '');
     $('svPlanList').innerHTML = list.map((m) => {
       const p = planFor(svPlan, m), ps = ((svPlan.counts || {})[m.name] || {}).pass || 0;
-      return '<button class="pl-t' + (p ? ' has' : '') + (p && p.urgent ? ' urg' : '') + '" data-id="' + esc(m.id) + '">' + (p && p.urgent ? '<i class="urg-b">ด่วน</i>' : '') + (p && p.sub ? '<em>✓ ส่งแล้ว</em>' : '') + '<b>' + esc(m.name) + '</b><span class="d">' + m.L.n + ' × ' + m.W.n + ' × ' + m.T.n + '</span>' +
+      return '<button class="pl-t' + (p ? ' has' : '') + (p && p.urgent ? ' urg' : '') + '" data-id="' + esc(m.id) + '"><span class="pl-hd"><b>' + esc(m.name) + '</b>' + (p && p.urgent ? '<i class="urg-b">ด่วน</i>' : '') + (p && p.sub ? '<em>✓ ส่งแล้ว</em>' : '') + '</span><span class="d">' + m.L.n + ' × ' + m.W.n + ' × ' + m.T.n + '</span>' +
         (p ? '<span class="q">' + p.qty.toLocaleString() + '<small>ชิ้น</small></span><div class="pr"><i style="width:' + Math.min(100, ps / p.qty * 100) + '%"></i></div><span class="s">ผ่านแล้ว ' + ps + ' · คงเหลือ ' + Math.max(0, p.qty - ps) + '</span>'
           : '<span class="q none">+ แตะเพื่อกรอกจำนวน</span>') + '</button>';
     }).join('') || '<div class="sv-empty">ไม่พบพาร์ทที่ค้นหา</div>';
@@ -3526,6 +3621,47 @@
   applyModel(); renderStats(); resetPiece();
   if (sessOk()) { applyUser(); loadSys(); if (sess.mode === 'sup' || sess.mode === 'pln') showSup(); else { showPicker(false); flushAux(); } } else showLogin();
   syncNow(); loadCV();
+</script>
+
+<script>
+// ===== ขนาดหน้าจอ: พอดีจอ / − / + (จำค่าไว้ในเครื่อง) =====
+(function () {
+  const vp = document.querySelector('meta[name="viewport"]');
+  const touch = (navigator.maxTouchPoints || 0) > 0 || 'ontouchstart' in window;
+  let z = 1; try { z = +localStorage.getItem('uiZoom') || 1; } catch (e) {}
+  if (!(z >= 0.6 && z <= 1.5)) z = 1;
+  function devW() {
+    const a = screen.width || innerWidth, b = screen.height || innerHeight;
+    const land = window.matchMedia ? matchMedia('(orientation: landscape)').matches : innerWidth > innerHeight;
+    return land ? Math.max(a, b) : Math.min(a, b);
+  }
+  function apply() {
+    if (touch) {
+      // แท็บเล็ต: วางหน้าจอเท่าโน๊ตบุ๊ค แล้วให้เบราว์เซอร์ย่อพอดีจอ
+      const d = devW(), land = window.matchMedia ? matchMedia('(orientation: landscape)').matches : innerWidth > innerHeight;
+      const base = Math.max(d, land ? 1280 : 900), w = Math.round(base / z);
+      vp.setAttribute('content', w === d ? 'width=device-width, initial-scale=1, viewport-fit=cover' : 'width=' + w + ', viewport-fit=cover');
+    } else {
+      document.documentElement.style.zoom = z === 1 ? '' : z;
+      document.documentElement.style.setProperty('--z', z);
+    }
+    const t = document.querySelector('#uiZ b'); if (t) t.textContent = Math.round(z * 100) + '%';
+  }
+  function set(v) { z = Math.round(Math.min(1.4, Math.max(0.7, v)) * 10) / 10; try { localStorage.setItem('uiZoom', z); } catch (e) {} apply(); kick(); }
+  let hideT = 0; const box = document.createElement('div'); box.id = 'uiZ';
+  function kick() { clearTimeout(hideT); hideT = setTimeout(() => box.classList.remove('on'), 5000); }
+  box.innerHTML = '<button class="zt" aria-label="ปรับขนาดหน้าจอ">Aa</button><div class="zp"><button data-z="+">+</button><b>100%</b><button data-z="-">−</button><button class="fit" data-z="fit">พอดีจอ</button></div>';
+  box.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.classList.contains('zt')) { box.classList.toggle('on'); kick(); return; }
+    const k = b.dataset.z; set(k === '+' ? z + 0.1 : k === '-' ? z - 0.1 : 1);
+  });
+  document.body.appendChild(box);
+  apply();
+  window.addEventListener('orientationchange', () => setTimeout(apply, 300));
+  window.addEventListener('resize', () => { if (touch) { clearTimeout(apply.t); apply.t = setTimeout(apply, 250); } });
+  window.QC_UIZ = { set, get: () => z };
+})();
 </script>
 </body>
 </html>
